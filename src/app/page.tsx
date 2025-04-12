@@ -1,103 +1,85 @@
-import Image from "next/image";
+import React from 'react';
+import { Button } from "@/components/ui/button";
+import { PlayCircle, TrendingUp, IndianRupee } from 'lucide-react';
+import Image from 'next/image';
+// import Partners from "@/components/home/Partners";
+import AboutUs from "@/components/home/AboutUs";
+import Services from "@/components/home/Services";
+import FadeInUp from "@/components/animations/FadeInUp";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <>
+      {/* Hero Section - Add animation class */}
+      <section className="bg-slate-900 text-slate-200 py-20 px-6 md:py-32 relative overflow-hidden animate-breathing-bg">
+        {/* Background decorative elements - use primary color */}
+        <div className="absolute inset-0 -z-10 opacity-10 overflow-hidden">
+          <div className="absolute top-10 right-10 w-32 h-32 border-2 border-primary/50 rounded-full opacity-50"></div>
+          <div className="absolute bottom-20 left-20 w-48 h-48 border-2 border-primary/20 rounded-full opacity-30"></div>
+          <div className="absolute bottom-5 right-1/4 w-20 h-20 bg-primary/20 rounded-lg transform rotate-45 opacity-40"></div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          <TrendingUp className="absolute top-[15%] left-[10%] h-12 w-12 text-primary/60 animate-[float_6s_ease-in-out_infinite]" />
+          <IndianRupee className="absolute bottom-[25%] right-[15%] h-10 w-10 text-emerald-400/60 animate-[float_7s_ease-in-out_infinite_0.5s]" />
+          <TrendingUp className="absolute bottom-[10%] left-[30%] h-8 w-8 text-primary/50 animate-[float_5s_ease-in-out_infinite_1s]" />
+          <IndianRupee className="absolute top-[30%] right-[35%] h-16 w-16 text-emerald-400/50 animate-[float_8s_ease-in-out_infinite_0.2s]" />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+
+        <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
+          {/* Text Content */}
+          <div className="space-y-6 text-center md:text-left">
+            {/* Use primary for welcome text */}
+            <p className="text-primary font-semibold text-sm tracking-wider uppercase flex items-center gap-2 justify-center md:justify-start">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+              Welcome to Net Wealth India
+            </p>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+              Empowering your financial success journey
+            </h1>
+            <p className="text-lg text-slate-300"> {/* Lighter text color */}
+              Guiding you with expert insights and strategic solutions to achieve financial growth, stability, and long-term success.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center md:justify-start">
+               {/* Use primary color for button */}
+              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground transition-transform duration-200 hover:scale-[1.03]">
+                Get Started
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+              </Button>
+              {/* Adjust outline button */}
+              <Button size="lg" variant="outline" className="border-slate-500 text-white hover:bg-white/10 hover:text-white hover:border-white/80 transition-transform duration-200 hover:scale-[1.03]">
+                <PlayCircle className="mr-2 h-5 w-5" />
+                Introduction
+              </Button>
+            </div>
+          </div>
+
+          {/* Image Content */}
+          <div className="relative flex justify-center items-center mt-10 md:mt-0">
+            {/* Replace gradient placeholder with the Image component */}
+            <div className="relative w-full max-w-md h-[400px] md:h-[500px] lg:h-[600px] rounded-lg shadow-2xl overflow-hidden"> {/* Added relative and overflow-hidden */}
+              <Image
+                src="/assets/hero.png" // Use path relative to public folder
+                alt="Financial professional ready to help with financial success"
+                fill // Use fill to cover the container
+                style={{ objectFit: 'cover' }} // Ensure the image covers the area nicely
+                priority // Prioritize loading for LCP
+                className="rounded-lg" // Keep the rounded corners
+              />
+            </div>
+             {/* Use primary color for badge */}
+            <div className="absolute bottom-4 -left-4 md:bottom-10 md:-left-10 bg-primary text-primary-foreground p-4 rounded-lg shadow-xl z-20">
+              <p className="text-3xl font-bold">25+</p>
+              <p className="text-xs">Years of experience<br/>in finance</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About Us Section */}
+      <FadeInUp delay={0.1}> <AboutUs /> </FadeInUp>
+      {/* Services Section - Adjust delay */}
+      <FadeInUp delay={0.2}> <Services /> </FadeInUp> 
+
+      {/* Other sections like Testimonials or CTA could go here */}
+    </>
   );
 }

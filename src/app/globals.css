@@ -1,26 +1,262 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 0 0% 100%; /* White */
+    --foreground: 224 71.4% 4.1%; /* Dark Blue/Black */
+
+    --card: 0 0% 100%;
+    --card-foreground: 224 71.4% 4.1%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71.4% 4.1%;
+
+    /* Primary: Vibrant but soft green (emerald-500 range) */
+    --primary: 145 58.3% 45.5%;
+    --primary-foreground: 0 0% 98%; /* Almost White */
+
+    --secondary: 210 40% 98%; /* Very Light Gray/Almost White */
+    --secondary-foreground: 222.2 47.4% 11.2%; /* Dark Blue */
+
+    --muted: 210 40% 96.1%; /* Light Gray */
+    --muted-foreground: 215.4 16.3% 56.9%; /* Softer Muted Gray */
+
+    /* Accent: Lighter emerald */
+    --accent: 145 63.4% 90.8%; /* emerald-100 range for hover */
+    --accent-foreground: 145 58.3% 35.5%; /* Darker emerald text on hover */
+
+    --destructive: 0 84.2% 60.2%; /* Red */
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 214.3 31.8% 91.4%; /* Light Gray Border */
+    --input: 214.3 31.8% 91.4%;
+    --ring: 145 58.3% 45.5%; /* Primary emerald for rings */
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* Dark Mode - Adjusted for softer feel */
+    --background: 220 13% 9%; /* Very Dark Blue/Slate */
+    --foreground: 210 20% 98%; /* Almost White */
+
+    --card: 220 13% 12%; /* Slightly lighter dark card */
+    --card-foreground: 210 20% 98%;
+
+    --popover: 220 13% 9%;
+    --popover-foreground: 210 20% 98%;
+
+    --primary: 145 58.3% 50.5%; /* Slightly brighter primary in dark */
+    --primary-foreground: 145 90% 96%; /* Very light text on primary */
+
+    --secondary: 215 14% 24%; /* Dark Slate */
+    --secondary-foreground: 210 20% 98%;
+
+    --muted: 215 14% 24%;
+    --muted-foreground: 217.9 10.6% 64.9%; /* Lighter muted text */
+
+    --accent: 215 14% 28%; /* Darker accent hover */
+    --accent-foreground: 210 20% 98%;
+
+    --destructive: 0 62.8% 50.6%; /* Darker Red */
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 215 14% 28%;
+    --input: 215 14% 28%;
+    --ring: 145 58.3% 50.5%;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
+
+@layer utilities {
+  /* Marquee Animation */
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .animate-marquee {
+    animation: marquee 60s linear infinite;
+  }
+
+  /* Image Glass Hover Effect */
+  .image-glass-effect-wrapper {
+    @apply relative overflow-hidden rounded-xl;
+  }
+
+  .image-glass-effect-wrapper::before {
+    content: '';
+    @apply absolute inset-0 z-10 transition-all duration-500 ease-in-out;
+    background: radial-gradient(circle at center, hsla(0, 0%, 100%, 0.2) 0%, hsla(0, 0%, 100%, 0) 70%);
+    transform: scale(0);
+    transform-origin: center center;
+    opacity: 0;
+  }
+
+  .image-glass-effect-wrapper:hover::before {
+    transform: scale(2.5);
+    opacity: 1;
+  }
+
+  .image-glass-effect-wrapper > * {
+    @apply relative z-0;
+  }
+
+  /* Subtle Dot Cursor Trail */
+  @keyframes dot-trail-fade-out {
+    to {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+  }
+
+  .dot-trail-element {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background-color: rgba(45, 212, 191, 0.7); /* teal-400 with some transparency */
+    border-radius: 50%;
+    pointer-events: none;
+    user-select: none;
+    z-index: 9998; /* Just below click effect */
+    opacity: 1;
+    transform: scale(1);
+    animation: dot-trail-fade-out 0.7s ease-out forwards;
+    box-shadow: 0 0 8px rgba(45, 212, 191, 0.5);
+  }
+
+  /* Rupee Click Effect */
+  @keyframes rupee-click-pop {
+    0% {
+      transform: scale(0.5);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.2);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(1.5);
+      opacity: 0;
+    }
+  }
+
+  .rupee-click-element {
+    position: fixed;
+    font-size: 1.5rem;
+    color: #22c55e; /* primary green */
+    user-select: none;
+    pointer-events: none;
+    z-index: 9999;
+    animation: rupee-click-pop 0.6s ease-out forwards;
+  }
+
+  /* Bitcoin Rain Animation */
+  @keyframes bitcoin-fall {
+    0% {
+      transform: translateY(-20px); /* Start slightly above the card */
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(150px); /* Fall down (adjust distance as needed) */
+      opacity: 0;
+    }
+  }
+
+  .bitcoin-rain-element {
+    position: absolute;
+    top: 0;
+    font-size: 1.2rem; /* Adjust size as needed */
+    color: #f7931a; /* Bitcoin orange */
+    user-select: none;
+    pointer-events: none;
+    z-index: 10; /* Ensure it's above card content but potentially below modals/headers if needed */
+    animation: bitcoin-fall 2s linear forwards; /* 2 second duration */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Add this within your @layer utilities or at the end of the file */
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px); /* Adjust vertical distance */
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+}
+
+/* === ADD BREATHING ANIMATION === */
+@keyframes breathingBackground {
+  0%, 100% {
+    background-color: theme('colors.slate.900'); /* Start/End with original dark slate */
+  }
+  25% {
+    background-color: theme('colors.blue.900'); /* Transition to dark blue */
+  }
+  50% {
+    background-color: theme('colors.red.900');   /* Transition to dark red */
+  }
+  75% {
+    background-color: theme('colors.emerald.900'); /* Transition to dark green */
+  }
+}
+/* === END BREATHING ANIMATION === */
