@@ -1,24 +1,17 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
-import { Goal, User, Target, IndianRupee, Percent, TrendingUp, Hourglass, Wallet, LineChart } from 'lucide-react'; // Import new icons
+import { Goal, Hourglass, Wallet, LineChart as LucideLineChart } from 'lucide-react';
 import { cn } from "@/lib/utils";
-// import { Separator } from "@/components/ui/separator"; // Temporarily commented out
 
 // Function to calculate Future Value of a lump sum
 const calculateFV = (pv: number, rate: number, periods: number): number => {
   if (rate === 0) return pv; // Avoid division by zero if rate is 0
   return pv * Math.pow(1 + rate, periods);
-};
-
-// Function to calculate Future Value of an annuity (regular investments)
-const calculateFVA = (payment: number, rate: number, periods: number): number => {
-  if (rate === 0) return payment * periods;
-  return payment * ((Math.pow(1 + rate, periods) - 1) / rate);
 };
 
 // Function to calculate Present Value of an annuity (corpus needed for expenses)
@@ -305,7 +298,7 @@ const RetirementPlannerPage = () => {
                 <Card className="bg-slate-50 border-slate-200">
                     <CardHeader>
                         <CardTitle className="text-xl text-primary flex items-center gap-2">
-                            <LineChart className="h-5 w-5"/> Projection Chart
+                            <LucideLineChart className="h-5 w-5"/> Projection Chart
                         </CardTitle>
                     </CardHeader>
                     <CardContent className="h-60 flex items-center justify-center text-slate-400">

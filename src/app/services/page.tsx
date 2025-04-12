@@ -1,14 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+// import Link from 'next/link'; // Unused import
 import { Button } from "@/components/ui/button";
-import { Shield, TrendingUp, Home, LifeBuoy, Banknote, PiggyBank, FileText, Umbrella, Library, Target, ArrowRight, HeartPulse, ShieldCheck, Briefcase, GraduationCap } from 'lucide-react';
+import { Shield, TrendingUp, Home, LifeBuoy, Banknote, PiggyBank, FileText, Umbrella, Library, HeartPulse, ShieldCheck, Briefcase, GraduationCap } from 'lucide-react'; // Removed unused Phone, LayoutGrid
 
 const servicesDetails = [
   {

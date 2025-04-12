@@ -24,7 +24,7 @@ const ContactPage = () => {
           <p className="text-white font-semibold text-sm tracking-wider uppercase mb-2 opacity-90">Contact Us</p>
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Get In Touch</h1>
           <p className="text-lg text-sky-100 max-w-3xl mx-auto">
-            We're here to help you navigate your financial future. Reach out to us with any questions or to schedule a consultation.
+            We&apos;re here to help you navigate your financial future. Reach out to us with any questions or to schedule a consultation.
           </p>
         </div>
       </section>

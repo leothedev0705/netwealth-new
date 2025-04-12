@@ -6,7 +6,6 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
 import { Landmark, IndianRupee, Percent, CalendarDays } from 'lucide-react'; // Use Landmark icon
-import { cn } from "@/lib/utils";
 
 const EMICalculatorPage = () => {
   const [loanAmountStr, setLoanAmountStr] = useState<string>("1000000"); // 10 Lakhs

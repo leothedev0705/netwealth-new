@@ -22,8 +22,8 @@ const Partners = () => {
     // Use Hero section's container settings for alignment
     <section className="bg-white py-12 px-6">
       <div className="container mx-auto">
-        <h3 className="text-sm font-semibold text-gray-600 mb-6 text-center md:text-left">We're Working With:</h3>
-        <div className="flex flex-wrap justify-center md:justify-start items-center gap-x-12 gap-y-6 opacity-70">
+        <h3 className="text-sm font-semibold text-gray-600 mb-6 text-center md:text-left">We&apos;re proud to collaborate with leading financial institutions and technology providers to offer you the best solutions.</h3>
+        <div className="flex flex-wrap justify-center items-center gap-x-12 gap-y-8">
           <VisaLogo />
           <PayPalLogo />
           <PayoneerLogo />

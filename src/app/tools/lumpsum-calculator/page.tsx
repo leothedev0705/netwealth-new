@@ -6,7 +6,6 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
 import { PiggyBank, IndianRupee, Percent, CalendarDays } from 'lucide-react'; // Import appropriate icons
-import { cn } from "@/lib/utils";
 
 
 const LumpSumCalculatorPage = () => {

@@ -1,12 +1,12 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
-import { Button } from "@/components/ui/button";
-import { IndianRupee, Percent, CalendarDays, Calculator } from 'lucide-react';
+import { IndianRupee, Percent, Calendar, LineChart, Info } from 'lucide-react';
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 const SIPCalculatorPage = () => {
   const [monthlyInvestmentStr, setMonthlyInvestmentStr] = useState<string>("10000");
@@ -73,7 +73,7 @@ const SIPCalculatorPage = () => {
         <Card className="w-full shadow-xl border-slate-200 overflow-hidden">
           <CardHeader className="bg-slate-50 border-b border-slate-200 p-6">
             <CardTitle className="text-2xl md:text-3xl font-bold text-slate-800 flex items-center gap-2">
-              <Calculator className="h-7 w-7 text-primary" />
+              <LineChart className="h-7 w-7 text-primary" />
               SIP Calculator
             </CardTitle>
             <CardDescription className="text-slate-500 mt-1">
@@ -137,13 +137,13 @@ const SIPCalculatorPage = () => {
                   aria-label="Annual Rate Slider"
                  />
                  <p className="text-xs text-slate-500 mt-2 px-1">
-                   SIP returns are market-linked (e.g., equity MFs historically averaged 10-15%+) and are NOT guaranteed or fixed like FD rates. RBI doesn't set SIP rates. Enter a realistic expected rate based on the investment type (equity/debt/hybrid) and understand the associated risks.
+                   SIP returns are market-linked (e.g., equity MFs historically averaged 10-15%+) and are NOT guaranteed or fixed like FD rates. RBI doesn&apos;t set SIP rates. Enter a realistic expected rate based on the investment type (equity/debt/hybrid) and understand the associated risks.
                  </p>
               </div>
 
               <div className="space-y-3">
                 <Label htmlFor="years" className="text-slate-700 font-medium flex items-center gap-2">
-                  <CalendarDays className="h-4 w-4" /> Investment Period (Years)
+                  <Calendar className="h-4 w-4" /> Investment Period (Years)
                 </Label>
                  <div className="flex items-center gap-4">
                    <Input
@@ -185,6 +185,23 @@ const SIPCalculatorPage = () => {
                </div>
                <p className="text-xs text-slate-400 pt-4">*Calculations are estimates based on inputs and do not guarantee future returns.</p>
             </div>
+
+            <Alert className="mt-6 border-blue-200 bg-blue-50/50">
+              <Info className="h-4 w-4 text-blue-600" />
+              <AlertTitle className="text-blue-800">Understanding Your Results</AlertTitle>
+              <AlertDescription className="text-blue-700">
+                The total investment is simply your monthly contribution multiplied by the number of months. The estimated returns are calculated based on the expected annual rate, compounded monthly. Remember, past performance doesn&apos;t guarantee future returns, and actual market returns may vary. This calculator provides an estimate for illustrative purposes. For personalized advice, consider consulting a financial advisor.
+              </AlertDescription>
+            </Alert>
+
+            <div className="mt-8 text-center">
+              <p className="text-slate-600 mb-3">
+                Ready to take the next step? Explore investment options aligned with your goals.
+              </p>
+               <a href="/services#investing" className="inline-block px-6 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors font-medium">
+                 Explore Investment Services
+               </a>
+            </div>
           </CardContent>
         </Card>
 
@@ -194,12 +211,12 @@ const SIPCalculatorPage = () => {
               Understanding Compound Interest
             </CardTitle>
              <CardDescription className="text-slate-500 mt-1">
-              The "magic" behind long-term wealth creation.
+              The &quot;magic&quot; behind long-term wealth creation.
             </CardDescription>
           </CardHeader>
           <CardContent className="p-6 md:p-8 space-y-4 text-slate-700 text-sm leading-relaxed">
             <p>
-              Compound interest, often called "interest on interest," is the engine that drives significant wealth growth over time, especially with regular investments like SIPs.
+              Compound interest, often called &quot;interest on interest,&quot; is the engine that drives significant wealth growth over time, especially with regular investments like SIPs.
             </p>
             <p>
               <strong>How it works:</strong> Instead of just earning returns on your initial investment (principal), you also start earning returns on the accumulated interest itself. In simple terms:

@@ -1,9 +1,11 @@
 import React from 'react';
-import Image from 'next/image';
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/components/ui/card";
+// import Image from 'next/image'; // Unused
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+// import { AvatarImage } from "@/components/ui/avatar"; // Unused
+import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/components/ui/card"; // Keep CardDescription
 import { Button } from "@/components/ui/button";
-import { Check, Award, Users, Target, Building, BarChart, ClipboardList, ShieldCheck, TrendingUp, Compass } from 'lucide-react';
+// Keep required icons, remove unused Building, TrendingUp, Phone, Mail, Briefcase, DollarSign
+import { CheckSquare, Users, Award, Check, Target, Compass, ClipboardList, ShieldCheck, BarChart } from 'lucide-react';
 import Link from 'next/link';
 
 // Placeholder Team Data
@@ -240,7 +242,7 @@ const AboutPage = () => {
        <section className="py-20 px-6 bg-gradient-to-r from-slate-800 to-slate-900 text-white">
          <div className="container mx-auto text-center">
            <h2 className="text-3xl font-bold mb-6 text-slate-100">Ready to Start Your Financial Journey?</h2>
-           <p className="mb-8 max-w-xl mx-auto text-slate-300">Let's discuss how Net Wealth India can help you achieve your financial goals. Reach out today for a personalized consultation.</p>
+           <p className="mb-8 max-w-xl mx-auto text-slate-300">Let&apos;s discuss how Net Wealth India can help you achieve your financial goals. Reach out today for a personalized consultation.</p>
            <Button 
              size="lg" 
              asChild 
@@ -255,6 +257,39 @@ const AboutPage = () => {
              <Link href="/contact">Contact Us Now</Link>
            </Button>
          </div>
+       </section>
+
+       {/* Why Choose Us Section (Similar to Homepage, adjust content if needed) */}
+       <section className="py-16 md:py-24 px-6 bg-white">
+           {/* ... section title ... */}
+           <div className="text-center mb-12">
+               <div className="inline-block bg-primary/10 p-3 rounded-full mb-3">
+                  <Award className="h-6 w-6 text-primary" />
+                </div>
+               <h2 className="text-3xl md:text-4xl font-bold text-slate-800">Why Partner With Us?</h2>
+               <p className="text-lg text-slate-500 mt-2 max-w-2xl mx-auto">Experience the Net Wealth India difference.</p>
+           </div>
+           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+               {/* Feature 1 */}
+               <div className="p-6 bg-slate-50/50 rounded-lg border border-slate-100 text-center">
+                  <CheckSquare className="h-8 w-8 text-primary mx-auto mb-3"/>
+                  <h3 className="text-lg font-semibold text-slate-700 mb-1">Holistic Approach</h3>
+                  <p className="text-sm text-slate-500">Comprehensive planning covering all aspects of your financial life.</p>
+               </div>
+                {/* Feature 2 */}
+               <div className="p-6 bg-slate-50/50 rounded-lg border border-slate-100 text-center">
+                   <Users className="h-8 w-8 text-primary mx-auto mb-3"/>
+                   <h3 className="text-lg font-semibold text-slate-700 mb-1">Client-First Philosophy</h3>
+                    {/* Fixed quote */}
+                   <p className="text-sm text-slate-500">Your interests always come first. We build relationships based on trust.</p>
+                </div>
+                 {/* Feature 3 */}
+                <div className="p-6 bg-slate-50/50 rounded-lg border border-slate-100 text-center">
+                    <Award className="h-8 w-8 text-primary mx-auto mb-3"/>
+                    <h3 className="text-lg font-semibold text-slate-700 mb-1">Proven Expertise</h3>
+                    <p className="text-sm text-slate-500">Decades of combined experience navigating complex financial landscapes.</p>
+                </div>
+           </div>
        </section>
     </>
   );

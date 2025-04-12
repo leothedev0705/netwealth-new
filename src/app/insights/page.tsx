@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from 'next/link';
-import { ArrowRight, BarChart2, Newspaper } from 'lucide-react';
+import { ArrowRight, Newspaper } from 'lucide-react';
 // Comment out the Sparkline import as the file is missing
 // import Sparkline from '@/components/ui/Sparkline'; 
 
@@ -43,12 +43,6 @@ const newsSnippets = [
   { id: 'news4', headline: "SEBI introduces new framework for Small & Medium REITs.", source: "Placeholder Regulatory Update", time: "Yesterday" },
 ];
 // =============================================
-
-// === Function to generate random data for sparklines ===
-const generateRandomData = (points = 10, min = 50, max = 100) => {
-  return Array.from({ length: points }, () => Math.floor(Math.random() * (max - min + 1)) + min);
-};
-// ===================================================
 
 const InsightsPage = () => {
   // Data generation is no longer needed if Sparkline is commented out

@@ -1,6 +1,4 @@
 import React from 'react';
-import { ArrowUp, ArrowDown } from 'lucide-react';
-import Sparkline from '@/components/ui/Sparkline';
 
 const tickerData = [
   { name: 'DOW', value: '39563', change: '+940', percent: '(3.14%)', positive: true },

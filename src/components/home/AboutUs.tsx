@@ -1,7 +1,8 @@
 import React from 'react';
-import Image from 'next/image';
+// import Image from 'next/image';
 import { Card, CardContent } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+// import { AvatarImage } from "@/components/ui/avatar";
 import { Phone, CheckSquare, DollarSign, Briefcase } from 'lucide-react';
 
 const AboutUs = () => {
