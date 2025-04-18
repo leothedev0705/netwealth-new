@@ -5,12 +5,18 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
-import { Landmark, IndianRupee, Percent, CalendarDays } from 'lucide-react'; // Use Landmark icon
+import { Landmark, IndianRupee, Percent, CalendarDays, Calculator } from 'lucide-react'; // Use Landmark icon
+import { Button } from "@/components/ui/button";
 
 const EMICalculatorPage = () => {
   const [loanAmountStr, setLoanAmountStr] = useState<string>("1000000"); // 10 Lakhs
   const [annualRateStr, setAnnualRateStr] = useState<string>("8.5");
   const [yearsStr, setYearsStr] = useState<string>("5");
+  const [result, setResult] = useState<{
+    emi: number
+    totalInterest: number
+    totalPayment: number
+  } | null>(null);
 
   // Derived numeric values
   const loanAmount = useMemo(() => parseFloat(loanAmountStr) || 0, [loanAmountStr]);
@@ -35,26 +41,24 @@ const EMICalculatorPage = () => {
     return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(value);
   };
 
-  const { monthlyEMI, totalInterest, totalPayment } = useMemo(() => {
-    if (loanAmount <= 0 || annualRate <= 0 || years <= 0) {
-      return { monthlyEMI: 0, totalInterest: 0, totalPayment: 0 };
-    }
-
-    const monthlyRate = annualRate / 12 / 100;
+  const calculateEMI = () => {
+    const principal = loanAmount;
+    const ratePerMonth = annualRate / (12 * 100);
     const numberOfMonths = years * 12;
+    
+    // EMI = P * r * (1 + r)^n / ((1 + r)^n - 1)
+    const emi = principal * ratePerMonth * Math.pow(1 + ratePerMonth, numberOfMonths) / 
+      (Math.pow(1 + ratePerMonth, numberOfMonths) - 1);
+    
+    const totalPayment = emi * numberOfMonths;
+    const totalInterest = totalPayment - principal;
 
-    // EMI = P * r * (1+r)^n / ((1+r)^n - 1)
-    const emi = (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, numberOfMonths)) / (Math.pow(1 + monthlyRate, numberOfMonths) - 1);
-
-    const totalPay = emi * numberOfMonths;
-    const interest = totalPay - loanAmount;
-
-    return {
-      monthlyEMI: emi,
-      totalInterest: interest,
-      totalPayment: totalPay,
-    };
-  }, [loanAmount, annualRate, years]);
+    setResult({
+      emi: Math.round(emi),
+      totalInterest: Math.round(totalInterest),
+      totalPayment: Math.round(totalPayment)
+    });
+  };
 
   return (
     <div className="bg-gradient-to-br from-slate-50 via-white to-slate-100 min-h-screen py-16 md:py-24 px-6">
@@ -62,7 +66,7 @@ const EMICalculatorPage = () => {
         <Card className="w-full shadow-xl border-slate-200 overflow-hidden">
           <CardHeader className="bg-slate-50 border-b border-slate-200 p-6">
             <CardTitle className="text-2xl md:text-3xl font-bold text-slate-800 flex items-center gap-2">
-              <Landmark className="h-7 w-7 text-primary" />
+              <Calculator className="h-7 w-7 text-primary" />
               EMI Calculator
             </CardTitle>
             <CardDescription className="text-slate-500 mt-1">
@@ -168,18 +172,20 @@ const EMICalculatorPage = () => {
             <div className="bg-slate-50 rounded-lg p-6 md:p-8 flex flex-col justify-center items-center text-center border border-slate-200 space-y-6">
               <div className="w-full">
                 <p className="text-sm text-slate-500 mb-1">Monthly EMI</p>
-                <p className="text-3xl md:text-4xl font-bold text-primary">{formatCurrency(monthlyEMI)}</p>
+                <p className="text-3xl md:text-4xl font-bold text-primary">{formatCurrency(result?.emi || 0)}</p>
               </div>
               <div className="w-full border-t border-slate-200 pt-4">
                 <p className="text-sm text-slate-500 mb-1">Total Interest Payable</p>
-                <p className="text-xl font-semibold text-slate-700">{formatCurrency(totalInterest)}</p>
+                <p className="text-xl font-semibold text-slate-700">{formatCurrency(result?.totalInterest || 0)}</p>
               </div>
                <div className="w-full border-t border-slate-200 pt-4">
                  <p className="text-sm text-slate-500 mb-1">Total Payment (Principal + Interest)</p>
-                 <p className="text-xl font-semibold text-slate-700">{formatCurrency(totalPayment)}</p>
+                 <p className="text-xl font-semibold text-slate-700">{formatCurrency(result?.totalPayment || 0)}</p>
                </div>
                <p className="text-xs text-slate-400 pt-4">*Calculations are approximate estimates.</p>
             </div>
+
+            <Button onClick={calculateEMI} className="w-full">Calculate</Button>
           </CardContent>
         </Card>
       </div>

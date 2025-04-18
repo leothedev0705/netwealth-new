@@ -31,14 +31,17 @@ const ClickEffect = () => {
   return (
     <div className="pointer-events-none fixed inset-0 z-[9999]">
       {clicks.map((click) => (
-        <div
+        <span
           key={click.id}
-          className="click-effect absolute rounded-full"
+          className="rupee-click-element absolute"
           style={{
             left: `${click.x}px`,
             top: `${click.y}px`,
+            transform: 'translate(-50%, -50%)',
           }}
-        />
+        >
+          ₹ 
+        </span>
       ))}
     </div>
   );

@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link'; // Import Link
 import Image from 'next/image'; // Import Image
+import { motion } from 'framer-motion'; // Import motion
 import {
   Card,
   CardContent,
@@ -93,46 +94,61 @@ const Services = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {servicesData.map((service, index) => (
-            <Link key={service.id} href={`/services#${service.id}`} className="block group">
-              <Card 
-                className="bg-gray-50 group-hover:shadow-xl transition-all duration-300 overflow-hidden relative rounded-xl border-gray-200 group-hover:scale-[1.04] group-hover:-translate-y-1 h-full flex flex-col" 
-                onMouseEnter={createBitcoinRain}
-              >
-                <CardHeader>
-                  {service.id === 'protection' ? (
-                    <div className="mb-4">
-                       <Image 
-                        src="/assets/protection.png"
-                        alt="Protection Planning"
-                        width={48}
-                        height={48}
-                        className="rounded-md"
-                      />
+          {servicesData.map((service, index) => {
+            // Map internal ID to the actual section ID on the /services page
+            const targetSectionId = service.id === 'protection' ? 'insurance' : service.id === 'borrowing' ? 'loans' : service.id;
+            return (
+              <Link key={service.id} href={`/services#${targetSectionId}`} className="block group">
+                <motion.div
+                  className="h-full"
+                  whileHover={{ 
+                    rotateY: 10, 
+                    rotateX: -5, 
+                    scale: 1.04,
+                    y: -4
+                  }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                  onMouseEnter={createBitcoinRain}
+                >
+                  <Card 
+                    className="bg-gray-50 group-hover:shadow-xl transition-shadow duration-300 overflow-hidden relative rounded-xl border-gray-200 h-full flex flex-col" 
+                  >
+                    <CardHeader>
+                      {service.id === 'protection' ? (
+                        <div className="mb-4">
+                           <Image 
+                            src="/assets/protection.png"
+                            alt="Protection Planning"
+                            width={48}
+                            height={48}
+                            className="rounded-md"
+                          />
+                        </div>
+                      ) : (
+                        <div className="mb-4 bg-green-100 p-3 rounded-full w-fit">
+                          <service.icon className="h-6 w-6 text-green-700" />
+                        </div>
+                      )}
+                      <CardTitle className="text-xl font-semibold text-gray-800">{service.title}</CardTitle>
+                    </CardHeader>
+                    <CardContent className="flex-grow flex flex-col justify-between"> 
+                      <div> 
+                        <CardDescription className="text-gray-600 text-sm leading-relaxed">
+                          {service.description}
+                        </CardDescription>
+                      </div>
+                      <div className="mt-4 self-start"> 
+                          <ArrowRight className="h-5 w-5 text-green-600 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300" />
+                      </div>
+                    </CardContent>
+                    <div className="absolute -bottom-4 -right-4 text-[100px] font-bold text-gray-200/50 opacity-50 group-hover:opacity-100 transition-opacity duration-300 -z-0">
+                       0{index + 1}
                     </div>
-                  ) : (
-                    <div className="mb-4 bg-green-100 p-3 rounded-full w-fit">
-                      <service.icon className="h-6 w-6 text-green-700" />
-                    </div>
-                  )}
-                  <CardTitle className="text-xl font-semibold text-gray-800">{service.title}</CardTitle>
-                </CardHeader>
-                <CardContent className="flex-grow flex flex-col justify-between"> 
-                  <div> 
-                    <CardDescription className="text-gray-600 text-sm leading-relaxed">
-                      {service.description}
-                    </CardDescription>
-                  </div>
-                  <div className="mt-4 self-start"> 
-                      <ArrowRight className="h-5 w-5 text-green-600 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300" />
-                  </div>
-                </CardContent>
-                <div className="absolute -bottom-4 -right-4 text-[100px] font-bold text-gray-200/50 opacity-50 group-hover:opacity-100 transition-opacity duration-300 -z-0">
-                   0{index + 1}
-                </div>
-              </Card>
-            </Link>
-          ))}
+                  </Card>
+                </motion.div>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </section>

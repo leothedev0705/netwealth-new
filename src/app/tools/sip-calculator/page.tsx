@@ -5,13 +5,19 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/com
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
-import { IndianRupee, Percent, Calendar, LineChart, Info } from 'lucide-react';
+import { IndianRupee, Percent, Calendar, LineChart, Info, Calculator } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
 
 const SIPCalculatorPage = () => {
   const [monthlyInvestmentStr, setMonthlyInvestmentStr] = useState<string>("10000");
   const [annualRateStr, setAnnualRateStr] = useState<string>("12");
   const [yearsStr, setYearsStr] = useState<string>("10");
+  const [result, setResult] = useState<{
+    totalInvestment: number
+    totalReturns: number
+    maturityValue: number
+  } | null>(null);
 
   const monthlyInvestment = useMemo(() => parseFloat(monthlyInvestmentStr) || 0, [monthlyInvestmentStr]);
   const annualRate = useMemo(() => parseFloat(annualRateStr) || 0, [annualRateStr]);
@@ -35,37 +41,24 @@ const SIPCalculatorPage = () => {
     return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(value);
   };
 
-  const { totalInvestment, estimatedReturns, futureValue } = useMemo(() => {
+  const calculateSIP = () => {
     const monthlyRate = annualRate / 12 / 100;
     const months = years * 12;
-    const totalInv = monthlyInvestment * months;
+    const totalInvestment = monthlyInvestment * months;
+    
+    // Formula: FV = P × ((1 + r)^n - 1) / r × (1 + r)
+    const maturityValue = monthlyInvestment * 
+      ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate) * 
+      (1 + monthlyRate);
+    
+    const totalReturns = maturityValue - totalInvestment;
 
-    if (monthlyInvestment <= 0 || annualRate < 0 || years <= 0 || months <= 0) {
-        return {
-            totalInvestment: 0,
-            estimatedReturns: 0,
-            futureValue: 0,
-        };
-    }
-
-    if (monthlyRate === 0) {
-       const fv = totalInv;
-       return {
-         totalInvestment: totalInv,
-         estimatedReturns: 0,
-         futureValue: fv,
-       };
-    }
-
-    const fv = monthlyInvestment * (Math.pow(1 + monthlyRate, months) - 1) / monthlyRate * (1 + monthlyRate);
-    const returns = fv - totalInv;
-
-    return {
-      totalInvestment: totalInv,
-      estimatedReturns: returns,
-      futureValue: fv,
-    };
-  }, [monthlyInvestment, annualRate, years]);
+    setResult({
+      totalInvestment: Math.round(totalInvestment),
+      totalReturns: Math.round(totalReturns),
+      maturityValue: Math.round(maturityValue)
+    });
+  };
 
   return (
     <div className="bg-gradient-to-br from-slate-50 via-white to-slate-100 min-h-screen py-16 md:py-24 px-6">
@@ -73,11 +66,11 @@ const SIPCalculatorPage = () => {
         <Card className="w-full shadow-xl border-slate-200 overflow-hidden">
           <CardHeader className="bg-slate-50 border-b border-slate-200 p-6">
             <CardTitle className="text-2xl md:text-3xl font-bold text-slate-800 flex items-center gap-2">
-              <LineChart className="h-7 w-7 text-primary" />
+              <Calculator className="h-7 w-7 text-primary" />
               SIP Calculator
             </CardTitle>
             <CardDescription className="text-slate-500 mt-1">
-              Estimate the future value of your Systematic Investment Plan.
+              Calculate your Systematic Investment Plan returns and plan your investments better
             </CardDescription>
           </CardHeader>
           <CardContent className="p-6 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -173,15 +166,15 @@ const SIPCalculatorPage = () => {
             <div className="bg-slate-50 rounded-lg p-6 md:p-8 flex flex-col justify-center items-center text-center border border-slate-200 space-y-6">
               <div className="w-full">
                 <p className="text-sm text-slate-500 mb-1">Total Investment</p>
-                <p className="text-2xl font-medium text-slate-700 font-sans">{formatCurrency(totalInvestment)}</p>
+                <p className="text-2xl font-medium text-slate-700 font-sans">{formatCurrency(monthlyInvestment * years * 12)}</p>
               </div>
               <div className="w-full border-t border-slate-200 pt-4">
                 <p className="text-sm text-slate-500 mb-1">Estimated Returns</p>
-                <p className="text-2xl font-medium text-green-600 font-sans">{formatCurrency(estimatedReturns)}</p>
+                <p className="text-2xl font-medium text-green-600 font-sans">{formatCurrency(monthlyInvestment * years * 12 * annualRate / 100)}</p>
               </div>
                <div className="w-full border-t border-slate-200 pt-4">
                  <p className="text-sm text-slate-500 mb-1">Projected Future Value</p>
-                 <p className="text-3xl md:text-4xl font-semibold text-primary font-sans">{formatCurrency(futureValue)}</p>
+                 <p className="text-3xl md:text-4xl font-semibold text-primary font-sans">{formatCurrency(monthlyInvestment * years * 12 * (1 + annualRate / 100) ** years)}</p>
                </div>
                <p className="text-xs text-slate-400 pt-4">*Calculations are estimates based on inputs and do not guarantee future returns.</p>
             </div>
@@ -202,6 +195,8 @@ const SIPCalculatorPage = () => {
                  Explore Investment Services
                </a>
             </div>
+
+            <Button onClick={calculateSIP} className="w-full mt-6">Calculate</Button>
           </CardContent>
         </Card>
 
@@ -235,6 +230,37 @@ const SIPCalculatorPage = () => {
             </p>
           </CardContent>
         </Card>
+
+        {result && (
+          <Card className="w-full mt-10 shadow-lg border-slate-200">
+            <CardHeader className="bg-slate-50 border-b border-slate-200 p-6">
+              <CardTitle className="text-xl md:text-2xl font-bold text-slate-800 flex items-center gap-2">
+                Results
+              </CardTitle>
+              <CardDescription className="text-slate-500 mt-1">
+                Your investment growth projection
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="p-6 md:p-8 space-y-6">
+              <div className="space-y-2">
+                <Label>Total Investment</Label>
+                <div className="text-2xl font-bold">₹ {result.totalInvestment.toLocaleString()}</div>
+              </div>
+              <div className="space-y-2">
+                <Label>Total Returns</Label>
+                <div className="text-2xl font-bold text-green-600">
+                  ₹ {result.totalReturns.toLocaleString()}
+                </div>
+              </div>
+              <div className="space-y-2">
+                <Label>Maturity Value</Label>
+                <div className="text-3xl font-bold text-primary">
+                  ₹ {result.maturityValue.toLocaleString()}
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
       </div>
     </div>
   );
