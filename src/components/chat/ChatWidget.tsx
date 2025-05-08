@@ -87,6 +87,7 @@ export default function ChatWidget() {
   const [isLoading, setIsLoading] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [speechError, setSpeechError] = useState<string | null>(null);
   const speechService = useRef<SpeechService>(null);
 
   useEffect(() => {
@@ -102,6 +103,7 @@ export default function ChatWidget() {
       setIsListening(false);
     } else {
       setIsListening(true);
+      setSpeechError(null);
       speechService.current.startListening(
         // On result callback
         async (text) => {
@@ -110,8 +112,13 @@ export default function ChatWidget() {
         },
         // On error callback
         (error) => {
-          console.error('Speech recognition error:', error);
           setIsListening(false);
+          if (error === 'no-speech') {
+            setSpeechError('No speech detected. Please try speaking again.');
+          } else {
+            setSpeechError('Speech recognition error: ' + error);
+          }
+          console.error('Speech recognition error:', error);
         }
       );
     }
@@ -389,6 +396,9 @@ export default function ChatWidget() {
                 </form>
               </div>
             </Card>
+            {speechError && (
+              <div className="text-red-600 text-sm px-4 py-2">{speechError}</div>
+            )}
           </motion.div>
         ) : (
           <motion.div

@@ -1,6 +1,6 @@
 'use client'; // Mark this component as a Client Component
 
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Link from 'next/link'; // Import Link
 import Image from 'next/image'; // Import Image
 import { motion } from 'framer-motion'; // Import motion
@@ -76,6 +76,13 @@ const createBitcoinRain = (event: React.MouseEvent<HTMLDivElement>) => {
   }
 };
 
+// Lazy load the Card components
+const LazyCard = lazy(() => import("@/components/ui/card").then(mod => ({ default: mod.Card })));
+const LazyCardContent = lazy(() => import("@/components/ui/card").then(mod => ({ default: mod.CardContent })));
+const LazyCardHeader = lazy(() => import("@/components/ui/card").then(mod => ({ default: mod.CardHeader })));
+const LazyCardTitle = lazy(() => import("@/components/ui/card").then(mod => ({ default: mod.CardTitle })));
+const LazyCardDescription = lazy(() => import("@/components/ui/card").then(mod => ({ default: mod.CardDescription })));
+
 const Services = () => {
   return (
     <section className="bg-white py-20 px-6 md:py-32">
@@ -110,41 +117,46 @@ const Services = () => {
                   transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                   onMouseEnter={createBitcoinRain}
                 >
-                  <Card 
-                    className="bg-gray-50 group-hover:shadow-xl transition-shadow duration-300 overflow-hidden relative rounded-xl border-gray-200 h-full flex flex-col" 
-                  >
-                    <CardHeader>
-                      {service.id === 'protection' ? (
-                        <div className="mb-4">
-                           <Image 
-                            src="/assets/protection.png"
-                            alt="Protection Planning"
-                            width={48}
-                            height={48}
-                            className="rounded-md"
-                          />
+                  <Suspense fallback={<div className="bg-white p-6 rounded-lg shadow-md border-slate-200 animate-pulse" />}>
+                    <LazyCard 
+                      className="bg-gray-50 group-hover:shadow-xl transition-shadow duration-300 overflow-hidden relative rounded-xl border-gray-200 h-full flex flex-col" 
+                    >
+                      <LazyCardHeader>
+                        {service.id === 'protection' ? (
+                          <div className="mb-4">
+                             <Image 
+                              src="/assets/protection.png"
+                              alt="Protection Planning"
+                              width={48}
+                              height={48}
+                              className="rounded-md"
+                            />
+                          </div>
+                        ) : (
+                          <div className="mb-4 bg-green-100 p-3 rounded-full w-fit">
+                            <service.icon className="h-6 w-6 text-green-700" />
+                          </div>
+                        )}
+                        <LazyCardTitle className="text-xl font-semibold text-gray-800">{service.title}</LazyCardTitle>
+                      </LazyCardHeader>
+                      <LazyCardContent className="flex-grow flex flex-col justify-between"> 
+                        <div> 
+                          <LazyCardDescription className="text-gray-600 text-sm leading-relaxed">
+                            {service.description}
+                          </LazyCardDescription>
                         </div>
-                      ) : (
-                        <div className="mb-4 bg-green-100 p-3 rounded-full w-fit">
-                          <service.icon className="h-6 w-6 text-green-700" />
-                        </div>
-                      )}
-                      <CardTitle className="text-xl font-semibold text-gray-800">{service.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent className="flex-grow flex flex-col justify-between"> 
-                      <div> 
-                        <CardDescription className="text-gray-600 text-sm leading-relaxed">
-                          {service.description}
-                        </CardDescription>
-                      </div>
-                      <div className="mt-4 self-start"> 
+                        <div className="mt-4 flex items-center gap-2 self-start"> 
+                          <span className="text-sm text-primary font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            Click for more information
+                          </span>
                           <ArrowRight className="h-5 w-5 text-green-600 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300" />
+                        </div>
+                      </LazyCardContent>
+                      <div className="absolute -bottom-4 -right-4 text-[100px] font-bold text-gray-200/50 opacity-50 group-hover:opacity-100 transition-opacity duration-300 -z-0">
+                         0{index + 1}
                       </div>
-                    </CardContent>
-                    <div className="absolute -bottom-4 -right-4 text-[100px] font-bold text-gray-200/50 opacity-50 group-hover:opacity-100 transition-opacity duration-300 -z-0">
-                       0{index + 1}
-                    </div>
-                  </Card>
+                    </LazyCard>
+                  </Suspense>
                 </motion.div>
               </Link>
             );

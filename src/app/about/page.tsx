@@ -1,6 +1,9 @@
+'use client';
+
 import React from 'react';
+import Image from 'next/image';
 // import Image from 'next/image'; // Unused
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 // import { AvatarImage } from "@/components/ui/avatar"; // Unused
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from "@/components/ui/card"; // Keep CardDescription
 import { Button } from "@/components/ui/button";
@@ -13,9 +16,9 @@ const teamMembers = [
   {
     name: "Shrikant Agarwal",
     title: "Founder & Lead Wealth Advisor",
-    imageUrl: "/images/shrikant-agarwal.jpg", // Replace with actual path
+    imageUrl: "/assets/shrikant-agarwal.png",
     fallback: "SA",
-    bio: "With over [Number] years of dedicated experience in financial services and holding [mention certifications like CFP/CFA if applicable, or state 'relevant financial certifications'], Shrikant founded Net Wealth India driven by a passion to provide truly personalized, ethical, and client-centric wealth advisory. He believes in empowering clients through education and building lasting partnerships focused on achieving long-term financial well-being."
+    bio: "With over 25 years of dedicated experience in financial services and holding relevant financial certifications, Shrikant founded Net Wealth India driven by a passion to provide truly personalized, ethical, and client-centric wealth advisory. He believes in empowering clients through education and building lasting partnerships focused on achieving long-term financial well-being."
   },
   // Add more team members here if needed
   // {
@@ -54,10 +57,14 @@ const AboutPage = () => {
                 <p className="text-slate-600 leading-relaxed">To be the most trusted and sought-after wealth advisory firm, known for our integrity, expertise, and the tangible success we bring to our clients.</p>
              </div>
           </div>
-          <div className="relative h-80 md:h-96 rounded-lg overflow-hidden shadow-lg">
-             <div className="bg-gradient-to-br from-primary/20 to-emerald-300/30 w-full h-full flex items-center justify-center text-slate-500 italic">
-                (Image illustrating growth/partnership)
-             </div>
+          <div className="relative h-[300px] w-[400px] mx-auto rounded-xl overflow-hidden shadow-lg">
+            <Image
+              src="/assets/growth.png"
+              alt="Financial Growth and Partnership"
+              fill
+              className="object-contain p-4 hover:scale-105 transition-transform duration-500"
+              priority
+            />
           </div>
         </div>
       </section>
@@ -222,7 +229,10 @@ const AboutPage = () => {
                 <CardContent className="grid md:grid-cols-3 gap-6 items-center text-center md:text-left">
                   <div className="md:col-span-1 flex flex-col items-center">
                     <Avatar className="h-32 w-32 mb-4 border-4 border-primary/30">
-                      <div className="w-full h-full bg-slate-200 flex items-center justify-center text-slate-500 text-lg font-medium">(Pic)</div>
+                      <AvatarImage
+                        src={member.imageUrl}
+                        alt={member.name}
+                      />
                       <AvatarFallback className="bg-primary/10 text-primary text-2xl font-semibold">{member.fallback}</AvatarFallback>
                     </Avatar>
                     <h3 className="text-xl font-bold text-slate-800 mt-2">{member.name}</h3>
@@ -256,39 +266,6 @@ const AboutPage = () => {
             >
              <Link href="/contact">Contact Us Now</Link>
            </Button>
-         </div>
-       </section>
-
-       {/* Why Choose Us Section (Similar to Homepage, adjust content if needed) */}
-       <section className="py-16 md:py-24 px-6 bg-white">
-           {/* ... section title ... */}
-           <div className="text-center mb-12">
-               <div className="inline-block bg-primary/10 p-3 rounded-full mb-3">
-                  <Award className="h-6 w-6 text-primary" />
-                </div>
-               <h2 className="text-3xl md:text-4xl font-bold text-slate-800">Why Partner With Us?</h2>
-               <p className="text-lg text-slate-500 mt-2 max-w-2xl mx-auto">Experience the Net Wealth India difference.</p>
-           </div>
-           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-               {/* Feature 1 */}
-               <div className="p-6 bg-slate-50/50 rounded-lg border border-slate-100 text-center">
-                  <CheckSquare className="h-8 w-8 text-primary mx-auto mb-3"/>
-                  <h3 className="text-lg font-semibold text-slate-700 mb-1">Holistic Approach</h3>
-                  <p className="text-sm text-slate-500">Comprehensive planning covering all aspects of your financial life.</p>
-               </div>
-                {/* Feature 2 */}
-               <div className="p-6 bg-slate-50/50 rounded-lg border border-slate-100 text-center">
-                   <Users className="h-8 w-8 text-primary mx-auto mb-3"/>
-                   <h3 className="text-lg font-semibold text-slate-700 mb-1">Client-First Philosophy</h3>
-                    {/* Fixed quote */}
-                   <p className="text-sm text-slate-500">Your interests always come first. We build relationships based on trust.</p>
-                </div>
-                 {/* Feature 3 */}
-                <div className="p-6 bg-slate-50/50 rounded-lg border border-slate-100 text-center">
-                    <Award className="h-8 w-8 text-primary mx-auto mb-3"/>
-                    <h3 className="text-lg font-semibold text-slate-700 mb-1">Proven Expertise</h3>
-                    <p className="text-sm text-slate-500">Decades of combined experience navigating complex financial landscapes.</p>
-                </div>
            </div>
        </section>
     </>

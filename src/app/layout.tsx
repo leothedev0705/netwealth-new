@@ -10,6 +10,8 @@ import { cn } from "@/lib/utils"
 export const metadata: Metadata = {
   title: "NetWealth India",
   description: "NetWealth India - Your Trusted Partner in Wealth Management",
+  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
+  themeColor: "#ffffff",
 }
 
 export default function RootLayout({
@@ -18,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={cn("min-h-screen bg-background font-sans antialiased")}>
         <ClickEffect />
         <Header />

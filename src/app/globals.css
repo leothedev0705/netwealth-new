@@ -49,68 +49,68 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%; /* White */
-    --foreground: 224 71.4% 4.1%; /* Dark Blue/Black */
+    --background: 120 20% 98%; /* Light Green Background */
+    --foreground: 120 20% 20%; /* Dark Green Text */
 
-    --card: 0 0% 100%;
-    --card-foreground: 224 71.4% 4.1%;
+    --card: 120 20% 100%;
+    --card-foreground: 120 20% 20%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 224 71.4% 4.1%;
+    --popover: 120 20% 100%;
+    --popover-foreground: 120 20% 20%;
 
-    /* Primary: Vibrant but soft green (emerald-500 range) */
-    --primary: 145 58.3% 45.5%;
-    --primary-foreground: 0 0% 98%; /* Almost White */
+    /* Primary: Vibrant but soft green */
+    --primary: 120 50% 50%;
+    --primary-foreground: 120 20% 98%;
 
-    --secondary: 210 40% 98%; /* Very Light Gray/Almost White */
-    --secondary-foreground: 222.2 47.4% 11.2%; /* Dark Blue */
+    --secondary: 120 30% 95%;
+    --secondary-foreground: 120 20% 20%;
 
-    --muted: 210 40% 96.1%; /* Light Gray */
-    --muted-foreground: 215.4 16.3% 56.9%; /* Softer Muted Gray */
+    --muted: 120 20% 96%;
+    --muted-foreground: 120 20% 40%;
 
-    /* Accent: Lighter emerald */
-    --accent: 145 63.4% 90.8%; /* emerald-100 range for hover */
-    --accent-foreground: 145 58.3% 35.5%; /* Darker emerald text on hover */
+    /* Accent: Lighter green */
+    --accent: 120 40% 90%;
+    --accent-foreground: 120 20% 20%;
 
-    --destructive: 0 84.2% 60.2%; /* Red */
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 120 20% 98%;
 
-    --border: 214.3 31.8% 91.4%; /* Light Gray Border */
-    --input: 214.3 31.8% 91.4%;
-    --ring: 145 58.3% 45.5%; /* Primary emerald for rings */
+    --border: 120 20% 90%;
+    --input: 120 20% 90%;
+    --ring: 120 50% 50%;
 
     --radius: 0.5rem;
   }
 
   .dark {
-    /* Dark Mode - Adjusted for softer feel */
-    --background: 220 13% 9%; /* Very Dark Blue/Slate */
-    --foreground: 210 20% 98%; /* Almost White */
+    /* Dark Mode - Adjusted for green theme */
+    --background: 120 20% 10%;
+    --foreground: 120 20% 98%;
 
-    --card: 220 13% 12%; /* Slightly lighter dark card */
-    --card-foreground: 210 20% 98%;
+    --card: 120 20% 15%;
+    --card-foreground: 120 20% 98%;
 
-    --popover: 220 13% 9%;
-    --popover-foreground: 210 20% 98%;
+    --popover: 120 20% 10%;
+    --popover-foreground: 120 20% 98%;
 
-    --primary: 145 58.3% 50.5%; /* Slightly brighter primary in dark */
-    --primary-foreground: 145 90% 96%; /* Very light text on primary */
+    --primary: 120 50% 50%;
+    --primary-foreground: 120 20% 98%;
 
-    --secondary: 215 14% 24%; /* Dark Slate */
-    --secondary-foreground: 210 20% 98%;
+    --secondary: 120 20% 20%;
+    --secondary-foreground: 120 20% 98%;
 
-    --muted: 215 14% 24%;
-    --muted-foreground: 217.9 10.6% 64.9%; /* Lighter muted text */
+    --muted: 120 20% 20%;
+    --muted-foreground: 120 20% 70%;
 
-    --accent: 215 14% 28%; /* Darker accent hover */
-    --accent-foreground: 210 20% 98%;
+    --accent: 120 20% 25%;
+    --accent-foreground: 120 20% 98%;
 
-    --destructive: 0 62.8% 50.6%; /* Darker Red */
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 120 20% 98%;
 
-    --border: 215 14% 28%;
-    --input: 215 14% 28%;
-    --ring: 145 58.3% 50.5%;
+    --border: 120 20% 25%;
+    --input: 120 20% 25%;
+    --ring: 120 50% 50%;
   }
 }
 

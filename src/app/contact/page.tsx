@@ -1,7 +1,6 @@
-// TODO: Implement form state handling and submission logic (e.g., using react-hook-form and an API route/server action)
-'use client'; // Mark as client component for form handling
+'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -9,120 +8,145 @@ import { Label } from "@/components/ui/label";
 import { Phone, Mail, MapPin, Send, Clock } from 'lucide-react';
 
 const ContactPage = () => {
-  // Basic handler for placeholder
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    alert('Form submission not implemented yet.');
+    console.log('Form data:', formData);
     // Add actual form submission logic here
+    alert('Form submission not implemented yet.');
   };
 
   return (
     <>
-      {/* Page Hero Section - Major Sky Blue Theme */}
-      <section className="bg-gradient-to-br from-sky-400 to-sky-200 py-24 px-6 text-center">
+      {/* Page Hero Section - Light Green Theme */}
+      <section className="bg-gradient-to-br from-green-50 to-green-100 py-24 px-6 text-center">
         <div className="container mx-auto">
-          <p className="text-white font-semibold text-sm tracking-wider uppercase mb-2 opacity-90">Contact Us</p>
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Get In Touch</h1>
-          <p className="text-lg text-sky-100 max-w-3xl mx-auto">
+          <p className="text-primary font-semibold text-sm tracking-wider uppercase mb-2">Contact Us</p>
+          <h1 className="text-4xl md:text-5xl font-bold text-green-900 mb-4">Get In Touch</h1>
+          <p className="text-lg text-green-700 max-w-3xl mx-auto">
             We&apos;re here to help you navigate your financial future. Reach out to us with any questions or to schedule a consultation.
           </p>
         </div>
       </section>
 
-      {/* Contact Info & Form Section - Major Sky Blue Theme */}
-      <section className="py-20 px-6 bg-sky-50">
-        <div className="container mx-auto grid md:grid-cols-2 gap-12 md:gap-16 items-start">
-          {/* Contact Details */}
-          <div className="space-y-6">
-            <h2 className="text-3xl font-semibold text-slate-900 mb-6">Contact Information</h2>
-            <div className="space-y-4">
-              {/* Address */}
-              <div className="flex items-start gap-4 p-4 rounded-md">
-                <div className="bg-sky-600 text-white p-3 rounded-full flex-shrink-0 shadow">
-                  <MapPin className="h-5 w-5" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-slate-700 mb-1">Our Office</h4>
-                  <p className="text-slate-500 text-sm italic">
-                    123 Finance Street, Suite 456,<br/>
-                    Wealth City, ST 78910
-                  </p>
-                </div>
+      {/* Contact Info & Form Section */}
+      <section className="py-16 px-6">
+        <div className="container mx-auto grid md:grid-cols-2 gap-12">
+          {/* Contact Information */}
+          <div className="space-y-8">
+            <div className="flex items-start gap-4">
+              <div className="bg-primary/10 p-3 rounded-lg">
+                <Phone className="h-6 w-6 text-primary" />
               </div>
-              {/* Phone */}
-              <div className="flex items-start gap-4 p-4 rounded-md">
-                <div className="bg-sky-600 text-white p-3 rounded-full flex-shrink-0 shadow">
-                  <Phone className="h-5 w-5" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-slate-700 mb-1">Phone</h4>
-                  <p className="text-slate-500 text-sm hover:text-sky-700 transition-colors">
-                    <a href="tel:+919949474099">99494 74099</a>, <a href="tel:+917981290540">79812 90540</a>
-                   </p>
-                </div>
-              </div>
-              {/* Email */}
-              <div className="flex items-start gap-4 p-4 rounded-md">
-                <div className="bg-sky-600 text-white p-3 rounded-full flex-shrink-0 shadow">
-                  <Mail className="h-5 w-5" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-slate-700 mb-1">Email</h4>
-                   <p className="text-slate-500 text-sm hover:text-sky-700 transition-colors italic">
-                    <a href="mailto:info@netwealthindia.com">info@netwealthindia.com</a>
-                   </p>
-                </div>
-              </div>
-               {/* Office Hours */} 
-              <div className="flex items-start gap-4 p-4 rounded-md">
-                 <div className="bg-sky-600 text-white p-3 rounded-full flex-shrink-0 shadow">
-                  <Clock className="h-5 w-5" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-slate-700 mb-1">Office Hours</h4>
-                   <p className="text-slate-500 text-sm">
-                     Monday - Friday: 9:00 AM - 6:00 PM<br/>
-                     Saturday: 10:00 AM - 2:00 PM<br/>
-                     Sunday: Closed
-                   </p>
-                </div>
+              <div>
+                <h3 className="text-lg font-semibold text-green-900">Phone</h3>
+                <p className="text-green-700">9930777332, 9930115558</p>
               </div>
             </div>
-             {/* Map Placeholder */}
-             <div className="mt-8 aspect-video bg-white rounded-lg flex items-center justify-center text-slate-500 border border-slate-300">
-                 (Map Placeholder)
-             </div>
+            <div className="flex items-start gap-4">
+              <div className="bg-primary/10 p-3 rounded-lg">
+                <Mail className="h-6 w-6 text-primary" />
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-green-900">Email</h3>
+                <p className="text-green-700">netwealthindia05@gmail.com</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <div className="bg-primary/10 p-3 rounded-lg">
+                <MapPin className="h-6 w-6 text-primary" />
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-green-900">Address</h3>
+                <p className="text-green-700">A-101, Plot No-25/A, Nilkant CHS, 1st Floor, Jethabhai Lane, Near A Ward BMC Office, Ghatkopar (E), Mumbai - 400077</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <div className="bg-primary/10 p-3 rounded-lg">
+                <Clock className="h-6 w-6 text-primary" />
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-green-900">Working Hours</h3>
+                <p className="text-green-700">Monday - Friday: 9:00 AM - 6:00 PM</p>
+              </div>
+            </div>
           </div>
 
-          {/* Contact Form - Major Sky Blue Theme */}
-          <div className="bg-white p-8 md:p-10 rounded-lg shadow-xl border border-slate-200">
-            <h2 className="text-3xl font-semibold text-sky-700 mb-6">Send Us a Message</h2>
+          {/* Contact Form */}
+          <div className="bg-white rounded-lg shadow-lg p-8">
+            <h2 className="text-2xl font-bold text-green-900 mb-6">Send us a Message</h2>
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <Label htmlFor="name" className="text-sm font-medium text-slate-800">Full Name</Label>
-                <Input id="name" type="text" placeholder="Your Name" required className="mt-1 bg-white focus-visible:ring-1 focus-visible:ring-sky-500 focus-visible:ring-offset-0 hover:border-sky-400 transition-colors" />
+              <div className="space-y-2">
+                <Label htmlFor="name" className="text-green-900">Name</Label>
+                <Input
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder="Your name"
+                  className="border-green-200 focus:border-primary"
+                  suppressHydrationWarning
+                />
               </div>
-              <div>
-                <Label htmlFor="email" className="text-sm font-medium text-slate-800">Email Address</Label>
-                <Input id="email" type="email" placeholder="your.email@example.com" required className="mt-1 bg-white focus-visible:ring-1 focus-visible:ring-sky-500 focus-visible:ring-offset-0 hover:border-sky-400 transition-colors" />
+              <div className="space-y-2">
+                <Label htmlFor="email" className="text-green-900">Email</Label>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="your@email.com"
+                  className="border-green-200 focus:border-primary"
+                  suppressHydrationWarning
+                />
               </div>
-               <div>
-                <Label htmlFor="phone" className="text-sm font-medium text-slate-800">Phone Number (Optional)</Label>
-                <Input id="phone" type="tel" placeholder="(+91) ..." className="mt-1 bg-white focus-visible:ring-1 focus-visible:ring-sky-500 focus-visible:ring-offset-0 hover:border-sky-400 transition-colors" />
+              <div className="space-y-2">
+                <Label htmlFor="subject" className="text-green-900">Subject</Label>
+                <Input
+                  id="subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  placeholder="Subject"
+                  className="border-green-200 focus:border-primary"
+                  suppressHydrationWarning
+                />
               </div>
-              <div>
-                <Label htmlFor="subject" className="text-sm font-medium text-slate-800">Subject</Label>
-                <Input id="subject" type="text" placeholder="Reason for contacting" required className="mt-1 bg-white focus-visible:ring-1 focus-visible:ring-sky-500 focus-visible:ring-offset-0 hover:border-sky-400 transition-colors" />
+              <div className="space-y-2">
+                <Label htmlFor="message" className="text-green-900">Message</Label>
+                <Textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  placeholder="Your message"
+                  className="border-green-200 focus:border-primary min-h-[150px]"
+                  suppressHydrationWarning
+                />
               </div>
-              <div>
-                <Label htmlFor="message" className="text-sm font-medium text-slate-800">Message</Label>
-                <Textarea id="message" placeholder="Your message details..." required rows={5} className="mt-1 bg-white focus-visible:ring-1 focus-visible:ring-sky-500 focus-visible:ring-offset-0 hover:border-sky-400 transition-colors" />
-              </div>
-              <div>
-                <Button type="submit" size="lg" className="w-full bg-sky-600 hover:bg-sky-700 text-white transition-all duration-200 hover:scale-[1.02]">
-                  <Send className="mr-2 h-4 w-4" /> Send Message
-                </Button>
-              </div>
+              <Button
+                type="submit"
+                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
+                suppressHydrationWarning
+              >
+                <Send className="mr-2 h-4 w-4" />
+                Send Message
+              </Button>
             </form>
           </div>
         </div>

@@ -49,11 +49,11 @@ const tools = [
 
 export default function ToolsPage() {
   return (
-    <div className="bg-gradient-to-br from-slate-50 via-white to-slate-100 min-h-screen py-16 md:py-24 px-6">
+    <div className="bg-gradient-to-br from-green-50 via-white to-green-100 min-h-screen py-16 md:py-24 px-6">
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-slate-800 mb-4">Financial Planning Tools</h1>
-          <p className="text-lg text-slate-600">
+          <h1 className="text-4xl font-bold text-green-900 mb-4">Financial Planning Tools</h1>
+          <p className="text-lg text-green-700">
             Powerful calculators and tools to help you make informed financial decisions
           </p>
         </div>
@@ -61,13 +61,13 @@ export default function ToolsPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {tools.map((tool, index) => (
             <Link href={tool.href} key={index}>
-              <Card className="h-full transition-all duration-300 hover:shadow-lg hover:scale-[1.02] cursor-pointer border-slate-200">
+              <Card className="h-full transition-all duration-300 hover:shadow-lg hover:scale-[1.02] cursor-pointer border-green-200">
                 <CardHeader>
                   <div className={`w-12 h-12 rounded-lg ${tool.color} flex items-center justify-center mb-4`}>
                     {tool.icon}
                   </div>
-                  <CardTitle className="text-xl font-bold text-slate-800">{tool.name}</CardTitle>
-                  <CardDescription className="text-slate-600 line-clamp-3">
+                  <CardTitle className="text-xl font-bold text-green-900">{tool.name}</CardTitle>
+                  <CardDescription className="text-green-700 line-clamp-3">
                     {tool.description}
                   </CardDescription>
                 </CardHeader>
