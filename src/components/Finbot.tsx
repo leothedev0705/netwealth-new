@@ -87,49 +87,49 @@ export default function Finbot() {
   return (
     <div className="fixed inset-0 bg-[#4339F2] flex flex-col">
       {/* Header */}
-      <div className="flex items-center justify-between p-4">
+      <div className="flex items-center justify-between p-3 sm:p-4">
         <div className="flex items-center">
-          <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mr-4">
-            <span className="text-white text-2xl">✨</span>
+          <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/10 rounded-xl flex items-center justify-center mr-3 sm:mr-4">
+            <span className="text-white text-xl sm:text-2xl">✨</span>
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-white">FinBot</h1>
-            <p className="text-white/80">Your Financial Advisor</p>
+            <h1 className="text-xl sm:text-2xl font-bold text-white">FinBot</h1>
+            <p className="text-sm sm:text-base text-white/80">Your Financial Advisor</p>
           </div>
         </div>
-        <button className="text-white/80 hover:text-white">
-          <X className="w-6 h-6" />
+        <button className="text-white/80 hover:text-white p-2">
+          <X className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
       </div>
 
       {/* Messages and Quick Actions */}
-      <div className="flex-1 p-4 overflow-y-auto">
+      <div className="flex-1 p-3 sm:p-4 overflow-y-auto">
         {/* Bot Message */}
-        <div className="bg-[#4339F2] text-white p-6 rounded-3xl mb-8">
-          <span className="text-3xl mb-4 inline-block">👋</span>
-          <p className="text-xl font-medium mb-4">
+        <div className="bg-[#4339F2] text-white p-4 sm:p-6 rounded-2xl sm:rounded-3xl mb-6 sm:mb-8">
+          <span className="text-2xl sm:text-3xl mb-3 sm:mb-4 inline-block">👋</span>
+          <p className="text-base sm:text-xl font-medium mb-3 sm:mb-4">
             Hello there! I'm FinBot, your personal financial assistant and stock market advisor.
             I'm here to help you make informed decisions about investments, market analysis, and financial planning.
           </p>
-          <p className="text-xl">What would you like to explore today?</p>
+          <p className="text-base sm:text-xl">What would you like to explore today?</p>
         </div>
 
         {/* Quick Action Buttons */}
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-4">
           <button 
-            className="w-full bg-white/10 hover:bg-white/20 text-white text-left p-6 rounded-3xl transition-colors"
+            className="w-full bg-white/10 hover:bg-white/20 text-white text-left p-4 sm:p-6 rounded-2xl sm:rounded-3xl transition-colors text-sm sm:text-base"
             onClick={() => handleMicToggle()}
           >
             How can I invest in the Indian stock market?
           </button>
           <button 
-            className="w-full bg-white/10 hover:bg-white/20 text-white text-left p-6 rounded-3xl transition-colors"
+            className="w-full bg-white/10 hover:bg-white/20 text-white text-left p-4 sm:p-6 rounded-2xl sm:rounded-3xl transition-colors text-sm sm:text-base"
             onClick={() => handleMicToggle()}
           >
             Explain SWP strategy
           </button>
           <button 
-            className="w-full bg-white/10 hover:bg-white/20 text-white text-left p-6 rounded-3xl transition-colors"
+            className="w-full bg-white/10 hover:bg-white/20 text-white text-left p-4 sm:p-6 rounded-2xl sm:rounded-3xl transition-colors text-sm sm:text-base"
             onClick={() => handleMicToggle()}
           >
             What are the best mutual funds for beginners?
@@ -138,14 +138,14 @@ export default function Finbot() {
       </div>
 
       {/* Message Input */}
-      <div className="p-4">
-        <div className="bg-white/10 rounded-full p-4 flex items-center justify-between">
-          <span className="text-white/80 ml-4">Type your message...</span>
+      <div className="p-3 sm:p-4">
+        <div className="bg-white/10 rounded-full p-2 sm:p-4 flex items-center justify-between">
+          <span className="text-white/80 ml-3 sm:ml-4 text-sm sm:text-base">Type your message...</span>
           <button 
             onClick={() => handleMicToggle()}
-            className="bg-[#4F46E5] hover:bg-[#4338CA] text-white p-4 rounded-full transition-colors"
+            className="bg-[#4F46E5] hover:bg-[#4338CA] text-white p-3 sm:p-4 rounded-full transition-colors"
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="20" height="20" className="sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 14C13.66 14 15 12.66 15 11V5C15 3.34 13.66 2 12 2C10.34 2 9 3.34 9 5V11C9 12.66 10.34 14 12 14Z" fill="currentColor"/>
               <path d="M17 11C17 13.76 14.76 16 12 16C9.24 16 7 13.76 7 11H5C5 14.53 7.61 17.43 11 17.92V21H13V17.92C16.39 17.43 19 14.53 19 11H17Z" fill="currentColor"/>
             </svg>
@@ -154,17 +154,17 @@ export default function Finbot() {
       </div>
 
       {/* Floating Microphone Button */}
-      <div className="fixed bottom-4 right-4">
+      <div className="fixed bottom-3 sm:bottom-4 right-3 sm:right-4">
         <button
           onClick={handleMicToggle}
-          className={`p-4 rounded-full shadow-lg transition-all transform hover:scale-110 ${
+          className={`p-3 sm:p-4 rounded-full shadow-lg transition-all transform hover:scale-110 ${
             isListening 
               ? 'bg-red-600 animate-pulse' 
               : 'bg-[#4339F2]'
           } text-white`}
           aria-label={isListening ? "Stop listening" : "Start voice chat"}
         >
-          <Mic className="w-6 h-6" />
+          <Mic className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
       </div>
     </div>
