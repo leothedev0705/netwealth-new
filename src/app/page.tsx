@@ -31,6 +31,16 @@ export default function Home() {
 
         <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
           <div className="space-y-6 text-center md:text-left">
+            <div className="flex justify-center md:justify-start mb-6">
+              <Image 
+                src="/assets/logo.png"
+                alt="NetWealth India Logo"
+                width={150}
+                height={150}
+                className="object-contain"
+                priority
+              />
+            </div>
             <p className="text-primary font-semibold text-sm tracking-wider uppercase flex items-center gap-2 justify-center md:justify-start">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
               Welcome to Net Wealth India

@@ -62,12 +62,13 @@ const ServicesPage = () => {
                 </div>
               </div>
             </div>
-            <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-yellow-200 shadow-xl md:ml-16">
+            <div className="relative w-[300px] h-[300px] mx-auto rounded-full bg-yellow-100/90 shadow-lg p-4 flex items-center justify-center border-4 border-yellow-200">
               <Image
                 src="/assets/logo.png"
                 alt="Net Wealth India Logo"
-                fill
-                className="object-cover"
+                width={250}
+                height={250}
+                className="object-contain"
                 priority
               />
             </div>

@@ -133,11 +133,11 @@ export default function WhyChooseUsPage() {
 
         <motion.div
           variants={fadeIn}
-          className="mt-20 flex justify-center"
+          className="mt-20 text-center"
         >
           <motion.a
             href="/contact"
-            className="inline-block px-12 py-4 bg-green-600 hover:bg-green-700 text-white text-2xl font-bold rounded-full shadow-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-green-200"
+            className="inline-block px-16 py-6 bg-emerald-600 text-white text-2xl font-bold rounded-xl shadow-xl hover:bg-emerald-500 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-emerald-300"
             whileHover={{ 
               scale: 1.05,
               transition: { duration: 0.2 }
