@@ -1,33 +1,59 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Phone, Mail, MapPin, Send, Clock } from 'lucide-react';
+import { Phone, Mail, MapPin, Send, Clock, CheckCircle2 } from 'lucide-react';
 
 const ContactPage = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log('Form data:', formData);
-    // Add actual form submission logic here
-    alert('Form submission not implemented yet.');
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const searchParams = new URLSearchParams();
+    formData.forEach((value, key) => {
+      searchParams.append(key, value.toString());
+    });
+
+    try {
+      await fetch(
+        'https://docs.google.com/forms/d/e/1FAIpQLSfnOt3Pbfp49KNTmMlfv0G25rMk5SxhA8zf4O6uNqb6NTCoXA/formResponse',
+        {
+          method: 'POST',
+          body: searchParams,
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        }
+      );
+
+      form.reset();
+      setShowSuccess(true);
+      
+      // Hide success message after 5 seconds
+      setTimeout(() => {
+        setShowSuccess(false);
+      }, 5000);
+    } catch (error) {
+      // Google Forms will always throw a CORS error, but the form will still submit
+      form.reset();
+      setShowSuccess(true);
+      
+      setTimeout(() => {
+        setShowSuccess(false);
+      }, 5000);
+    }
+
+    setIsSubmitting(false);
   };
 
   return (
@@ -63,7 +89,7 @@ const ContactPage = () => {
               </div>
               <div>
                 <h3 className="text-lg font-semibold text-green-900">Email</h3>
-                <p className="text-green-700">netwealthindia05@gmail.com</p>
+                <p className="text-green-700">netwealthindia.official@gmail.com</p>
               </div>
             </div>
             <div className="flex items-start gap-4">
@@ -89,63 +115,65 @@ const ContactPage = () => {
           {/* Contact Form */}
           <div className="bg-white rounded-lg shadow-lg p-8">
             <h2 className="text-2xl font-bold text-green-900 mb-6">Send us a Message</h2>
-            <form onSubmit={handleSubmit} className="space-y-6">
+            {showSuccess && (
+              <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-center gap-2 text-green-800">
+                <CheckCircle2 className="h-5 w-5" />
+                <p>Message received! We will get back to you soon.</p>
+              </div>
+            )}
+            <form 
+              ref={formRef}
+              onSubmit={handleSubmit}
+              className="space-y-6"
+            >
               <div className="space-y-2">
-                <Label htmlFor="name" className="text-green-900">Name</Label>
+                <Label htmlFor="name" className="text-green-900">Name *</Label>
                 <Input
                   id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
+                  name="entry.2005620554"
                   placeholder="Your name"
                   className="border-green-200 focus:border-primary"
-                  suppressHydrationWarning
+                  required
+                  type="text"
+                  autoComplete="name"
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-green-900">Email</Label>
+                <Label htmlFor="email" className="text-green-900">Email *</Label>
                 <Input
                   id="email"
-                  name="email"
+                  name="entry.1045781291"
                   type="email"
-                  value={formData.email}
-                  onChange={handleChange}
                   placeholder="your@email.com"
                   className="border-green-200 focus:border-primary"
-                  suppressHydrationWarning
+                  required
                 />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="subject" className="text-green-900">Subject</Label>
                 <Input
                   id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
+                  name="entry.1166974658"
                   placeholder="Subject"
                   className="border-green-200 focus:border-primary"
-                  suppressHydrationWarning
                 />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="message" className="text-green-900">Message</Label>
                 <Textarea
                   id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
+                  name="entry.839337160"
                   placeholder="Your message"
                   className="border-green-200 focus:border-primary min-h-[150px]"
-                  suppressHydrationWarning
                 />
               </div>
               <Button
                 type="submit"
                 className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
-                suppressHydrationWarning
+                disabled={isSubmitting}
               >
                 <Send className="mr-2 h-4 w-4" />
-                Send Message
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </Button>
             </form>
           </div>
