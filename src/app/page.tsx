@@ -33,8 +33,8 @@ export default function Home() {
           <div className="space-y-6 text-center md:text-left">
             <div className="flex justify-center md:justify-start mb-6">
               <Image 
-                src="/assets/logo.png"
-                alt="NetWealth India Logo"
+                src="/assets/Kalpvriksh.png"
+                alt="Kalpvriksh - Let's Grow Together"
                 width={150}
                 height={150}
                 className="object-contain"
@@ -73,8 +73,8 @@ export default function Home() {
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 priority
                 quality={90}
-                className="rounded-lg"
-                style={{ objectFit: 'cover' }}
+                className="rounded-lg w-full h-full object-cover"
+                style={{ objectFit: 'cover', width: '100%', height: '100%' }}
               />
             </div>
             <div className="absolute bottom-4 -left-4 md:bottom-10 md:-left-10 bg-primary text-primary-foreground p-4 rounded-lg shadow-xl z-20">
