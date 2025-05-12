@@ -1,10 +1,16 @@
 import React from 'react';
+import Image from 'next/image';
 
 const Logo = () => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg>
+    <Image
+      src="/assets/logo.png"
+      alt="Net Wealth India Logo"
+      width={32}
+      height={32}
+      className="h-8 w-8 object-contain"
+      priority
+    />
   );
 };
 
