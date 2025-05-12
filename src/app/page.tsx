@@ -6,6 +6,7 @@ import Image from 'next/image';
 import AboutUs from "@/components/home/AboutUs";
 import Services from "@/components/home/Services";
 import FadeInUp from "@/components/animations/FadeInUp";
+import CompanyCarousel from '@/components/carousel/CompanyCarousel';
 
 // Lazy load the decorative elements
 const DecorativeElements = () => (
@@ -96,6 +97,8 @@ export default function Home() {
           <Services />
         </FadeInUp>
       </Suspense>
+
+      <CompanyCarousel />
 
       {/* Other sections like Testimonials or CTA could go here */}
     </>
