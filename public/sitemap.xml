@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Static pages -->
-  <url><loc>https://www.netwealthindia.in/</loc></url>
-  <url><loc>https://www.netwealthindia.in/about</loc></url>
-  <url><loc>https://www.netwealthindia.in/about/why-choose-us</loc></url>
-  <url><loc>https://www.netwealthindia.in/services</loc></url>
-  <url><loc>https://www.netwealthindia.in/contact</loc></url>
-  <url><loc>https://www.netwealthindia.in/tools</loc></url>
-  <url><loc>https://www.netwealthindia.in/insights</loc></url>
+  <url><loc>https://www.netwealthindia.com/</loc></url>
+  <url><loc>https://www.netwealthindia.com/about</loc></url>
+  <url><loc>https://www.netwealthindia.com/about/why-choose-us</loc></url>
+  <url><loc>https://www.netwealthindia.com/services</loc></url>
+  <url><loc>https://www.netwealthindia.com/contact</loc></url>
+  <url><loc>https://www.netwealthindia.com/tools</loc></url>
+  <url><loc>https://www.netwealthindia.com/insights</loc></url>
 
   <!-- Tools calculators -->
-  <url><loc>https://www.netwealthindia.in/tools/sip-calculator</loc></url>
-  <url><loc>https://www.netwealthindia.in/tools/swp-calculator</loc></url>
-  <url><loc>https://www.netwealthindia.in/tools/lumpsum-calculator</loc></url>
-  <url><loc>https://www.netwealthindia.in/tools/emi-calculator</loc></url>
-  <url><loc>https://www.netwealthindia.in/tools/retirement-planner</loc></url>
-  <url><loc>https://www.netwealthindia.in/tools/mutual-funds</loc></url>
-  <url><loc>https://www.netwealthindia.in/tools/pms</loc></url>
+  <url><loc>https://www.netwealthindia.com/tools/sip-calculator</loc></url>
+  <url><loc>https://www.netwealthindia.com/tools/swp-calculator</loc></url>
+  <url><loc>https://www.netwealthindia.com/tools/lumpsum-calculator</loc></url>
+  <url><loc>https://www.netwealthindia.com/tools/emi-calculator</loc></url>
+  <url><loc>https://www.netwealthindia.com/tools/retirement-planner</loc></url>
+  <url><loc>https://www.netwealthindia.com/tools/mutual-funds</loc></url>
+  <url><loc>https://www.netwealthindia.com/tools/pms</loc></url>
 
   <!-- Stock Market Tools -->
-  <url><loc>https://www.netwealthindia.in/tools/stock-market</loc></url>
-  <url><loc>https://www.netwealthindia.in/tools/stock-market/position-size</loc></url>
-  <url><loc>https://www.netwealthindia.in/tools/stock-market/risk-reward</loc></url>
-  <url><loc>https://www.netwealthindia.in/tools/stock-market/cagr</loc></url>
-  <url><loc>https://www.netwealthindia.in/tools/stock-market/volatility</loc></url>
-  <url><loc>https://www.netwealthindia.in/tools/stock-market/margin</loc></url>
+  <url><loc>https://www.netwealthindia.com/tools/stock-market</loc></url>
+  <url><loc>https://www.netwealthindia.com/tools/stock-market/position-size</loc></url>
+  <url><loc>https://www.netwealthindia.com/tools/stock-market/risk-reward</loc></url>
+  <url><loc>https://www.netwealthindia.com/tools/stock-market/cagr</loc></url>
+  <url><loc>https://www.netwealthindia.com/tools/stock-market/volatility</loc></url>
+  <url><loc>https://www.netwealthindia.com/tools/stock-market/margin</loc></url>
 
   <!-- Dynamic Service Pages (example structure) -->
-  <url><loc>https://www.netwealthindia.in/services/loans/home-loan</loc></url>
-  <url><loc>https://www.netwealthindia.in/services/loans/business-loan</loc></url>
-  <url><loc>https://www.netwealthindia.in/services/loans/auto-loan</loc></url>
-  <url><loc>https://www.netwealthindia.in/services/loans/loan-against-property-lap</loc></url>
-  <url><loc>https://www.netwealthindia.in/services/loans/loan-against-rental-discounting</loc></url>
-  <url><loc>https://www.netwealthindia.in/services/loans/construction-funding</loc></url>
-  <url><loc>https://www.netwealthindia.in/services/loans/ipo-funding</loc></url>
-  <url><loc>https://www.netwealthindia.in/services/loans/loan-against-shares-&-mutual-funds</loc></url>
+  <url><loc>https://www.netwealthindia.com/services/loans/home-loan</loc></url>
+  <url><loc>https://www.netwealthindia.com/services/loans/business-loan</loc></url>
+  <url><loc>https://www.netwealthindia.com/services/loans/auto-loan</loc></url>
+  <url><loc>https://www.netwealthindia.com/services/loans/loan-against-property-lap</loc></url>
+  <url><loc>https://www.netwealthindia.com/services/loans/loan-against-rental-discounting</loc></url>
+  <url><loc>https://www.netwealthindia.com/services/loans/construction-funding</loc></url>
+  <url><loc>https://www.netwealthindia.com/services/loans/ipo-funding</loc></url>
+  <url><loc>https://www.netwealthindia.com/services/loans/loan-against-shares-&amp;-mutual-funds</loc></url>
   <!-- Add more URLs for other dynamic services and insights posts if needed -->
-</urlset> 
+</urlset>

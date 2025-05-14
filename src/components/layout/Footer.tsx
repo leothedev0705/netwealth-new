@@ -102,7 +102,7 @@ const Footer = () => {
               <li className="flex items-start gap-3" key={idx}>
                 {item.icon}
                 {item.content}
-              </li>
+            </li>
             ))}
           </ul>
         </address>
