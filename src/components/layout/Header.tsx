@@ -111,25 +111,25 @@ const Header = () => {
                 <span className="sr-only">Toggle Menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="pr-0 bg-white">
+            <SheetContent side="left" className="pr-0 bg-white pl-4">
               <SheetHeader>
                 <SheetTitle className="text-slate-800">Navigation Menu</SheetTitle>
               </SheetHeader>
               <nav className="flex flex-col space-y-4">
                 <SheetClose asChild>
-                  <Link href="/" className="hover:text-primary transition-colors py-2 font-medium text-slate-600">Home</Link>
+                  <Link href="/" className="hover:text-primary transition-colors py-2 pl-4 font-medium text-slate-600">Home</Link>
                 </SheetClose>
                 <SheetClose asChild>
-                  <Link href="/about" className="hover:text-primary transition-colors py-2 font-medium text-slate-600">About</Link>
+                  <Link href="/about" className="hover:text-primary transition-colors py-2 pl-4 font-medium text-slate-600">About</Link>
                 </SheetClose>
                 <SheetClose asChild>
-                  <Link href="/services" className="hover:text-primary transition-colors py-2 font-medium text-slate-600">Services</Link>
+                  <Link href="/services" className="hover:text-primary transition-colors py-2 pl-4 font-medium text-slate-600">Services</Link>
                 </SheetClose>
                 <SheetClose asChild>
-                  <Link href="/tools" className="hover:text-primary transition-colors py-2 font-medium text-slate-600">Tools</Link>
+                  <Link href="/tools" className="hover:text-primary transition-colors py-2 pl-4 font-medium text-slate-600">Tools</Link>
                 </SheetClose>
                 <SheetClose asChild>
-                  <Link href="/contact" className="hover:text-primary transition-colors py-2 font-medium text-slate-600">Contact</Link>
+                  <Link href="/contact" className="hover:text-primary transition-colors py-2 pl-4 font-medium text-slate-600">Contact</Link>
                 </SheetClose>
               </nav>
             </SheetContent>

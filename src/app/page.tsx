@@ -53,15 +53,13 @@ export default function Home() {
               Guiding you with expert insights and strategic solutions to achieve financial growth, stability, and long-term success.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground transition-transform duration-200 hover:scale-[1.03]">
-                Get Started
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
-              </Button>
-              <Button size="lg" variant="outline" className="border-green-600 text-green-700 hover:bg-green-50 hover:text-green-800 hover:border-green-700 transition-transform duration-200 hover:scale-[1.03]">
-                <PlayCircle className="mr-2 h-5 w-5" />
-                Introduction
-              </Button>
+            <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 mt-4 shadow-sm">
+              <p className="text-green-800 font-medium">
+                Trusted by Leading Insurance Companies
+              </p>
+              <p className="text-sm text-green-700 mt-1">
+                Including Reliance, Tata AIA, Birla Sun Life, HDFC Life, and other major insurers in India
+              </p>
             </div>
           </div>
 
@@ -77,10 +75,6 @@ export default function Home() {
                 className="rounded-lg w-full h-full object-cover"
                 style={{ objectFit: 'cover', width: '100%', height: '100%' }}
               />
-            </div>
-            <div className="absolute bottom-4 -left-4 md:bottom-10 md:-left-10 bg-primary text-primary-foreground p-4 rounded-lg shadow-xl z-20">
-              <p className="text-3xl font-bold">25+</p>
-              <p className="text-xs">Years of experience<br/>in finance</p>
             </div>
           </div>
         </div>

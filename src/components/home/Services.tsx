@@ -122,21 +122,9 @@ const Services = () => {
                       className="bg-gray-50 group-hover:shadow-xl transition-shadow duration-300 overflow-hidden relative rounded-xl border-gray-200 h-full flex flex-col" 
                     >
                       <LazyCardHeader>
-                        {service.id === 'protection' ? (
-                          <div className="mb-4">
-                             <Image 
-                              src="/assets/protection.png"
-                              alt="Protection Planning"
-                              width={48}
-                              height={48}
-                              className="rounded-md"
-                            />
-                          </div>
-                        ) : (
-                          <div className="mb-4 bg-green-100 p-3 rounded-full w-fit">
-                            <service.icon className="h-6 w-6 text-green-700" />
-                          </div>
-                        )}
+                        <div className="mb-4 bg-green-100 p-3 rounded-full w-fit">
+                          <service.icon className="h-6 w-6 text-green-700" />
+                        </div>
                         <LazyCardTitle className="text-xl font-semibold text-gray-800">{service.title}</LazyCardTitle>
                       </LazyCardHeader>
                       <LazyCardContent className="flex-grow flex flex-col justify-between"> 

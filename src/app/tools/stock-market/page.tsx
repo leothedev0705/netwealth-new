@@ -1,204 +1,114 @@
 'use client'
 
 import React from 'react'
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
+import { LineChart, TrendingUp, Calculator, ArrowRight, BarChart3, Scale, Percent } from 'lucide-react'
+import Link from 'next/link'
 
-import { ArrowUpRight } from 'lucide-react'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-
-interface Metric {
-  label: string
-  value: string
-  change: string
-}
-
-interface Stock {
-  name: string
-  price: number
-  change: string
-}
-
-interface MarketInsight {
-  title: string
-  metrics?: Metric[]
-  stocks?: Stock[]
-}
-
-interface Tool {
-  name: string
-  description: string
-  icon: React.ReactNode
-  features: string[]
-}
-
-const tools: Tool[] = [
+const tools = [
   {
-    name: "Technical Analysis",
-    description: "Advanced charting and technical indicators",
-    icon: <ArrowUpRight className="h-6 w-6" />,
-    features: [
-      "Multiple chart types and timeframes",
-      "Over 100+ technical indicators",
-      "Drawing tools and annotations",
-      "Custom indicator settings"
-    ]
+    name: "Position Size Calculator",
+    description: "Calculate optimal position sizes based on your risk tolerance, account size, and stop-loss levels.",
+    icon: <Calculator className="h-6 w-6" />,
+    href: "/tools/stock-market/position-size",
+    color: "bg-blue-500/10 text-blue-500"
   },
   {
-    name: "Market Scanner",
-    description: "Real-time market screening tools",
-    icon: <ArrowUpRight className="h-6 w-6" />,
-    features: [
-      "Pre-built scanning templates",
-      "Custom scan criteria",
-      "Real-time alerts",
-      "Market breadth analysis"
-    ]
+    name: "Risk/Reward Calculator",
+    description: "Analyze potential trades by calculating risk-reward ratios, profit targets, and stop-loss levels.",
+    icon: <Scale className="h-6 w-6" />,
+    href: "/tools/stock-market/risk-reward",
+    color: "bg-green-500/10 text-green-500"
   },
   {
-    name: "Portfolio Tracker",
-    description: "Track and analyze your investments",
-    icon: <ArrowUpRight className="h-6 w-6" />,
-    features: [
-      "Real-time portfolio valuation",
-      "Performance analytics",
-      "Risk metrics",
-      "Transaction history"
-    ]
+    name: "CAGR Calculator",
+    description: "Calculate Compound Annual Growth Rate for your investments over different time periods.",
+    icon: <TrendingUp className="h-6 w-6" />,
+    href: "/tools/stock-market/cagr",
+    color: "bg-purple-500/10 text-purple-500"
   },
   {
-    name: "Trading Journal",
-    description: "Document and analyze your trades",
-    icon: <ArrowUpRight className="h-6 w-6" />,
-    features: [
-      "Trade logging and notes",
-      "Performance metrics",
-      "Strategy analysis",
-      "Trade screenshots"
-    ]
+    name: "Volatility Calculator",
+    description: "Measure stock volatility using standard deviation and average true range (ATR) indicators.",
+    icon: <BarChart3 className="h-6 w-6" />,
+    href: "/tools/stock-market/volatility",
+    color: "bg-orange-500/10 text-orange-500"
+  },
+  {
+    name: "Margin Calculator",
+    description: "Calculate required margin, leverage ratios, and potential profits/losses for margin trading.",
+    icon: <Percent className="h-6 w-6" />,
+    href: "/tools/stock-market/margin",
+    color: "bg-red-500/10 text-red-500"
   }
 ]
 
-const marketInsights: MarketInsight[] = [
-  {
-    title: "Market Overview",
-    metrics: [
-      { label: "Nifty 50", value: "19,425.35", change: "+0.62%" },
-      { label: "Sensex", value: "64,958.69", change: "+0.59%" },
-      { label: "Bank Nifty", value: "43,856.30", change: "+0.45%" }
-    ]
-  },
-  {
-    title: "Top Gainers",
-    stocks: [
-      { name: "TCS", price: 3450.75, change: "+2.8%" },
-      { name: "Infosys", price: 1478.25, change: "+2.3%" },
-      { name: "HDFC Bank", price: 1589.60, change: "+1.9%" }
-    ]
-  },
-  {
-    title: "Top Losers",
-    stocks: [
-      { name: "ITC", price: 438.90, change: "-1.5%" },
-      { name: "Reliance", price: 2367.45, change: "-1.2%" },
-      { name: "Bharti Airtel", price: 867.30, change: "-0.9%" }
-    ]
-  }
-]
-
-export default function StockMarketPage() {
+export default function StockMarketTools() {
   return (
-    <div className="container mx-auto py-8">
-      <h1 className="text-4xl font-bold mb-8">Stock Market Tools</h1>
-      
-      {/* Tools Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-        {tools.map((tool, index) => (
-          <Card key={index} className="hover:shadow-lg transition-shadow">
-            <CardHeader>
-              <div className="flex items-center gap-4">
-                {tool.icon}
-                <div>
-                  <CardTitle>{tool.name}</CardTitle>
-                  <CardDescription>{tool.description}</CardDescription>
-                </div>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <ul className="list-disc list-inside space-y-2">
-                {tool.features.map((feature, idx) => (
-                  <li key={idx}>{feature}</li>
-                ))}
-              </ul>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-
-      {/* Market Insights Section */}
-      <h2 className="text-3xl font-semibold mb-6">Market Insights</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-        {marketInsights.map((insight, index) => (
-          <Card key={index}>
-            <CardHeader>
-              <CardTitle>{insight.title}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              {insight.metrics && (
-                <div className="space-y-4">
-                  {insight.metrics.map((metric, idx) => (
-                    <div key={idx} className="flex justify-between items-center">
-                      <span className="text-gray-600">{metric.label}</span>
-                      <div className="text-right">
-                        <div className="font-semibold">{metric.value}</div>
-                        <div className={metric.change.startsWith('+') ? 'text-green-600' : 'text-red-600'}>
-                          {metric.change}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-              {insight.stocks && (
-                <div className="space-y-4">
-                  {insight.stocks.map((stock, idx) => (
-                    <div key={idx} className="flex justify-between items-center">
-                      <span className="font-medium">{stock.name}</span>
-                      <div className="text-right">
-                        <div className="font-semibold">₹{stock.price.toFixed(2)}</div>
-                        <div className={stock.change.startsWith('+') ? 'text-green-600' : 'text-red-600'}>
-                          {stock.change}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-
-      {/* Call to Action */}
-      <Card className="bg-gradient-to-r from-blue-500 to-blue-700 text-white">
-        <CardContent className="py-8">
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            <div>
-              <h3 className="text-2xl font-bold mb-2">Ready to Start Trading?</h3>
-              <p className="text-blue-100">Open your trading account today and access all our premium tools.</p>
-            </div>
-            <Button className="mt-4 md:mt-0 bg-white text-blue-700 hover:bg-blue-50">
-              Open Account <ArrowUpRight className="ml-2 h-4 w-4" />
-            </Button>
+    <div className="bg-gradient-to-br from-slate-50 via-white to-slate-100 min-h-screen py-16 md:py-24 px-6">
+      <div className="container mx-auto max-w-6xl">
+        <div className="text-center mb-16">
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <LineChart className="h-8 w-8 text-primary" />
+            <h1 className="text-3xl md:text-4xl font-bold text-slate-800">Stock Market Tools</h1>
           </div>
-        </CardContent>
-      </Card>
+          <p className="text-slate-600 text-lg max-w-2xl mx-auto">
+            Professional-grade tools to help you make informed trading decisions and manage your portfolio effectively.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {tools.map((tool) => (
+            <Link key={tool.name} href={tool.href} className="block group">
+              <Card className="h-full transition-all duration-300 hover:shadow-lg border-slate-200">
+                <CardHeader>
+                  <div className={`${tool.color} w-fit p-3 rounded-lg mb-4`}>
+                    {tool.icon}
+                  </div>
+                  <CardTitle className="text-xl font-semibold text-slate-800 flex items-center justify-between">
+                    {tool.name}
+                    <ArrowRight className="h-5 w-5 text-slate-400 group-hover:text-primary group-hover:translate-x-1 transition-all duration-300" />
+                  </CardTitle>
+                  <CardDescription className="text-slate-600 mt-2">
+                    {tool.description}
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            </Link>
+          ))}
+        </div>
+
+        <Card className="mt-16 border-slate-200">
+          <CardHeader className="text-center">
+            <CardTitle className="text-2xl font-bold text-slate-800">Why Use Our Stock Market Tools?</CardTitle>
+            <CardDescription className="text-slate-600">
+              Professional features designed to enhance your trading and investment decisions
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="text-center">
+                <h3 className="font-semibold text-slate-800 mb-2">Precise Calculations</h3>
+                <p className="text-slate-600 text-sm">
+                  Get accurate results using industry-standard formulas and methodologies
+                </p>
+              </div>
+              <div className="text-center">
+                <h3 className="font-semibold text-slate-800 mb-2">Risk Management</h3>
+                <p className="text-slate-600 text-sm">
+                  Make informed decisions with comprehensive risk assessment tools
+                </p>
+              </div>
+              <div className="text-center">
+                <h3 className="font-semibold text-slate-800 mb-2">User-Friendly Design</h3>
+                <p className="text-slate-600 text-sm">
+                  Intuitive interface with real-time calculations and clear visualizations
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   )
 } 

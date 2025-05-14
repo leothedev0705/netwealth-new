@@ -50,44 +50,16 @@ const getCategoryAnimation = (category: InsuranceCategory) => {
       return {
         gradient: "bg-gradient-to-r from-rose-50 via-white to-rose-50",
         underlineColor: "bg-rose-600",
-        animation: {
-          scale: [1, 1.02, 1],
-          transition: {
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }
-        }
       };
     case 'General_Insurance':
       return {
         gradient: "bg-gradient-to-r from-blue-50 via-white to-blue-50",
         underlineColor: "bg-blue-600",
-        animation: {
-          boxShadow: [
-            "0 0 0 rgba(59, 130, 246, 0)",
-            "0 0 20px rgba(59, 130, 246, 0.2)",
-            "0 0 0 rgba(59, 130, 246, 0)"
-          ],
-          transition: {
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }
-        }
       };
     case 'Health_Insurance':
       return {
         gradient: "bg-gradient-to-r from-green-50 via-white to-green-50",
         underlineColor: "bg-green-600",
-        animation: {
-          y: [0, -3, 0],
-          transition: {
-            duration: 2.5,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }
-        }
       };
   };
 };
@@ -101,23 +73,27 @@ const CompanyLogo = ({
   name: string;
   category: InsuranceCategory;
 }) => {
-  const { animation } = getCategoryAnimation(category);
-  
   return (
-    <motion.div 
-      className="flex items-center justify-center mx-6"
-      animate={animation}
-    >
+    <div className="flex items-center justify-center mx-6">
       <div className="relative w-44 h-28">
         <Image
           src={`/assets/companies/${category}/${filename}`}
           alt={name}
           fill
-          className="object-contain transition-opacity duration-300"
+          className="object-contain"
         />
       </div>
-    </motion.div>
+    </div>
   );
+};
+
+// Animation constants for consistent speed across all carousels
+const CAROUSEL_ANIMATION = {
+  duration: 25,
+  ease: "linear" as const,
+  repeat: Infinity,
+  repeatType: "loop" as const,
+  repeatDelay: 0,
 };
 
 const ScrollingLogos = ({ category, title }: { category: InsuranceCategory; title: string }) => {
@@ -126,6 +102,7 @@ const ScrollingLogos = ({ category, title }: { category: InsuranceCategory; titl
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState(0);
   const { gradient, underlineColor } = getCategoryAnimation(category);
+  const animationRef = useRef<any>(null);
 
   const getLogos = () => {
     switch (category) {
@@ -158,20 +135,26 @@ const ScrollingLogos = ({ category, title }: { category: InsuranceCategory; titl
   }, []);
 
   useEffect(() => {
-    if (!isHovered && containerWidth > 0) {
-      controls.start({
-        x: -containerWidth,
-        transition: {
-          duration: 25,
-          ease: "linear",
-          repeat: Infinity,
-          repeatType: "loop",
-          repeatDelay: 0,
-        },
-      });
-    } else {
-      controls.stop();
+    if (containerWidth > 0) {
+      const startAnimation = () => {
+        animationRef.current = controls.start({
+          x: -containerWidth,
+          transition: CAROUSEL_ANIMATION,
+        });
+      };
+
+      if (!isHovered) {
+        startAnimation();
+      } else {
+        controls.stop();
+      }
     }
+
+    return () => {
+      if (animationRef.current) {
+        controls.stop();
+      }
+    };
   }, [isHovered, containerWidth, controls]);
 
   return (
@@ -201,6 +184,7 @@ const ScrollingLogos = ({ category, title }: { category: InsuranceCategory; titl
           ref={containerRef}
           className="flex whitespace-nowrap"
           animate={controls}
+          style={{ willChange: 'transform' }}
         >
           {triplicatedLogos.map((logo, index) => (
             <CompanyLogo
