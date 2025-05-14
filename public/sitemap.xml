@@ -26,7 +26,7 @@
   <url><loc>https://www.netwealthindia.com/tools/stock-market/volatility</loc></url>
   <url><loc>https://www.netwealthindia.com/tools/stock-market/margin</loc></url>
 
-  <!-- Dynamic Service Pages (example structure) -->
+  <!-- Dynamic Service Pages (all categories and services) -->
   <url><loc>https://www.netwealthindia.com/services/loans/home-loan</loc></url>
   <url><loc>https://www.netwealthindia.com/services/loans/business-loan</loc></url>
   <url><loc>https://www.netwealthindia.com/services/loans/auto-loan</loc></url>
@@ -34,6 +34,19 @@
   <url><loc>https://www.netwealthindia.com/services/loans/loan-against-rental-discounting</loc></url>
   <url><loc>https://www.netwealthindia.com/services/loans/construction-funding</loc></url>
   <url><loc>https://www.netwealthindia.com/services/loans/ipo-funding</loc></url>
-  <url><loc>https://www.netwealthindia.com/services/loans/loan-against-shares-&amp;-mutual-funds</loc></url>
-  <!-- Add more URLs for other dynamic services and insights posts if needed -->
+  <url><loc>https://www.netwealthindia.com/services/loans/loan-against-shares-and-mutual-funds</loc></url>
+  <url><loc>https://www.netwealthindia.com/services/insurance/robust-protection-planning</loc></url>
+  <url><loc>https://www.netwealthindia.com/services/insurance/life-insurance</loc></url>
+  <url><loc>https://www.netwealthindia.com/services/insurance/health-insurance</loc></url>
+  <url><loc>https://www.netwealthindia.com/services/insurance/general-insurance</loc></url>
+  <url><loc>https://www.netwealthindia.com/services/wealth/retirement-planning</loc></url>
+  <url><loc>https://www.netwealthindia.com/services/wealth/education-planning</loc></url>
+  <url><loc>https://www.netwealthindia.com/services/wealth/strategic-investment-management</loc></url>
+  <url><loc>https://www.netwealthindia.com/services/wealth/systematic-investment-plan-sip</loc></url>
+  <url><loc>https://www.netwealthindia.com/services/wealth/mutual-funds</loc></url>
+  <url><loc>https://www.netwealthindia.com/services/wealth/portfolio-management-services-pms</loc></url>
+  <url><loc>https://www.netwealthindia.com/services/wealth/systematic-withdrawal-plan-swp</loc></url>
+  <url><loc>https://www.netwealthindia.com/services/wealth/stocks-short-and-long-term</loc></url>
+  <url><loc>https://www.netwealthindia.com/services/wealth/secure-fixed-deposits</loc></url>
+  <url><loc>https://www.netwealthindia.com/services/wealth/corporate-fixed-deposits</loc></url>
 </urlset>
