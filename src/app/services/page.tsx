@@ -112,7 +112,7 @@ const ServicesPage = () => {
               {category.items.map((item, itemIndex) => (
                 <Link
                   key={itemIndex}
-                  href={`/services/${category.id}/${item.title.toLowerCase().replace(/\s+/g, '-')}`}
+                  href={`/services/${category.id}/${item.title.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-')}`}
                 >
                   <Card 
                     className="text-center shadow-sm hover:shadow-lg transition-shadow duration-300 border border-slate-100 bg-white flex flex-col hover:border-primary/30"
