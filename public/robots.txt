@@ -1,0 +1,9 @@
+# robots.txt for https://www.netwealthindia.in
+# Allow all search engines to crawl everything except sensitive or non-public areas
+
+User-agent: *
+Disallow: /api/
+
+# (Add more Disallow rules if you have other private folders)
+
+Sitemap: https://www.netwealthindia.in/sitemap.xml 

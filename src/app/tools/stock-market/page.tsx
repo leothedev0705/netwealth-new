@@ -61,10 +61,10 @@ export default function StockMarketTools() {
           {tools.map((tool) => (
             <Link key={tool.name} href={tool.href} className="block group">
               <Card className="h-full transition-all duration-300 hover:shadow-lg border-slate-200">
-                <CardHeader>
+            <CardHeader>
                   <div className={`${tool.color} w-fit p-3 rounded-lg mb-4`}>
-                    {tool.icon}
-                  </div>
+                {tool.icon}
+                </div>
                   <CardTitle className="text-xl font-semibold text-slate-800 flex items-center justify-between">
                     {tool.name}
                     <ArrowRight className="h-5 w-5 text-slate-400 group-hover:text-primary group-hover:translate-x-1 transition-all duration-300" />
@@ -72,11 +72,11 @@ export default function StockMarketTools() {
                   <CardDescription className="text-slate-600 mt-2">
                     {tool.description}
                   </CardDescription>
-                </CardHeader>
-              </Card>
+            </CardHeader>
+          </Card>
             </Link>
-          ))}
-        </div>
+        ))}
+      </div>
 
         <Card className="mt-16 border-slate-200">
           <CardHeader className="text-center">
@@ -84,30 +84,30 @@ export default function StockMarketTools() {
             <CardDescription className="text-slate-600">
               Professional features designed to enhance your trading and investment decisions
             </CardDescription>
-          </CardHeader>
-          <CardContent>
+            </CardHeader>
+            <CardContent>
             <div className="grid md:grid-cols-3 gap-8">
               <div className="text-center">
                 <h3 className="font-semibold text-slate-800 mb-2">Precise Calculations</h3>
                 <p className="text-slate-600 text-sm">
                   Get accurate results using industry-standard formulas and methodologies
                 </p>
-              </div>
+                        </div>
               <div className="text-center">
                 <h3 className="font-semibold text-slate-800 mb-2">Risk Management</h3>
                 <p className="text-slate-600 text-sm">
                   Make informed decisions with comprehensive risk assessment tools
                 </p>
-              </div>
+                      </div>
               <div className="text-center">
                 <h3 className="font-semibold text-slate-800 mb-2">User-Friendly Design</h3>
                 <p className="text-slate-600 text-sm">
                   Intuitive interface with real-time calculations and clear visualizations
                 </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+                      </div>
+                    </div>
+            </CardContent>
+          </Card>
       </div>
     </div>
   )

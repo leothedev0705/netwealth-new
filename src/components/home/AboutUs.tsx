@@ -45,13 +45,13 @@ const AboutUs = () => {
         {/* Text Column */}
         <div className="space-y-8">
           <div>
-            <p className="text-primary font-semibold text-sm tracking-wider uppercase flex items-center gap-2">
-              <Briefcase className="h-5 w-5" />
-              About Us
-            </p>
+          <p className="text-primary font-semibold text-sm tracking-wider uppercase flex items-center gap-2">
+            <Briefcase className="h-5 w-5" />
+            About Us
+          </p>
             <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mt-2">
               Your Trusted Partner in Financial Growth
-            </h2>
+          </h2>
           </div>
 
           <div className="space-y-6">

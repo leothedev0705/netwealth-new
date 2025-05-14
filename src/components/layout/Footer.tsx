@@ -7,6 +7,50 @@ import { Phone, Mail, MapPin } from 'lucide-react';
 // Lazy load the logo SVG
 const Logo = lazy(() => import('./Logo'));
 
+// Data for footer sections
+const quickLinks = [
+  { label: 'Home', href: '/' },
+  { label: 'About Us', href: '/about' },
+  { label: 'Services', href: '/services' },
+  { label: 'Tools', href: '/tools' },
+  { label: 'Contact Us', href: '/contact' },
+];
+
+const serviceLinks = [
+  { label: 'Protection', href: '/services#protection' },
+  { label: 'Investing', href: '/services#investing' },
+  { label: 'Borrowing', href: '/services#borrowing' },
+];
+
+const contactInfo = [
+  {
+    icon: <MapPin className="h-4 w-4 text-primary mt-1 flex-shrink-0" />, 
+    content: (
+      <span>A-101, Plot No-25/A, Nilkant CHS, 1st Floor, Jethabhai Lane, Near A Ward BMC Office, Ghatkopar (E), Mumbai - 400077</span>
+    )
+  },
+  {
+    icon: <Phone className="h-4 w-4 text-primary flex-shrink-0" />,
+    content: <span>9930777332, 9930115558</span>
+  },
+  {
+    icon: <Mail className="h-4 w-4 text-primary flex-shrink-0" />,
+    content: (
+      <span className="hover:text-primary transition-colors"><a href="mailto:netwealthindia05@gmail.com">netwealthindia05@gmail.com</a></span>
+    )
+  },
+  {
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-primary flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+      </svg>
+    ),
+    content: (
+      <span className="hover:text-primary transition-colors"><a href="https://www.netwealthindia.in" target="_blank" rel="noopener noreferrer">www.netwealthindia.in</a></span>
+    )
+  },
+];
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
@@ -14,7 +58,7 @@ const Footer = () => {
     <footer className="bg-slate-900 text-slate-300 pt-16 pb-8 px-6">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
         {/* Column 1: Logo & Description */}
-        <div className="space-y-4">
+        <section className="space-y-4" aria-label="Net Wealth India">
           <Link href="/" className="flex items-center space-x-2">
             <Suspense fallback={<div className="h-8 w-8 bg-slate-700 rounded-full animate-pulse" />}>
               <Logo />
@@ -24,53 +68,44 @@ const Footer = () => {
           <p className="text-sm text-slate-400">
             Empowering Your Financial Future with Trusted Expertise.
           </p>
-        </div>
+        </section>
 
         {/* Column 2: Quick Links */}
-        <div className="space-y-4">
+        <nav className="space-y-4" aria-label="Quick Links">
           <h4 className="font-semibold text-white mb-3">Quick Links</h4>
           <ul className="space-y-2 text-sm">
-            <li><Link href="/" className="hover:text-primary transition-colors">Home</Link></li>
-            <li><Link href="/about" className="hover:text-primary transition-colors">About Us</Link></li>
-            <li><Link href="/services" className="hover:text-primary transition-colors">Services</Link></li>
-            <li><Link href="/contact" className="hover:text-primary transition-colors">Contact Us</Link></li>
+            {quickLinks.map(link => (
+              <li key={link.href}>
+                <Link href={link.href} className="hover:text-primary transition-colors">{link.label}</Link>
+              </li>
+            ))}
           </ul>
-        </div>
+        </nav>
 
         {/* Column 3: Services Links */}
-        <div className="space-y-4">
+        <nav className="space-y-4" aria-label="Our Services">
           <h4 className="font-semibold text-white mb-3">Our Services</h4>
           <ul className="space-y-2 text-sm">
-            <li><Link href="/services#protection" className="hover:text-primary transition-colors">Protection</Link></li>
-            <li><Link href="/services#investing" className="hover:text-primary transition-colors">Investing</Link></li>
-            <li><Link href="/services#borrowing" className="hover:text-primary transition-colors">Borrowing</Link></li>
+            {serviceLinks.map(link => (
+              <li key={link.href}>
+                <Link href={link.href} className="hover:text-primary transition-colors">{link.label}</Link>
+              </li>
+            ))}
           </ul>
-        </div>
+        </nav>
 
         {/* Column 4: Contact Info */}
-        <div className="space-y-4">
+        <address className="not-italic space-y-4" aria-label="Contact Information">
           <h4 className="font-semibold text-white mb-3">Get In Touch</h4>
           <ul className="space-y-2 text-sm text-slate-400">
-            <li className="flex items-start gap-3">
-              <MapPin className="h-4 w-4 text-primary mt-1 flex-shrink-0" />
-              <span>A-101, Plot No-25/A, Nilkant CHS, 1st Floor, Jethabhai Lane, Near A Ward BMC Office, Ghatkopar (E), Mumbai - 400077</span>
-            </li>
-            <li className="flex items-center gap-3">
-              <Phone className="h-4 w-4 text-primary flex-shrink-0" />
-              <span>9930777332, 9930115558</span>
-            </li>
-            <li className="flex items-center gap-3">
-              <Mail className="h-4 w-4 text-primary flex-shrink-0" />
-              <span className="hover:text-primary transition-colors"><a href="mailto:netwealthindia05@gmail.com">netwealthindia05@gmail.com</a></span>
-            </li>
-            <li className="flex items-center gap-3">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-primary flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-              </svg>
-              <span className="hover:text-primary transition-colors"><a href="https://www.netwealthindia.in" target="_blank" rel="noopener noreferrer">www.netwealthindia.in</a></span>
-            </li>
+            {contactInfo.map((item, idx) => (
+              <li className="flex items-start gap-3" key={idx}>
+                {item.icon}
+                {item.content}
+              </li>
+            ))}
           </ul>
-        </div>
+        </address>
       </div>
 
       {/* GST Number Box */}
