@@ -75,7 +75,6 @@ const ServicesPage = () => {
           </div>
         </div>
       </section>
-
       {/* Services Details Sections */}
       {serviceCategories.map((category, index) => (
         <section
@@ -135,7 +134,6 @@ const ServicesPage = () => {
           </div>
         </section>
       ))}
-
       {/* CTA Section */}
       <section className="bg-gradient-to-r from-yellow-500 to-yellow-600 py-20 px-6">
         <div className="container mx-auto text-center">

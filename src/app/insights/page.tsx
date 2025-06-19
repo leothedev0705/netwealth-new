@@ -65,7 +65,6 @@ const InsightsPage = () => {
           </p>
         </div>
       </section>
-
       {/* Market News Section */}
       <section className="py-16 md:py-20 px-6 bg-white">
         <div className="container mx-auto">
@@ -88,7 +87,6 @@ const InsightsPage = () => {
           </div>
         </div>
       </section>
-
       {/* In-Depth Analysis Section */}
       <section className="py-16 md:py-20 px-6 bg-slate-50">
         <div className="container mx-auto">
@@ -109,7 +107,10 @@ const InsightsPage = () => {
                     <p className="text-sm text-slate-600 leading-relaxed">{post.excerpt}</p>
                   </CardContent>
                   <CardFooter>
-                    <Link href={post.slug} className="text-sm text-primary font-semibold hover:underline flex items-center group">
+                    <Link
+                      href={post.slug}
+                      className="text-sm text-primary font-semibold hover:underline flex items-center group"
+                    >
                       Read More <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
                     </Link>
                   </CardFooter>
@@ -123,7 +124,6 @@ const InsightsPage = () => {
           )}
         </div>
       </section>
-
       {/* === Market Data & Visualizations Section - Commented Out === */}
       {/* 
       <section className="py-16 md:py-20 px-6 bg-white">

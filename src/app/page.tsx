@@ -72,8 +72,8 @@ export default function Home() {
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 priority
                 quality={90}
-                className="rounded-lg w-full h-full object-cover"
-                style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+                className="rounded-lg w-full h-full object-contain"
+                style={{ objectFit: 'contain', width: '100%', height: '100%' }}
               />
             </div>
           </div>

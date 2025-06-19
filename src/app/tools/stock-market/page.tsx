@@ -110,5 +110,5 @@ export default function StockMarketTools() {
           </Card>
       </div>
     </div>
-  )
+  );
 } 

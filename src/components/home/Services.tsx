@@ -105,7 +105,11 @@ const Services = () => {
             // Map internal ID to the actual section ID on the /services page
             const targetSectionId = service.id === 'protection' ? 'insurance' : service.id === 'borrowing' ? 'loans' : service.id;
             return (
-              <Link key={service.id} href={`/services#${targetSectionId}`} className="block group">
+              <Link
+                key={service.id}
+                href={`/services#${targetSectionId}`}
+                className="block group"
+              >
                 <motion.div
                   className="h-full"
                   whileHover={{ 

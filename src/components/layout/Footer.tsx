@@ -76,7 +76,10 @@ const Footer = () => {
           <ul className="space-y-2 text-sm">
             {quickLinks.map(link => (
               <li key={link.href}>
-                <Link href={link.href} className="hover:text-primary transition-colors">{link.label}</Link>
+                <Link
+                  href={link.href}
+                  className="hover:text-primary transition-colors"
+                >{link.label}</Link>
               </li>
             ))}
           </ul>
@@ -88,7 +91,10 @@ const Footer = () => {
           <ul className="space-y-2 text-sm">
             {serviceLinks.map(link => (
               <li key={link.href}>
-                <Link href={link.href} className="hover:text-primary transition-colors">{link.label}</Link>
+                <Link
+                  href={link.href}
+                  className="hover:text-primary transition-colors"
+                >{link.label}</Link>
               </li>
             ))}
           </ul>
@@ -107,14 +113,12 @@ const Footer = () => {
           </ul>
         </address>
       </div>
-
       {/* GST Number Box */}
       <div className="mt-12 flex justify-center">
         <div className="bg-primary/10 border border-primary/20 rounded-lg px-6 py-3">
           <p className="text-primary font-medium">GST No: 27AAXFN5300R1ZG</p>
         </div>
       </div>
-
       {/* Bottom Bar */}
       <div className="mt-8 pt-8 border-t border-slate-700/50 text-center text-sm text-slate-500">
         <p>&copy; {currentYear} Net Wealth India. All Rights Reserved.</p>

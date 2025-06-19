@@ -61,8 +61,8 @@ const ServicePage = () => {
       </div>
       {/* Header */}
       <div className="max-w-5xl mx-auto bg-white border rounded-xl shadow-sm px-6 py-8 mb-10">
-          <Link 
-            href="/services" 
+          <Link
+            href="/services"
             className="inline-flex items-center text-sm text-slate-600 hover:text-primary mb-8"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
@@ -130,7 +130,7 @@ const ServicePage = () => {
                   {relatedServices.map((service, index) => (
                     <Link
                       key={index}
-                    href={`/services/${category}/${getServiceSlug(service.title)}`}
+                      href={`/services/${category}/${getServiceSlug(service.title)}`}
                       className="block p-4 rounded-lg border border-slate-100 hover:border-primary/30 hover:shadow-sm transition-all"
                     >
                       <div className="flex items-center">
