@@ -57,53 +57,28 @@ const serviceItems: { title: string; href: string; description: string, icon: Re
 // Define Credit Card items for dropdown
 const creditCardItems: { title: string; href: string; description?: string, icon?: React.ElementType }[] = [
   {
-    title: "Popular Credit Card",
-    href: "/services/credit-cards/popular",
+    title: "IDFC Bank",
+    href: "/services/credit-cards/idfc-bank",
     icon: CreditCard
   },
   {
-    title: "HDFC Bank Credit Card",
-    href: "/services/credit-cards/hdfc",
+    title: "YES Bank",
+    href: "/services/credit-cards/yes-bank",
     icon: CreditCard
   },
   {
-    title: "SBI Credit Card",
-    href: "/services/credit-cards/sbi",
+    title: "HDFC Bank",
+    href: "/services/credit-cards/hdfc-bank",
     icon: CreditCard
   },
   {
-    title: "IDFC Bank Credit Card",
-    href: "/services/credit-cards/idfc",
+    title: "ICICI Bank",
+    href: "/services/credit-cards/icici-bank",
     icon: CreditCard
   },
   {
-    title: "Axis Bank Credit Card",
-    href: "/services/credit-cards/axis",
-    icon: CreditCard
-  },
-  {
-    title: "HSBC Bank Credit Card",
-    href: "/services/credit-cards/hsbc",
-    icon: CreditCard
-  },
-  {
-    title: "AU Bank Credit Card",
-    href: "/services/credit-cards/au",
-    icon: CreditCard
-  },
-  {
-    title: "American Express Credit Card",
-    href: "/services/credit-cards/amex",
-    icon: CreditCard
-  },
-  {
-    title: "ICICI Bank Credit Card",
-    href: "/services/credit-cards/icici",
-    icon: CreditCard
-  },
-  {
-    title: "IndusInd Bank Credit Cards",
-    href: "/services/credit-cards/indusind",
+    title: "SBI Bank",
+    href: "/services/credit-cards/sbi-bank",
     icon: CreditCard
   },
 ];
@@ -126,9 +101,19 @@ const loanItems: { title: string; href: string; description?: string, icon?: Rea
     icon: Home
   },
   {
-    title: "Gold Loan",
-    href: "/services/loans/gold",
-    icon: PiggyBank
+    title: "Construction Funding",
+    href: "/services/loans/construction-funding",
+    icon: Home
+  },
+  {
+    title: "Project Funding",
+    href: "/services/loans/project-funding",
+    icon: Briefcase
+  },
+  {
+    title: "IPO Funding",
+    href: "/services/loans/ipo-funding",
+    icon: TrendingUp
   },
   {
     title: "Loan Against Property",

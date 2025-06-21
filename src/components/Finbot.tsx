@@ -2,7 +2,9 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { SpeechService } from '@/lib/speechUtils';
-import { X, Mic } from 'lucide-react';
+import { X, Mic, Send, Bot, User, CornerDownLeft, Check } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { AnimatePresence, motion } from 'framer-motion';
 
 interface Message {
   type: 'user' | 'bot';
@@ -10,49 +12,60 @@ interface Message {
 }
 
 export default function Finbot() {
+  const [isOpen, setIsOpen] = useState(false);
   const [isListening, setIsListening] = useState(false);
-  const [isSpeaking, setIsSpeaking] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      type: 'bot',
-      content: "Hello there! I'm FinBot, your personal financial assistant and stock market advisor. I'm here to help you make informed decisions about investments, market analysis, and financial planning. What would you like to explore today?"
-    }
-  ]);
-  const speechService = useRef<SpeechService>(null);
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [inputValue, setInputValue] = useState('');
+  const speechService = useRef<SpeechService | null>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Initialize speech service on client side
     speechService.current = SpeechService.getInstance();
+    setMessages([
+      {
+        type: 'bot',
+        content:
+          "Hello! I'm FinBot, your personal financial assistant. How can I help you today?",
+      },
+    ]);
   }, []);
 
-  const handleMicToggle = async () => {
-    if (!speechService.current) return;
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
 
+  const toggleChat = () => setIsOpen(!isOpen);
+
+  const processAndRespond = async (text: string) => {
+    setMessages((prev) => [...prev, { type: 'user', content: text }]);
+    setInputValue('');
+
+    const response = await processUserInput(text);
+
+    setMessages((prev) => [...prev, { type: 'bot', content: response }]);
+
+    await speechService.current?.speak(response);
+  };
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (inputValue.trim()) {
+      processAndRespond(inputValue);
+    }
+  };
+
+  const handleMicClick = () => {
+    if (!speechService.current) return;
     if (isListening) {
       speechService.current.stopListening();
       setIsListening(false);
     } else {
       setIsListening(true);
       speechService.current.startListening(
-        // On result callback
-        async (text) => {
+        (text) => {
           setIsListening(false);
-          
-          // Add user message to chat
-          setMessages(prev => [...prev, { type: 'user', content: text }]);
-          
-          // Process the voice input and get response
-          const response = await processUserInput(text);
-          
-          // Add bot response to chat
-          setMessages(prev => [...prev, { type: 'bot', content: response }]);
-          
-          // Speak the response
-          setIsSpeaking(true);
-          await speechService.current?.speak(response);
-          setIsSpeaking(false);
+          processAndRespond(text);
         },
-        // On error callback
         (error) => {
           console.error('Speech recognition error:', error);
           setIsListening(false);
@@ -61,112 +74,143 @@ export default function Finbot() {
     }
   };
 
-  // Process user input and return appropriate response
   const processUserInput = async (input: string): Promise<string> => {
+    // This function can be expanded with a real NLP service
     const lowerInput = input.toLowerCase();
-    
-    if (lowerInput.includes('hello') || lowerInput.includes('hi')) {
-      return "Hello! I'm your financial assistant. How can I help you today?";
-    }
-    if (lowerInput.includes('invest') && lowerInput.includes('stock market')) {
-      return "To invest in the Indian stock market, you'll need to: 1. Open a demat account with a broker 2. Complete your KYC 3. Link your bank account 4. Start with blue-chip stocks or index funds. Would you like me to explain any of these steps in detail?";
-    }
-    if (lowerInput.includes('swp') || lowerInput.includes('systematic withdrawal')) {
-      return "SWP (Systematic Withdrawal Plan) is a strategy where you regularly withdraw a fixed amount from your mutual fund investments. It's useful for generating regular income from your investments. Would you like to know more about how SWP works?";
-    }
-    if (lowerInput.includes('mutual fund') && lowerInput.includes('beginner')) {
-      return "For beginners, I recommend starting with: 1. Large-cap index funds 2. Balanced advantage funds 3. Conservative hybrid funds. These offer good diversification and lower risk. Would you like specific fund recommendations?";
-    }
-    if (lowerInput.includes('stock') || lowerInput.includes('market')) {
-      return "The stock market is currently active. Would you like me to check specific stocks for you or provide general market updates?";
-    }
-    
-    return "I understand you're asking about: " + input + ". Could you please be more specific about what you'd like to know?";
+    if (lowerInput.includes('invest')) return "To invest in the stock market, you need a demat account, KYC, and a linked bank account. Starting with index funds is a great first step.";
+    if (lowerInput.includes('swp')) return "A Systematic Withdrawal Plan (SWP) provides regular income by letting you withdraw a fixed amount from your mutual funds periodically.";
+    if (lowerInput.includes('mutual fund')) return "For beginners, large-cap index funds or balanced advantage funds are excellent choices due to their diversification and lower risk.";
+    return `I've received your query about: "${input}". While my capabilities are currently in development, a financial expert from our team will review this and get in touch with you shortly.`;
   };
 
+  const quickActions = [
+    "How do I invest in stocks?",
+    "Explain SWP.",
+    "Best mutual funds for beginners?",
+  ];
+
   return (
-    <div className="fixed inset-x-0 bottom-0 top-0 md:inset-auto md:right-4 md:bottom-4 md:w-[400px] md:h-[600px] bg-[#4339F2] flex flex-col rounded-t-2xl md:rounded-2xl shadow-2xl">
-      {/* Header */}
-      <div className="flex items-center justify-between p-4 md:p-4">
-        <div className="flex items-center">
-          <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center mr-3">
-            <span className="text-white text-xl">✨</span>
-          </div>
-          <div>
-            <h1 className="text-xl font-bold text-white">FinBot</h1>
-            <p className="text-sm text-white/80">Your Financial Advisor</p>
-          </div>
-        </div>
-        <button className="text-white/80 hover:text-white p-2">
-          <X className="w-5 h-5" />
-        </button>
-      </div>
-
-      {/* Messages and Quick Actions */}
-      <div className="flex-1 p-4 overflow-y-auto">
-        {/* Bot Message */}
-        <div className="bg-[#4339F2] text-white p-4 rounded-2xl mb-6">
-          <span className="text-2xl mb-3 inline-block">👋</span>
-          <p className="text-base font-medium mb-3">
-            Hello there! I'm FinBot, your personal financial assistant and stock market advisor.
-            I'm here to help you make informed decisions about investments, market analysis, and financial planning.
-          </p>
-          <p className="text-base">What would you like to explore today?</p>
-        </div>
-
-        {/* Quick Action Buttons */}
-        <div className="space-y-3">
-          <button 
-            className="w-full bg-white/10 hover:bg-white/20 text-white text-left p-4 rounded-2xl transition-colors text-sm"
-            onClick={() => handleMicToggle()}
+    <>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 50, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 50, scale: 0.9 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="fixed bottom-24 right-4 z-50 w-[calc(100vw-32px)] max-w-md h-[70vh] max-h-[600px] flex flex-col bg-white rounded-2xl shadow-2xl border border-slate-200"
           >
-            How can I invest in the Indian stock market?
-          </button>
-          <button 
-            className="w-full bg-white/10 hover:bg-white/20 text-white text-left p-4 rounded-2xl transition-colors text-sm"
-            onClick={() => handleMicToggle()}
-          >
-            Explain SWP strategy
-          </button>
-          <button 
-            className="w-full bg-white/10 hover:bg-white/20 text-white text-left p-4 rounded-2xl transition-colors text-sm"
-            onClick={() => handleMicToggle()}
-          >
-            What are the best mutual funds for beginners?
-          </button>
-        </div>
-      </div>
+            {/* Header */}
+            <header className="flex items-center justify-between p-4 border-b border-slate-200 bg-slate-50 rounded-t-2xl">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-brand-green-light rounded-full">
+                  <Bot className="h-6 w-6 text-brand-green" />
+                </div>
+                <div>
+                  <h2 className="text-lg font-bold text-brand-green">FinBot</h2>
+                  <p className="text-sm text-slate-500">Your Financial AI Assistant</p>
+                </div>
+              </div>
+              <Button variant="ghost" size="icon" onClick={toggleChat}>
+                <X className="h-5 w-5 text-slate-500" />
+              </Button>
+            </header>
 
-      {/* Message Input */}
-      <div className="p-4">
-        <div className="bg-white/10 rounded-full p-2 flex items-center justify-between">
-          <span className="text-white/80 ml-3 text-sm">Type your message...</span>
-          <button 
-            onClick={() => handleMicToggle()}
-            className="bg-[#4F46E5] hover:bg-[#4338CA] text-white p-3 rounded-full transition-colors"
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 14C13.66 14 15 12.66 15 11V5C15 3.34 13.66 2 12 2C10.34 2 9 3.34 9 5V11C9 12.66 10.34 14 12 14Z" fill="currentColor"/>
-              <path d="M17 11C17 13.76 14.76 16 12 16C9.24 16 7 13.76 7 11H5C5 14.53 7.61 17.43 11 17.92V21H13V17.92C16.39 17.43 19 14.53 19 11H17Z" fill="currentColor"/>
-            </svg>
-          </button>
-        </div>
-      </div>
+            {/* Messages */}
+            <div className="flex-1 overflow-y-auto p-4 space-y-4">
+              {messages.map((msg, i) => (
+                <div key={i} className={`flex items-end gap-2 ${msg.type === 'user' ? 'justify-end' : ''}`}>
+                  {msg.type === 'bot' && <Bot className="h-6 w-6 text-slate-400 flex-shrink-0" />}
+                  <div
+                    className={`max-w-[80%] rounded-2xl px-4 py-2.5 text-sm ${
+                      msg.type === 'bot'
+                        ? 'bg-brand-green-light text-slate-800 rounded-bl-none'
+                        : 'bg-brand-green text-white rounded-br-none'
+                    }`}
+                  >
+                    {msg.content}
+                  </div>
+                  {msg.type === 'user' && <User className="h-6 w-6 text-slate-400 flex-shrink-0" />}
+                </div>
+              ))}
+              <div ref={messagesEndRef} />
+            </div>
 
-      {/* Floating Microphone Button */}
-      <div className="fixed bottom-20 right-4 md:bottom-4 md:right-4">
-        <button
-          onClick={handleMicToggle}
-          className={`p-3 rounded-full shadow-lg transition-all transform hover:scale-110 ${
-            isListening 
-              ? 'bg-red-600 animate-pulse' 
-              : 'bg-[#4339F2]'
-          } text-white`}
-          aria-label={isListening ? "Stop listening" : "Start voice chat"}
+            {/* Quick Actions */}
+            {messages.length <= 1 && (
+              <div className="p-4 border-t border-slate-200">
+                <p className="text-xs font-semibold text-slate-400 mb-2">QUICK ACTIONS</p>
+                <div className="flex flex-wrap gap-2">
+                  {quickActions.map(action => (
+                    <button key={action} onClick={() => processAndRespond(action)} className="px-3 py-1.5 bg-slate-100 text-slate-700 rounded-full text-sm hover:bg-slate-200 transition-colors">
+                      {action}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Input */}
+            <footer className="p-4 border-t border-slate-200 bg-white rounded-b-2xl">
+              <form onSubmit={handleFormSubmit} className="flex items-center gap-2">
+                <input
+                  type="text"
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  placeholder="Type your message..."
+                  className="flex-1 w-full px-4 py-2 bg-slate-100 border border-slate-200 rounded-full focus:outline-none focus:ring-2 focus:ring-brand-green"
+                />
+                <Button type="button" size="icon" variant="ghost" onClick={handleMicClick} className={isListening ? 'text-red-500' : 'text-slate-500'}>
+                  <Mic className="h-5 w-5" />
+                </Button>
+                <Button type="submit" size="icon" className="bg-brand-green text-white hover:bg-teal-600 flex-shrink-0">
+                  <Send className="h-5 w-5" />
+                </Button>
+              </form>
+            </footer>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Floating Toggle Button */}
+      <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end gap-2">
+        <AnimatePresence>
+        {!isOpen && (
+            <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ duration: 0.2, ease: 'easeInOut' }}
+            >
+                <Button
+                onClick={toggleChat}
+                variant="outline"
+                className="rounded-full w-auto h-12 px-4 bg-white/80 backdrop-blur-sm text-brand-green shadow-lg hover:bg-slate-50 border-slate-200/80 transition-all flex items-center gap-2"
+                >
+                <span className="text-sm font-semibold">Ask FinBot</span>
+                <Check size={16}/>
+                </Button>
+            </motion.div>
+        )}
+        </AnimatePresence>
+        
+        <Button
+          onClick={toggleChat}
+          className="rounded-full w-16 h-16 bg-brand-green text-white shadow-lg hover:bg-teal-600 transition-transform hover:scale-110"
         >
-          <Mic className="w-5 h-5" />
-        </button>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={isOpen ? 'x' : 'bot'}
+              initial={{ opacity: 0, rotate: -30 }}
+              animate={{ opacity: 1, rotate: 0 }}
+              exit={{ opacity: 0, rotate: 30 }}
+              transition={{ duration: 0.2 }}
+            >
+              {isOpen ? <X size={24} /> : <Bot size={24} />}
+            </motion.div>
+          </AnimatePresence>
+        </Button>
       </div>
-    </div>
+    </>
   );
-} 
+}

@@ -1,7 +1,7 @@
 'use client';
 
-import React from 'react';
-import { useParams } from 'next/navigation';
+import React, { useEffect } from 'react';
+import { useParams, useRouter } from 'next/navigation';
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Clock, CheckCircle2, AlertCircle } from 'lucide-react';
 import Link from 'next/link';
@@ -21,8 +21,19 @@ function getServiceSlug(title: string) {
 
 const ServicePage = () => {
   const params = useParams();
+  const router = useRouter();
   const category = params.category as string;
   const serviceName = params.service as string;
+
+  useEffect(() => {
+    if (category === 'insurance') {
+      if (serviceName === 'health-insurance') {
+        router.replace('/services/insurance/health-insurance');
+      } else if (serviceName === 'life-insurance') {
+        router.replace('/services/insurance/life-insurance');
+      }
+    }
+  }, [category, serviceName, router]);
 
   // Find the category and service
   const categoryData = serviceCategories.find(cat => cat.id === category);
@@ -30,14 +41,10 @@ const ServicePage = () => {
     item => getServiceSlug(item.title) === serviceName
   );
 
-  if (!categoryData || !serviceData) {
+  if (!categoryData || !serviceData || (category === 'insurance' && (serviceName === 'health-insurance' || serviceName === 'life-insurance'))) {
     return (
       <div className="container py-20 text-center">
-        <h1 className="text-2xl font-bold text-slate-800 mb-4">Service not found</h1>
-        <p className="text-slate-600 mb-8">The service you're looking for doesn't exist.</p>
-        <Button asChild>
-          <Link href="/services">Back to Services</Link>
-        </Button>
+        <h1 className="text-2xl font-bold text-slate-800 mb-4">Loading...</h1>
       </div>
     );
   }

@@ -1,83 +1,214 @@
-import React, { Suspense } from 'react';
-import { Button } from "@/components/ui/button";
-import { PlayCircle, TrendingUp, IndianRupee } from 'lucide-react';
+'use client'
+import React, { Suspense, useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { ArrowRight, PlayCircle, ShieldCheck, TrendingUp, Zap, ArrowLeft, Radio } from 'lucide-react';
 import Image from 'next/image';
-// import Partners from "@/components/home/Partners";
-import AboutUs from "@/components/home/AboutUs";
-import Services from "@/components/home/Services";
-import FadeInUp from "@/components/animations/FadeInUp";
+import AboutUs from '@/components/home/AboutUs';
+import Services from '@/components/home/Services';
+import FadeInUp from '@/components/animations/FadeInUp';
 import CompanyCarousel from '@/components/carousel/CompanyCarousel';
+import LottieAnimation from '@/components/animations/LottieAnimation';
+import MoneyLottie from '@/../public/assets/lotties/money.json';
+import HomeLottie from '@/../public/assets/lotties/home.json';
+import PersonalLottie from '@/../public/assets/lotties/personal.json';
+import BusinessLottie from '@/../public/assets/lotties/business.json';
+import FundingLottie from '@/../public/assets/lotties/funding.json';
+import { useKeenSlider } from 'keen-slider/react';
+import 'keen-slider/keen-slider.min.css';
+import { motion } from 'framer-motion';
 
-// Lazy load the decorative elements
-const DecorativeElements = () => (
-  <div className="absolute inset-0 -z-10 opacity-10 overflow-hidden">
-    <div className="absolute top-10 right-10 w-32 h-32 border-2 border-primary/50 rounded-full opacity-50"></div>
-    <div className="absolute bottom-20 left-20 w-48 h-48 border-2 border-primary/20 rounded-full opacity-30"></div>
-    <div className="absolute bottom-5 right-1/4 w-20 h-20 bg-primary/20 rounded-lg transform rotate-45 opacity-40"></div>
 
-    <TrendingUp className="absolute top-[15%] left-[10%] h-12 w-12 text-primary/60 animate-[float_6s_ease-in-out_infinite]" />
-    <IndianRupee className="absolute bottom-[25%] right-[15%] h-10 w-10 text-emerald-400/60 animate-[float_7s_ease-in-out_infinite_0.5s]" />
-    <TrendingUp className="absolute bottom-[10%] left-[30%] h-8 w-8 text-primary/50 animate-[float_5s_ease-in-out_infinite_1s]" />
-    <IndianRupee className="absolute top-[30%] right-[35%] h-16 w-16 text-emerald-400/50 animate-[float_8s_ease-in-out_infinite_0.2s]" />
-  </div>
+const LoanFormSlide = ({ title, description, isActive, lottieAnimation }: { title: string, description: string, isActive: boolean, lottieAnimation?: any }) => (
+    <div className="keen-slider__slide w-full flex items-center px-8 lg:px-16">
+        <div className="w-full lg:w-1/2 text-center lg:text-left">
+            <motion.h1 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 20 }}
+                transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
+                className="text-4xl lg:text-5xl font-bold text-[#002855] mb-4"
+            >
+                {title}
+            </motion.h1>
+            <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 20 }}
+                transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}
+                className="text-slate-600 mb-8 max-w-lg mx-auto lg:mx-0"
+            >
+                {description}
+            </motion.p>
+            <motion.form 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 20 }}
+                transition={{ duration: 0.6, delay: 0.6, ease: 'easeOut' }}
+                className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-md mx-auto lg:mx-0"
+            >
+                <input type="text" placeholder="Full Name" className="p-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-green focus:outline-none" />
+                <input type="tel" placeholder="Phone Number" className="p-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-green focus:outline-none" />
+                <input type="email" placeholder="Email Address" className="p-3 rounded-lg border border-slate-300 sm:col-span-2 focus:ring-2 focus:ring-brand-green focus:outline-none" />
+                <input type="number" placeholder="Loan Amount (₹)" className="p-3 rounded-lg border border-slate-300 sm:col-span-2 focus:ring-2 focus:ring-brand-green focus:outline-none" />
+                <Button className="bg-[#00b894] hover:bg-teal-600 text-white font-bold py-3 px-6 rounded-lg sm:col-span-2">
+                    Apply Now
+                </Button>
+            </motion.form>
+        </div>
+        <div className="hidden lg:flex w-1/2 h-full items-center justify-center">
+             <div className="w-full h-full flex items-center justify-center">
+                {lottieAnimation ? (
+                    <LottieAnimation animationData={lottieAnimation} />
+                ) : (
+                    <div className="w-[450px] h-[450px] bg-slate-100 rounded-full flex items-center justify-center">
+                        <p className="text-slate-500">Lottie Animation Here</p>
+                    </div>
+                )}
+            </div>
+        </div>
+    </div>
 );
 
+
 export default function Home() {
+    const [currentSlide, setCurrentSlide] = useState(0)
+    const [loaded, setLoaded] = useState(false)
+    const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
+        initial: 0,
+        loop: true,
+        slideChanged(slider) {
+            setCurrentSlide(slider.track.details.rel)
+        },
+        created() {
+            setLoaded(true)
+        },
+    })
+
+    const slides = [
+        {
+            type: 'form',
+            title: 'Secure Your Dream Home',
+            description: 'Fast, transparent, and hassle-free home loans. Let us help you unlock the door to your new home with competitive rates and expert guidance.',
+            lottie: HomeLottie,
+        },
+        {
+            type: 'form',
+            title: 'Achieve Your Personal Goals',
+            description: 'Need funds for a wedding, vacation, or an emergency? Our personal loans offer flexible terms and quick disbursal to help you meet your needs.',
+            lottie: PersonalLottie,
+        },
+        {
+            type: 'form',
+            title: 'Fuel Your Business Growth',
+            description: 'Expand your operations, purchase new equipment, or manage cash flow with our customized business loan solutions designed for entrepreneurs.',
+            lottie: BusinessLottie,
+        },
+        {
+            type: 'form',
+            title: 'Innovative IPO & Venture Funding',
+            description: 'Secure capital for your Pre-IPO placement or next big venture. We connect visionary founders with strategic investors to fuel groundbreaking success.',
+            lottie: FundingLottie,
+        },
+    ]
+
+
   return (
     <>
-      <section className="bg-gradient-to-br from-green-50 to-green-100 py-20 px-6 md:py-32 relative overflow-hidden">
-        <Suspense fallback={null}>
-          <DecorativeElements />
-        </Suspense>
+      <section className="relative bg-gradient-to-b from-teal-50 to-white pt-12 pb-16">
+        <div ref={sliderRef} className="keen-slider h-[600px]">
+            {/* Slide 1: Original Hero */}
+            <div className="keen-slider__slide w-full flex flex-col lg:flex-row items-center justify-between px-8 lg:px-16">
+                <div className="w-full lg:w-1/2 text-center lg:text-left mb-12 lg:mb-0">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: currentSlide === 0 ? 1 : 0, y: currentSlide === 0 ? 0 : 20 }}
+                        transition={{ duration: 0.6, delay: 0.1, ease: 'easeOut' }}
+                        className="flex flex-wrap items-center gap-2 mb-4 justify-center lg:justify-start"
+                    >
+                        <div className="inline-flex items-center gap-2 rounded-full bg-teal-100 px-3 py-1 text-xs sm:text-sm font-semibold text-[#00b894]">
+                            <Zap className="h-4 w-4" />
+                            <span>Welcome to NetWealth India</span>
+                        </div>
+                         <div className="inline-flex items-center gap-2 rounded-full bg-blue-100 px-3 py-1 text-xs sm:text-sm font-semibold text-[#002855]">
+                            <ShieldCheck className="h-4 w-4" />
+                            <span>25+ years of experience</span>
+                        </div>
+                         <div className="inline-flex items-center gap-2 rounded-full bg-amber-100 px-3 py-1 text-xs sm:text-sm font-semibold text-amber-800">
+                            <TrendingUp className="h-4 w-4" />
+                            <span>1000+ Happy Clients</span>
+                        </div>
+                    </motion.div>
+                    <motion.h1
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: currentSlide === 0 ? 1 : 0, y: currentSlide === 0 ? 0 : 20 }}
+                        transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
+                        className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#002855] mb-6 leading-tight"
+                    >
+                        Navigate Your Financial Future with Confidence
+                    </motion.h1>
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: currentSlide === 0 ? 1 : 0, y: currentSlide === 0 ? 0 : 20 }}
+                        transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
+                        className="text-lg text-slate-600 md:text-xl  mb-8 max-w-lg mx-auto lg:mx-0"
+                    >
+                        Your trusted partner for comprehensive financial planning, from
+                        strategic investments and insurance to achieving your life goals.
+                    </motion.p>
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: currentSlide === 0 ? 1 : 0, y: currentSlide === 0 ? 0 : 20 }}
+                        transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}
+                        className="flex flex-col gap-4 sm:flex-row sm:justify-center md:justify-start"
+                    >
+                        <Button size="lg" className="bg-[#00b894] text-white hover:bg-[#00a383]">
+                            Get Started <ArrowRight className="ml-2 h-5 w-5" />
+                        </Button>
+                        <Button size="lg" variant="outline" className="border-[#00b894] text-[#00b894] hover:bg-teal-50 hover:text-[#00a383]">
+                            Explore Services
+                        </Button>
+                    </motion.div>
+                </div>
+                <div className="w-full lg:w-1/2 flex items-center justify-center">
+                    <LottieAnimation animationData={MoneyLottie} />
+                </div>
+            </div>
 
-        <div className="container mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
-          <div className="space-y-6 text-center md:text-left">
-            <div className="flex justify-center md:justify-start mb-6">
-              <Image 
-                src="/assets/Kalpvriksh.png"
-                alt="Kalpvriksh - Let's Grow Together"
-                width={150}
-                height={150}
-                className="object-contain"
-                priority
-              />
-            </div>
-            <p className="text-primary font-semibold text-sm tracking-wider uppercase flex items-center gap-2 justify-center md:justify-start">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-              Welcome to Net Wealth India
-            </p>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-green-900 leading-tight">
-              Empowering your financial success journey
-            </h1>
-            <p className="text-lg text-green-700">
-              Guiding you with expert insights and strategic solutions to achieve financial growth, stability, and long-term success.
-            </p>
-            
-            <div className="bg-white/80 backdrop-blur-sm rounded-lg p-4 mt-4 shadow-sm">
-              <p className="text-green-800 font-medium">
-                Trusted by Leading Insurance Companies
-              </p>
-              <p className="text-sm text-green-700 mt-1">
-                Including Reliance, Tata AIA, Birla Sun Life, HDFC Life, and other major insurers in India
-              </p>
-            </div>
-          </div>
-
-          <div className="relative flex justify-center items-center mt-10 md:mt-0">
-            <div className="relative w-full max-w-md h-[400px] md:h-[500px] lg:h-[600px] rounded-lg shadow-2xl overflow-hidden">
-              <Image
-                src="/assets/hero.png"
-                alt="Financial professional ready to help with financial success"
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                priority
-                quality={90}
-                className="rounded-lg w-full h-full object-contain"
-                style={{ objectFit: 'contain', width: '100%', height: '100%' }}
-              />
-            </div>
-          </div>
+            {/* Slides 2-5: Forms */}
+            {slides.map((slide, index) => (
+                    <LoanFormSlide
+                    key={index}
+                    title={slide.title}
+                    description={slide.description}
+                    isActive={currentSlide === index + 1}
+                    lottieAnimation={slide.lottie}
+                    />
+            ))}
         </div>
+        
+        {loaded && instanceRef.current && (
+            <>
+                <ArrowLeft
+                    onClick={(e: any) => e.stopPropagation() || instanceRef.current?.prev()}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 p-2 text-[#00b894] bg-teal-50/50 rounded-full cursor-pointer hover:bg-teal-100/70 transition z-10"
+                />
+
+                <ArrowRight
+                    onClick={(e: any) => e.stopPropagation() || instanceRef.current?.next()}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 p-2 text-[#00b894] bg-teal-50/50 rounded-full cursor-pointer hover:bg-teal-100/70 transition z-10"
+                />
+            </>
+        )}
+        {loaded && instanceRef.current && (
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                {[...Array(instanceRef.current.track.details.slides.length).keys()].map((idx) => {
+                    return (
+                        <button
+                            key={idx}
+                            onClick={() => instanceRef.current?.moveToIdx(idx)}
+                            className={'w-3 h-3 rounded-full ' + (currentSlide === idx ? 'bg-brand-green' : 'bg-slate-300')}
+                        ></button>
+                    )
+                })}
+            </div>
+        )}
       </section>
 
       <Suspense fallback={<div className="h-96" />}>
@@ -93,8 +224,6 @@ export default function Home() {
       </Suspense>
 
       <CompanyCarousel />
-
-      {/* Other sections like Testimonials or CTA could go here */}
     </>
   );
 }

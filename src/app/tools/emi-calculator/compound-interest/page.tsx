@@ -253,7 +253,7 @@ const CompoundInterestCalculator = () => {
                     type="text"
                     inputMode="decimal"
                     value={principalStr}
-                    onChange={handleInputChange(setPrincipalStr, 100000000)} // 10 Crore max
+                    onChange={handleInputChange(setPrincipalStr, 100000000)}
                     placeholder="e.g., 100000"
                     className="flex-grow"
                   />
@@ -264,22 +264,17 @@ const CompoundInterestCalculator = () => {
                 <Slider
                   value={[principal]}
                   onValueChange={handleSliderChange(setPrincipalStr)}
-                  min={1000} // 1K min
-                  max={1000000} // 10 Lakh max for slider
+                  min={1000}
+                  max={5000000}
                   step={1000}
                   className="[&>span]:bg-emerald-500"
-                  aria-label="Principal Amount Slider"
                 />
-                <div className="flex justify-between text-xs text-slate-500">
-                  <span>₹1K</span>
-                  <span>₹10L</span>
-                </div>
               </div>
 
               {/* Interest Rate */}
               <div className="space-y-3">
                 <Label htmlFor="rate" className="text-slate-700 font-medium flex items-center gap-2">
-                  <Percent className="h-4 w-4 text-emerald-500" /> Interest Rate (% p.a.)
+                  <Percent className="h-4 w-4 text-emerald-500" /> Annual Interest Rate (%)
                 </Label>
                 <div className="flex items-center gap-4">
                   <Input
@@ -287,7 +282,7 @@ const CompoundInterestCalculator = () => {
                     type="text"
                     inputMode="decimal"
                     value={rateStr}
-                    onChange={handleInputChange(setRateStr, 30)}
+                    onChange={handleInputChange(setRateStr, 50)}
                     placeholder="e.g., 8"
                     className="flex-grow"
                   />
@@ -298,16 +293,11 @@ const CompoundInterestCalculator = () => {
                 <Slider
                   value={[rate]}
                   onValueChange={handleSliderChange(setRateStr)}
-                  min={1} // Min rate 1%
-                  max={20} // Max rate 20%
+                  min={1}
+                  max={25}
                   step={0.1}
                   className="[&>span]:bg-emerald-500"
-                  aria-label="Interest Rate Slider"
                 />
-                <div className="flex justify-between text-xs text-slate-500">
-                  <span>1%</span>
-                  <span>20%</span>
-                </div>
               </div>
 
               {/* Time Period */}
@@ -321,12 +311,12 @@ const CompoundInterestCalculator = () => {
                     type="text"
                     inputMode="numeric"
                     value={yearsStr}
-                    onChange={handleInputChange(setYearsStr, 50)} // Max 50 years
+                    onChange={handleInputChange(setYearsStr, 50)}
                     placeholder="e.g., 10"
                     className="flex-grow"
                   />
                   <span className="text-sm text-slate-500 font-semibold min-w-[60px] text-right">
-                    {years} {years === 1 ? 'Year' : 'Years'}
+                    {years} Yr
                   </span>
                 </div>
                 <Slider
@@ -336,27 +326,24 @@ const CompoundInterestCalculator = () => {
                   max={30}
                   step={1}
                   className="[&>span]:bg-emerald-500"
-                  aria-label="Years Slider"
                 />
-                <div className="flex justify-between text-xs text-slate-500">
-                  <span>1 Yr</span>
-                  <span>30 Yrs</span>
-                </div>
               </div>
 
               {/* Compounding Frequency */}
               <div className="space-y-3">
-                <Label htmlFor="compounding" className="text-slate-700 font-medium">
-                  Compounding Frequency
-                </Label>
+                <Label className="text-slate-700 font-medium">Compounding Frequency</Label>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                  {compoundingOptions.map(option => (
+                  {compoundingOptions.map((option) => (
                     <Button
                       key={option.value}
                       type="button"
                       variant={compoundFrequency === option.value ? "default" : "outline"}
-                      className={compoundFrequency === option.value ? "bg-emerald-600 hover:bg-emerald-700" : "border-emerald-200 text-slate-700"}
                       onClick={() => setCompoundFrequency(option.value)}
+                      className={compoundFrequency === option.value ? 
+                        "bg-emerald-500 hover:bg-emerald-600" : 
+                        "border-emerald-200 text-emerald-700 hover:bg-emerald-50"
+                      }
+                      size="sm"
                     >
                       {option.label}
                     </Button>
@@ -366,8 +353,8 @@ const CompoundInterestCalculator = () => {
 
               {/* Additional Contribution */}
               <div className="space-y-3">
-                <Label htmlFor="additionalContribution" className="text-slate-700 font-medium">
-                  Additional Contribution
+                <Label htmlFor="additionalContribution" className="text-slate-700 font-medium flex items-center gap-2">
+                  <RefreshCw className="h-4 w-4 text-emerald-500" /> Additional Contribution
                 </Label>
                 <div className="flex items-center gap-4">
                   <Input
@@ -375,7 +362,7 @@ const CompoundInterestCalculator = () => {
                     type="text"
                     inputMode="decimal"
                     value={additionalContributionStr}
-                    onChange={handleInputChange(setAdditionalContributionStr, 10000000)} // 1 Crore max
+                    onChange={handleInputChange(setAdditionalContributionStr, 10000000)}
                     placeholder="e.g., 10000"
                     className="flex-grow"
                   />
@@ -383,171 +370,191 @@ const CompoundInterestCalculator = () => {
                     {formatCompactNumber(additionalContribution)}
                   </span>
                 </div>
-                <div className="grid grid-cols-2 gap-2">
+                <Slider
+                  value={[additionalContribution]}
+                  onValueChange={handleSliderChange(setAdditionalContributionStr)}
+                  min={0}
+                  max={500000}
+                  step={1000}
+                  className="[&>span]:bg-emerald-500"
+                />
+              </div>
+
+              {/* Contribution Frequency */}
+              <div className="space-y-3">
+                <Label className="text-slate-700 font-medium">Contribution Frequency</Label>
+                <div className="flex space-x-4">
                   <Button
                     type="button"
                     variant={contributionFrequency === 'yearly' ? "default" : "outline"}
-                    className={contributionFrequency === 'yearly' ? "bg-emerald-600 hover:bg-emerald-700" : "border-emerald-200 text-slate-700"}
                     onClick={() => setContributionFrequency('yearly')}
+                    className={contributionFrequency === 'yearly' ? 
+                      "bg-emerald-500 hover:bg-emerald-600" : 
+                      "border-emerald-200 text-emerald-700 hover:bg-emerald-50"
+                    }
                   >
                     Yearly
                   </Button>
                   <Button
                     type="button"
                     variant={contributionFrequency === 'monthly' ? "default" : "outline"}
-                    className={contributionFrequency === 'monthly' ? "bg-emerald-600 hover:bg-emerald-700" : "border-emerald-200 text-slate-700"}
                     onClick={() => setContributionFrequency('monthly')}
+                    className={contributionFrequency === 'monthly' ? 
+                      "bg-emerald-500 hover:bg-emerald-600" : 
+                      "border-emerald-200 text-emerald-700 hover:bg-emerald-50"
+                    }
                   >
                     Monthly
                   </Button>
                 </div>
               </div>
             </CardContent>
-            <CardFooter className="bg-emerald-50/50 p-6 border-t border-emerald-100">
+            <CardFooter className="bg-emerald-50 p-4 border-t border-emerald-100">
               <Button 
                 onClick={calculateCompoundInterest} 
-                className="w-full bg-emerald-600 hover:bg-emerald-700"
+                className="w-full bg-emerald-500 hover:bg-emerald-600"
               >
-                <Calculator className="h-4 w-4 mr-2" /> Calculate
+                Calculate
               </Button>
             </CardFooter>
           </Card>
 
-          {/* Results Card */}
-          <Card className="lg:col-span-2 shadow-lg border-emerald-100">
-            <CardHeader className="bg-gradient-to-r from-emerald-50 to-emerald-100 border-b border-emerald-100">
-              <CardTitle className="text-xl font-bold text-slate-800">Investment Growth</CardTitle>
-              <CardDescription>See how your investment grows over time</CardDescription>
-            </CardHeader>
-            <CardContent className="p-6">
-              <div className="grid grid-cols-1 gap-8">
-                {/* Main Results */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="bg-emerald-50 rounded-xl p-6 text-center">
-                    <h3 className="text-sm font-medium text-slate-500 mb-1">Final Amount</h3>
-                    <p className="text-3xl font-bold text-emerald-600">
-                      {formatCurrency(result?.finalAmount || 0)}
-                    </p>
-                  </div>
-                  
-                  <div className="bg-slate-50 rounded-xl p-6 text-center">
-                    <h3 className="text-sm font-medium text-slate-500 mb-1">Total Contributions</h3>
-                    <p className="text-xl font-semibold text-slate-700">{formatCurrency(result?.totalContributions || 0)}</p>
-                  </div>
-                  
-                  <div className="bg-slate-50 rounded-xl p-6 text-center">
-                    <h3 className="text-sm font-medium text-slate-500 mb-1">Total Interest</h3>
-                    <p className="text-xl font-semibold text-slate-700">{formatCurrency(result?.totalInterest || 0)}</p>
-                  </div>
-                </div>
-                
+          {/* Results Section */}
+          <div className="lg:col-span-2 space-y-8">
+            {result && (
+              <>
+                {/* Summary Card */}
+                <Card className="shadow-lg border-emerald-100">
+                  <CardHeader className="bg-gradient-to-r from-emerald-50 to-emerald-100 border-b border-emerald-100">
+                    <CardTitle className="text-xl font-bold text-slate-800">Investment Summary</CardTitle>
+                    <CardDescription>Results based on your inputs</CardDescription>
+                  </CardHeader>
+                  <CardContent className="p-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                      <div className="space-y-6">
+                        <div>
+                          <p className="text-sm text-slate-500 mb-1">Future Value</p>
+                          <p className="text-3xl font-bold text-emerald-600">{formatCurrency(result.finalAmount)}</p>
+                        </div>
+                        
+                        <div className="grid grid-cols-2 gap-4">
+                          <div>
+                            <p className="text-sm text-slate-500 mb-1">Initial Investment</p>
+                            <p className="text-lg font-semibold text-slate-700">{formatCurrency(principal)}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-slate-500 mb-1">Total Contributions</p>
+                            <p className="text-lg font-semibold text-slate-700">{formatCurrency(result.totalContributions - principal)}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-slate-500 mb-1">Total Interest</p>
+                            <p className="text-lg font-semibold text-emerald-600">{formatCurrency(result.totalInterest)}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-slate-500 mb-1">Interest to Principal Ratio</p>
+                            <p className="text-lg font-semibold text-slate-700">{Math.round((result.totalInterest / principal) * 100)}%</p>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-center justify-center">
+                        <div className="bg-white p-4 rounded-lg shadow-sm border border-emerald-100 w-full">
+                          <div className="flex justify-between mb-2">
+                            <span className="text-sm font-medium text-slate-700">Initial Investment</span>
+                            <span className="text-sm font-medium text-slate-700">{formatCurrency(principal)}</span>
+                          </div>
+                          <div className="w-full bg-slate-100 rounded-full h-3 mb-4">
+                            <div 
+                              className="bg-blue-500 h-3 rounded-full" 
+                              style={{ width: `${(principal / result.finalAmount) * 100}%` }}
+                            ></div>
+                          </div>
+                          
+                          <div className="flex justify-between mb-2">
+                            <span className="text-sm font-medium text-slate-700">Additional Contributions</span>
+                            <span className="text-sm font-medium text-slate-700">{formatCurrency(result.totalContributions - principal)}</span>
+                          </div>
+                          <div className="w-full bg-slate-100 rounded-full h-3 mb-4">
+                            <div 
+                              className="bg-purple-500 h-3 rounded-full" 
+                              style={{ width: `${((result.totalContributions - principal) / result.finalAmount) * 100}%` }}
+                            ></div>
+                          </div>
+                          
+                          <div className="flex justify-between mb-2">
+                            <span className="text-sm font-medium text-slate-700">Interest Earned</span>
+                            <span className="text-sm font-medium text-emerald-600">{formatCurrency(result.totalInterest)}</span>
+                          </div>
+                          <div className="w-full bg-slate-100 rounded-full h-3">
+                            <div 
+                              className="bg-emerald-500 h-3 rounded-full" 
+                              style={{ width: `${(result.totalInterest / result.finalAmount) * 100}%` }}
+                            ></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
                 {/* Growth Chart */}
-                <div className="mt-4">
-                  <h3 className="text-lg font-semibold text-slate-800 mb-4">Growth Over Time</h3>
-                  {result && result.yearlyData.length > 0 && (
+                <Card className="shadow-lg border-emerald-100">
+                  <CardHeader className="bg-gradient-to-r from-emerald-50 to-emerald-100 border-b border-emerald-100 py-4">
+                    <CardTitle className="text-lg font-bold text-slate-800">Growth Over Time</CardTitle>
+                  </CardHeader>
+                  <CardContent className="p-6">
                     <GrowthChart 
                       principal={principal} 
                       years={years} 
                       yearlyData={result.yearlyData} 
                     />
-                  )}
-                </div>
-                
+                  </CardContent>
+                </Card>
+
                 {/* Yearly Breakdown */}
-                <div className="mt-4">
-                  <h3 className="text-lg font-semibold text-slate-800 mb-4">Yearly Breakdown</h3>
-                  <div className="overflow-x-auto">
-                    <table className="min-w-full divide-y divide-emerald-200">
-                      <thead className="bg-emerald-50">
-                        <tr>
-                          <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-emerald-800 uppercase tracking-wider">Year</th>
-                          <th scope="col" className="px-4 py-3 text-right text-xs font-medium text-emerald-800 uppercase tracking-wider">Balance</th>
-                          <th scope="col" className="px-4 py-3 text-right text-xs font-medium text-emerald-800 uppercase tracking-wider">Interest Earned</th>
-                        </tr>
-                      </thead>
-                      <tbody className="bg-white divide-y divide-emerald-100">
-                        {result?.yearlyData.slice(0, Math.min(years + 1, 11)).map((amount, index) => {
-                          const prevAmount = index > 0 ? result.yearlyData[index - 1] : 0;
-                          const yearlyContribution = index > 0 ? 
-                            (contributionFrequency === 'yearly' ? additionalContribution : additionalContribution * 12) : 0;
-                          const interestEarned = index > 0 ? amount - prevAmount - yearlyContribution : 0;
-                          
-                          return (
-                            <tr key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-emerald-50/30'}>
-                              <td className="px-4 py-2 whitespace-nowrap text-sm font-medium text-slate-700">{index}</td>
-                              <td className="px-4 py-2 whitespace-nowrap text-sm text-right font-semibold text-slate-700">{formatCurrency(amount)}</td>
-                              <td className="px-4 py-2 whitespace-nowrap text-sm text-right text-slate-600">{formatCurrency(interestEarned)}</td>
-                            </tr>
-                          );
-                        })}
-                        {years > 10 && (
+                <Card className="shadow-lg border-emerald-100">
+                  <CardHeader className="bg-gradient-to-r from-emerald-50 to-emerald-100 border-b border-emerald-100 py-4">
+                    <CardTitle className="text-lg font-bold text-slate-800">Yearly Breakdown</CardTitle>
+                  </CardHeader>
+                  <CardContent className="p-6">
+                    <div className="overflow-x-auto">
+                      <table className="min-w-full divide-y divide-emerald-200">
+                        <thead>
                           <tr>
-                            <td colSpan={3} className="px-4 py-2 text-center text-sm text-emerald-600">
-                              <Button variant="link" className="text-emerald-600">
-                                Show all {years} years
-                              </Button>
-                            </td>
+                            <th className="px-4 py-3 bg-emerald-50 text-left text-xs font-medium text-emerald-800 uppercase tracking-wider">Year</th>
+                            <th className="px-4 py-3 bg-emerald-50 text-right text-xs font-medium text-emerald-800 uppercase tracking-wider">Value</th>
+                            <th className="px-4 py-3 bg-emerald-50 text-right text-xs font-medium text-emerald-800 uppercase tracking-wider">Interest</th>
+                            <th className="px-4 py-3 bg-emerald-50 text-right text-xs font-medium text-emerald-800 uppercase tracking-wider">Growth</th>
                           </tr>
-                        )}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-            <CardFooter className="bg-emerald-50/50 p-6 border-t border-emerald-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <div className="flex items-center gap-2 text-sm text-slate-600">
-                <Info className="h-4 w-4 text-emerald-500" />
-                <p>Results are indicative and don't account for taxes or inflation.</p>
-              </div>
-              <Button variant="outline" className="border-emerald-200 text-emerald-600 hover:bg-emerald-50">
-                <BarChart2 className="h-4 w-4 mr-2" /> Compare with other investments
-              </Button>
-            </CardFooter>
-          </Card>
+                        </thead>
+                        <tbody className="bg-white divide-y divide-emerald-100">
+                          {result.yearlyData.map((value, index) => {
+                            const prevValue = index > 0 ? result.yearlyData[index - 1] : 0;
+                            const yearlyInterest = index > 0 ? value - prevValue - (contributionFrequency === 'yearly' ? additionalContribution : additionalContribution * 12) : 0;
+                            const yearlyGrowth = index > 0 ? ((value - prevValue) / prevValue) * 100 : 0;
+                            
+                            return (
+                              <tr key={index} className={index % 2 === 0 ? "bg-white" : "bg-emerald-50/30"}>
+                                <td className="px-4 py-3 whitespace-nowrap text-sm font-medium text-slate-700">{index}</td>
+                                <td className="px-4 py-3 whitespace-nowrap text-sm text-right text-slate-700">{formatCurrency(value)}</td>
+                                <td className="px-4 py-3 whitespace-nowrap text-sm text-right text-emerald-600">
+                                  {index > 0 ? formatCurrency(yearlyInterest) : "-"}
+                                </td>
+                                <td className="px-4 py-3 whitespace-nowrap text-sm text-right text-slate-700">
+                                  {index > 0 ? `${yearlyGrowth.toFixed(2)}%` : "-"}
+                                </td>
+                              </tr>
+                            );
+                          })}
+                        </tbody>
+                      </table>
+                    </div>
+                  </CardContent>
+                </Card>
+              </>
+            )}
+          </div>
         </div>
-        
-        {/* Additional Info */}
-        <Card className="mt-8 shadow-lg border-emerald-100">
-          <CardHeader className="bg-gradient-to-r from-emerald-50 to-emerald-100 border-b border-emerald-100">
-            <CardTitle className="text-xl font-bold text-slate-800">Understanding Compound Interest</CardTitle>
-          </CardHeader>
-          <CardContent className="p-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="text-lg font-semibold text-slate-800 mb-2">What is Compound Interest?</h3>
-                <p className="text-slate-600 mb-4">
-                  Compound interest is the interest calculated on both the initial principal and the accumulated interest from previous periods. 
-                  It's essentially "interest on interest" which can dramatically increase your investment over time.
-                </p>
-                <h3 className="text-lg font-semibold text-slate-800 mb-2">The Formula</h3>
-                <p className="text-slate-600">
-                  The compound interest formula is: <br />
-                  <span className="font-mono bg-slate-100 px-2 py-1 rounded text-sm">
-                    A = P(1 + r/n)^(nt)
-                  </span>
-                  <br />
-                  Where:<br />
-                  A = Final amount<br />
-                  P = Principal (initial investment)<br />
-                  r = Annual interest rate (decimal)<br />
-                  n = Compounding frequency per year<br />
-                  t = Time in years
-                </p>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-slate-800 mb-2">The Power of Compounding</h3>
-                <ul className="list-disc list-inside text-slate-600 space-y-2">
-                  <li>The earlier you start investing, the more time your money has to grow</li>
-                  <li>Higher compounding frequency can lead to greater returns over time</li>
-                  <li>Regular additional contributions can significantly boost your returns</li>
-                  <li>Even small differences in interest rates can make a huge difference over long periods</li>
-                  <li>The "Rule of 72" is a quick way to estimate how long it will take to double your money (72 ÷ interest rate)</li>
-                </ul>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
       </div>
     </div>
   );

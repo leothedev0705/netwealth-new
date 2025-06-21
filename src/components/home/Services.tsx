@@ -1,156 +1,99 @@
 'use client'; // Mark this component as a Client Component
 
-import React, { lazy, Suspense } from 'react';
-import Link from 'next/link'; // Import Link
-import Image from 'next/image'; // Import Image
-import { motion } from 'framer-motion'; // Import motion
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import React from 'react';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { Shield, TrendingUp, Home, ArrowRight, Target } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const servicesData = [
   {
     id: 'protection',
     icon: Shield,
-    title: "Protection",
-    description: "Insurance isn't just about protection—it's about peace of mind. Comprehensive coverage (Life, General, Health, Fire, Marine) safeguarding what matters most.",
+    title: 'Protection',
+    description:
+      'Comprehensive insurance coverage (Life, General, Health) to safeguard what matters most.',
+    bgColor: 'bg-teal-50',
+    textColor: 'text-teal-600',
+    buttonClass: 'bg-teal-500 hover:bg-teal-600',
   },
   {
     id: 'investing',
     icon: TrendingUp,
-    title: "Investing",
-    description: "Secure your future and grow your wealth. Expert advice for Mutual Funds, Corporate FDs, PMS/AIF, Tax Planning, and portfolio management.",
+    title: 'Investing',
+    description:
+      'Expert advice for Mutual Funds, FDs, PMS/AIF, and portfolio management to grow your wealth.',
+    bgColor: 'bg-blue-50',
+    textColor: 'text-blue-600',
+    buttonClass: 'bg-blue-500 hover:bg-blue-600',
   },
   {
     id: 'borrowing',
     icon: Home,
-    title: "Borrowing",
-    description: "Personalized loan options for your dream home or leveraging assets. Guidance through home loans, loans against property, and loans against shares.",
+    title: 'Borrowing',
+    description:
+      'Personalized loan options for your dream home, property, or leveraging shares.',
+    bgColor: 'bg-indigo-50',
+    textColor: 'text-indigo-600',
+    buttonClass: 'bg-indigo-500 hover:bg-indigo-600',
   },
 ];
 
-// Function to create Bitcoin rain effect
-const createBitcoinRain = (event: React.MouseEvent<HTMLDivElement>) => {
-  const card = event.currentTarget;
-  const cooldownPeriod = 2000; // 2 seconds in milliseconds
-  const currentTime = Date.now();
-  const lastAnimatedTimestamp = parseInt(card.dataset.lastAnimated || '0', 10);
-
-  // Check if cooldown period has passed
-  if (currentTime - lastAnimatedTimestamp < cooldownPeriod) {
-    return; // Don't run animation if it ran recently
-  }
-
-  // Update the timestamp before starting the animation
-  card.dataset.lastAnimated = currentTime.toString();
-
-  const numberOfCoins = 10; // How many coins to drop
-  const animationDuration = 2000; // 2 seconds in milliseconds
-
-  for (let i = 0; i < numberOfCoins; i++) {
-    const coin = document.createElement('span');
-    coin.classList.add('bitcoin-rain-element');
-    coin.textContent = '₿'; // Bitcoin symbol
-
-    // Random horizontal position within the card
-    const randomLeft = Math.random() * card.offsetWidth;
-    coin.style.left = `${randomLeft}px`;
-
-    // Stagger the start slightly for a more natural fall
-    coin.style.animationDelay = `${Math.random() * 0.5}s`;
-
-    card.appendChild(coin);
-
-    // Remove the coin after the animation finishes
-    setTimeout(() => {
-        // Check if the coin is still a child before removing
-        if (coin.parentNode === card) {
-            card.removeChild(coin);
-        }
-    }, animationDuration + 500); // Add a small buffer
-  }
-};
-
-// Lazy load the Card components
-const LazyCard = lazy(() => import("@/components/ui/card").then(mod => ({ default: mod.Card })));
-const LazyCardContent = lazy(() => import("@/components/ui/card").then(mod => ({ default: mod.CardContent })));
-const LazyCardHeader = lazy(() => import("@/components/ui/card").then(mod => ({ default: mod.CardHeader })));
-const LazyCardTitle = lazy(() => import("@/components/ui/card").then(mod => ({ default: mod.CardTitle })));
-const LazyCardDescription = lazy(() => import("@/components/ui/card").then(mod => ({ default: mod.CardDescription })));
-
 const Services = () => {
   return (
-    <section className="bg-white py-20 px-6 md:py-32">
+    <section className="bg-slate-50 py-20 px-6 md:py-32">
       <div className="container mx-auto">
-        <div className="text-center md:text-left mb-16 max-w-3xl mx-auto md:mx-0">
-          <p className="text-primary font-semibold text-sm tracking-wider uppercase flex items-center gap-2 justify-center md:justify-start mb-2">
-            <Target className="h-5 w-5" />
-            Our Services
-          </p>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-            Expert Finance & Consult Services for Success
+        <div className="text-center mb-16 max-w-2xl mx-auto">
+          <div className="inline-flex items-center gap-2 rounded-full bg-blue-100 px-4 py-1.5 text-sm font-semibold text-[#002855]">
+            <Target className="h-4 w-4" />
+            <span>Our Core Services</span>
+          </div>
+          <h2 className="mt-4 text-4xl font-extrabold tracking-tight text-[#002855] sm:text-5xl">
+            A Complete Financial Ecosystem
           </h2>
-          <p className="text-gray-600 leading-relaxed">
-             Our Wealth advisory services offer a wide array of products and investment solutions tailored to help you build a secure and prosperous future.
+          <p className="mt-4 text-lg text-slate-600">
+            We offer a wide array of products and investment solutions tailored
+            to help you build a secure and prosperous future.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           {servicesData.map((service, index) => {
-            // Map internal ID to the actual section ID on the /services page
-            const targetSectionId = service.id === 'protection' ? 'insurance' : service.id === 'borrowing' ? 'loans' : service.id;
+            const targetSectionId =
+              service.id === 'protection'
+                ? 'insurance'
+                : service.id === 'borrowing'
+                ? 'loans'
+                : service.id;
             return (
-              <Link
+              <motion.div
                 key={service.id}
-                href={`/services#${targetSectionId}`}
-                className="block group"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+                className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg transition-shadow duration-300 hover:shadow-2xl"
               >
-                <motion.div
-                  className="h-full"
-                  whileHover={{ 
-                    rotateY: 10, 
-                    rotateX: -5, 
-                    scale: 1.04,
-                    y: -4
-                  }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                  onMouseEnter={createBitcoinRain}
-                >
-                  <Suspense fallback={<div className="bg-white p-6 rounded-lg shadow-md border-slate-200 animate-pulse" />}>
-                    <LazyCard 
-                      className="bg-gray-50 group-hover:shadow-xl transition-shadow duration-300 overflow-hidden relative rounded-xl border-gray-200 h-full flex flex-col" 
-                    >
-                      <LazyCardHeader>
-                          <div className="mb-4 bg-green-100 p-3 rounded-full w-fit">
-                            <service.icon className="h-6 w-6 text-green-700" />
-                          </div>
-                        <LazyCardTitle className="text-xl font-semibold text-gray-800">{service.title}</LazyCardTitle>
-                      </LazyCardHeader>
-                      <LazyCardContent className="flex-grow flex flex-col justify-between"> 
-                        <div> 
-                          <LazyCardDescription className="text-gray-600 text-sm leading-relaxed">
-                            {service.description}
-                          </LazyCardDescription>
-                        </div>
-                        <div className="mt-4 flex items-center gap-2 self-start"> 
-                          <span className="text-sm text-primary font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            Click for more information
-                          </span>
-                          <ArrowRight className="h-5 w-5 text-green-600 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300" />
-                        </div>
-                      </LazyCardContent>
-                      <div className="absolute -bottom-4 -right-4 text-[100px] font-bold text-gray-200/50 opacity-50 group-hover:opacity-100 transition-opacity duration-300 -z-0">
-                         0{index + 1}
-                      </div>
-                    </LazyCard>
-                  </Suspense>
-                </motion.div>
-              </Link>
+                <div className="flex-grow p-8">
+                  <div
+                    className={`mb-6 flex h-14 w-14 items-center justify-center rounded-xl ${service.bgColor}`}
+                  >
+                    <service.icon className={`h-8 w-8 ${service.textColor}`} />
+                  </div>
+                  <h3 className="text-2xl font-bold text-[#002855]">
+                    {service.title}
+                  </h3>
+                  <p className="mt-3 text-slate-600">{service.description}</p>
+                </div>
+                <div className="bg-slate-50 p-6">
+                  <Link href={`/services#${targetSectionId}`}>
+                    <Button className="w-full font-semibold">
+                      Explore {service.title}
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
+                </div>
+              </motion.div>
             );
           })}
         </div>

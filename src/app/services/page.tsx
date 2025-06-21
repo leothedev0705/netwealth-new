@@ -108,28 +108,40 @@ const ServicesPage = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
               variants={fadeIn}
             >
-              {category.items.map((item, itemIndex) => (
-                <Link
-                  key={itemIndex}
-                  href={`/services/${category.id}/${item.title.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-')}`}
-                >
-                  <Card 
-                    className="text-center shadow-sm hover:shadow-lg transition-shadow duration-300 border border-slate-100 bg-white flex flex-col hover:border-primary/30"
+              {category.items.map((item, itemIndex) => {
+                const isHealthInsurance = category.id === 'insurance' && item.title === 'Health Insurance';
+                const isLifeInsurance = category.id === 'insurance' && item.title === 'Life Insurance';
+                
+                const slug = item.title.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-');
+                const href = isHealthInsurance 
+                  ? '/services/insurance/health' 
+                  : isLifeInsurance
+                  ? '/services/insurance/life'
+                  : `/services/${category.id}/${slug}`;
+
+                return (
+                  <Link
+                    key={itemIndex}
+                    href={href}
                   >
-                    <CardHeader className="items-center pt-6">
-                      <div className="bg-primary/10 p-3 rounded-full mb-3 w-fit">
-                        <item.icon className="h-6 w-6 text-primary" />
-                      </div>
-                      <CardTitle className="text-lg font-semibold text-slate-700">{item.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent className="flex-grow">
-                      <CardDescription className="text-sm leading-relaxed text-slate-500">
-                        {item.description}
-                      </CardDescription>
-                    </CardContent>
-                  </Card>
-                </Link>
-              ))}
+                    <Card 
+                      className="text-center shadow-sm hover:shadow-lg transition-shadow duration-300 border border-slate-100 bg-white flex flex-col hover:border-primary/30"
+                    >
+                      <CardHeader className="items-center pt-6">
+                        <div className="bg-primary/10 p-3 rounded-full mb-3 w-fit">
+                          <item.icon className="h-6 w-6 text-primary" />
+                        </div>
+                        <CardTitle className="text-lg font-semibold text-slate-700">{item.title}</CardTitle>
+                      </CardHeader>
+                      <CardContent className="flex-grow">
+                        <CardDescription className="text-sm leading-relaxed text-slate-500">
+                          {item.description}
+                        </CardDescription>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                );
+              })}
             </motion.div>
           </div>
         </section>

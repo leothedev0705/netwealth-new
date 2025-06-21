@@ -1,4 +1,4 @@
-import { Calculator, PiggyBank, Building2, Landmark, LineChart, Coins } from 'lucide-react';
+import { Calculator, PiggyBank, Building2, Landmark, LineChart, Coins, CreditCard } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from 'next/link';
 
@@ -25,10 +25,10 @@ const tools = [
     color: "bg-purple-500/10 text-purple-500"
   },
   {
-    name: "EMI Calculator",
-    description: "Calculate your loan EMIs and understand the total interest payable. Make informed decisions about your borrowings with detailed breakdowns.",
+    name: "Financial Tools",
+    description: "Access comprehensive financial calculators for loans, deposits, and investments. Make informed decisions with detailed projections and breakdowns.",
     icon: <Landmark className="h-6 w-6" />,
-    href: "/tools/emi-calculator",
+    href: "/tools/financial-tools",
     color: "bg-orange-500/10 text-orange-500"
   },
   {
@@ -37,6 +37,13 @@ const tools = [
     icon: <LineChart className="h-6 w-6" />,
     href: "/tools/stock-market",
     color: "bg-red-500/10 text-red-500"
+  },
+  {
+    name: "CIBIL Score",
+    description: "Check your free CIBIL score and understand your creditworthiness. Learn how to improve your score and increase your chances of loan approval.",
+    icon: <CreditCard className="h-6 w-6" />,
+    href: "/tools/credit-score",
+    color: "bg-blue-500/10 text-blue-500"
   },
   {
     name: "SWP Calculator",

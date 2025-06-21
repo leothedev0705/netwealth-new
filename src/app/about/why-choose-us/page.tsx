@@ -1,160 +1,148 @@
 'use client';
+
 import React from 'react';
-import { Award, Briefcase, Star, TrendingUp, Handshake, Globe } from 'lucide-react';
+import {
+  Award,
+  Briefcase,
+  Star,
+  TrendingUp,
+  Handshake,
+  Globe,
+  ArrowRight,
+} from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 const valueProps = [
   {
-    icon: <Award className="h-10 w-10 text-primary" />,
-    title: 'Expertise Backed by 15+ Years in BFSI',
-    description: 'Over 8+ years of experience in banking, insurance, and financial services, including roles in ICICI Prudential Life Insurance and HDFC Bank. Deep understanding of Retail Banking, HNI Portfolio Management, and Financial Advisory.'
+    icon: Award,
+    title: '15+ Years of BFSI Expertise',
+    description:
+      'Deep understanding of banking, insurance, and financial services, including roles at ICICI and HDFC Bank.',
   },
   {
-    icon: <Briefcase className="h-10 w-10 text-primary" />,
+    icon: Briefcase,
     title: 'Trusted HNI Portfolio Specialist',
-    description: 'Managed an Imperia Portfolio worth ₹120 Cr at HDFC Bank. Specialized in handling High Net-worth Individuals (HNIs), focusing on long-term financial planning and holistic wealth building.'
+    description:
+      'Managed Imperia Portfolios worth over ₹120 Cr, focusing on long-term financial planning for high-net-worth clients.',
   },
   {
-    icon: <Star className="h-10 w-10 text-primary" />,
+    icon: Star,
     title: 'Proven Track Record',
-    description: 'MDRT qualifier for 3 consecutive years (2016, 2017, 2018) – a global recognition of top-performing financial professionals. Multiple performance awards at ICICI Prudential (e.g., "Profitable Champ" across multiple years).'
+    description:
+      'Recognized as an MDRT qualifier for 3 consecutive years, a global standard for financial professionals.',
   },
   {
-    icon: <TrendingUp className="h-10 w-10 text-primary" />,
-    title: 'Full-Spectrum Financial Solutions',
-    description: 'Cross-selling expertise in Mutual Funds, Insurance, FDs, RDs, Retail Loans, and Savings/Current Accounts. Ability to create customized investment portfolios aligned with client goals.'
+    icon: TrendingUp,
+    title: 'Holistic Financial Solutions',
+    description:
+      'Expertise in Mutual Funds, Insurance, FDs, and Loans to create customized and diversified investment portfolios.',
   },
   {
-    icon: <Handshake className="h-10 w-10 text-primary" />,
-    title: 'Relationship & Trust Focus',
-    description: 'Senior Key Relationship Manager role involved direct engagement with clients, building trust, and ensuring seamless service delivery. Track record of client retention, repeat business, and long-term wealth management.'
+    icon: Handshake,
+    title: 'Client-Centric Approach',
+    description:
+      'Focused on building long-term trust and ensuring seamless service delivery, leading to high client retention.',
   },
   {
-    icon: <Globe className="h-10 w-10 text-primary" />,
-    title: 'Client-Centric & Globally Aware',
-    description: 'Attended international seminars and workshops in Europe, Russia, Thailand, and Bali, adding global perspective to financial planning. Multilingual professional: Fluent in English, Hindi, Marathi, Marwari, and Gujarati.'
+    icon: Globe,
+    title: 'Global Perspective',
+    description:
+      'Insights informed by international finance seminars and workshops across Europe and Asia.',
   },
 ];
 
-const container = {
+const containerVariants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
     transition: {
       staggerChildren: 0.1,
-      delayChildren: 0.3,
     },
   },
 };
 
-const card = {
+const itemVariants = {
   hidden: { opacity: 0, y: 20 },
-  show: { 
-    opacity: 1, 
-    y: 0,
-    transition: { 
-      type: "spring",
-      stiffness: 100,
-      damping: 15,
-      duration: 0.4
-    }
-  },
-};
-
-const fadeIn = {
-  hidden: { opacity: 0, y: 20 },
-  show: { 
-    opacity: 1, 
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut"
-    }
-  }
+  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
 export default function WhyChooseUsPage() {
   return (
-    <main className="min-h-screen relative flex flex-col items-center justify-center overflow-hidden">
-      <div 
-        className="absolute inset-0 -z-10 bg-gradient-to-br from-blue-100 via-white to-emerald-100 opacity-90"
-        style={{
-          backgroundSize: '200% 200%',
-          animation: 'gradient 12s ease-in-out infinite'
-        }}
-      />
-      <motion.section
-        initial="hidden"
-        animate="show"
-        variants={container}
-        className="w-full max-w-6xl mx-auto px-4 py-24"
-      >
-        <motion.div
-          variants={fadeIn}
-          className="text-center mb-12"
-        >
-          <h1 className="text-5xl md:text-6xl font-serif font-extrabold text-blue-900 mb-4 drop-shadow-lg tracking-tight">
-            Why Choose <span className="text-primary">NetWealth India</span>?
-          </h1>
-          <div className="w-24 h-1 mx-auto bg-gradient-to-r from-primary to-emerald-400 rounded-full mb-6" />
-          <p className="text-xl text-blue-700 max-w-2xl mx-auto mb-2 font-light">
-            Discover what sets us apart and why clients trust us for their long-term financial growth and security.
-          </p>
-        </motion.div>
-
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-12"
-          variants={container}
-        >
-          {valueProps.map((prop, idx) => (
-            <motion.div
-              key={prop.title}
-              className="backdrop-blur-lg bg-white/70 rounded-3xl shadow-2xl p-10 flex flex-col items-center text-center border border-blue-100 hover:shadow-emerald-200 transition-all duration-300 transform hover:scale-105 hover:z-10 group"
-              variants={card}
-              whileHover={{ 
-                scale: 1.03,
-                transition: { duration: 0.2 }
-              }}
-            >
-              <motion.div
-                className="mb-5"
-                whileHover={{ 
-                  scale: 1.1,
-                  transition: { duration: 0.2 }
-                }}
-              >
-                {prop.icon}
-              </motion.div>
-              <h3 className="text-2xl font-serif font-bold text-blue-900 mb-2 tracking-tight">{prop.title}</h3>
-              <p className="text-blue-700 text-base leading-relaxed font-light">{prop.description}</p>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        <motion.div
-          variants={fadeIn}
-          className="mt-20 text-center"
-        >
-          <motion.a
-            href="/contact"
-            className="inline-block px-16 py-6 bg-emerald-600 text-white text-2xl font-bold rounded-xl shadow-xl hover:bg-emerald-500 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-emerald-300"
-            whileHover={{ 
-              scale: 1.05,
-              transition: { duration: 0.2 }
-            }}
-            whileTap={{ scale: 0.98 }}
+    <div className="bg-slate-50">
+      {/* Hero Section */}
+      <section className="bg-white py-24 sm:py-32">
+        <div className="container mx-auto px-6 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
           >
-            Start Your Wealth Journey
-          </motion.a>
-        </motion.div>
-      </motion.section>
-      <style jsx global>{`
-        @keyframes gradient {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-      `}</style>
-    </main>
+            <div className="inline-block rounded-full bg-blue-100 px-4 py-1.5 text-sm font-semibold text-[#002855]">
+              Our Commitment to You
+            </div>
+            <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-[#002855] sm:text-6xl">
+              Why Choose NetWealth India?
+            </h1>
+            <p className="mt-6 max-w-3xl mx-auto text-lg text-slate-600">
+              Discover what sets us apart and why clients trust us for their
+              long-term financial growth and security.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Value Propositions Grid */}
+      <section className="py-24 sm:py-32">
+        <div className="container mx-auto px-6">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+            className="grid grid-cols-1 gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3"
+          >
+            {valueProps.map((prop) => (
+              <motion.div
+                key={prop.title}
+                variants={itemVariants}
+                className="flex flex-col items-start"
+              >
+                <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-blue-100">
+                  <prop.icon className="h-8 w-8 text-[#002855]" />
+                </div>
+                <h3 className="text-xl font-bold text-[#002855]">
+                  {prop.title}
+                </h3>
+                <p className="mt-2 text-slate-600">{prop.description}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="bg-white">
+        <div className="container mx-auto px-6 py-24 sm:py-32">
+          <div className="mx-auto max-w-4xl text-center">
+            <h2 className="text-3xl font-extrabold text-[#002855] sm:text-4xl">
+              Ready to Start Your Wealth Journey?
+            </h2>
+            <p className="mt-4 text-lg text-slate-600">
+              Let's build a prosperous future together. Get in touch with our
+              experts today for a personalized financial consultation.
+            </p>
+            <div className="mt-8">
+              <Button asChild size="lg" className="bg-[#00b894] text-white hover:bg-[#00a383]">
+                <Link href="/contact">
+                  Contact Us <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 } 

@@ -253,7 +253,7 @@ const BusinessLoanEMICalculator = () => {
                     type="text"
                     inputMode="decimal"
                     value={loanAmountStr}
-                    onChange={handleInputChange(setLoanAmountStr, 50000000)} // 5 Crore max
+                    onChange={handleInputChange(setLoanAmountStr, 100000000)}
                     placeholder="e.g., 2000000"
                     className="flex-grow"
                   />
@@ -264,22 +264,17 @@ const BusinessLoanEMICalculator = () => {
                 <Slider
                   value={[loanAmount]}
                   onValueChange={handleSliderChange(setLoanAmountStr)}
-                  min={500000} // 5 Lakh min
-                  max={10000000} // 1 Crore max for slider
+                  min={500000}
+                  max={50000000}
                   step={100000}
                   className="[&>span]:bg-teal-500"
-                  aria-label="Loan Amount Slider"
                 />
-                <div className="flex justify-between text-xs text-slate-500">
-                  <span>₹5L</span>
-                  <span>₹1Cr</span>
-                </div>
               </div>
 
               {/* Annual Interest Rate */}
               <div className="space-y-3">
                 <Label htmlFor="annualRate" className="text-slate-700 font-medium flex items-center gap-2">
-                  <Percent className="h-4 w-4 text-teal-500" /> Interest Rate (% p.a.)
+                  <Percent className="h-4 w-4 text-teal-500" /> Annual Interest Rate (%)
                 </Label>
                 <div className="flex items-center gap-4">
                   <Input
@@ -298,22 +293,17 @@ const BusinessLoanEMICalculator = () => {
                 <Slider
                   value={[annualRate]}
                   onValueChange={handleSliderChange(setAnnualRateStr)}
-                  min={10} // Min rate 10%
-                  max={24} // Max rate 24%
+                  min={8}
+                  max={24}
                   step={0.1}
                   className="[&>span]:bg-teal-500"
-                  aria-label="Annual Rate Slider"
                 />
-                <div className="flex justify-between text-xs text-slate-500">
-                  <span>10%</span>
-                  <span>24%</span>
-                </div>
               </div>
 
-              {/* Loan Tenure (Years) */}
+              {/* Loan Tenure */}
               <div className="space-y-3">
                 <Label htmlFor="years" className="text-slate-700 font-medium flex items-center gap-2">
-                  <CalendarDays className="h-4 w-4 text-teal-500" /> Loan Tenure
+                  <CalendarDays className="h-4 w-4 text-teal-500" /> Loan Tenure (Years)
                 </Label>
                 <div className="flex items-center gap-4">
                   <Input
@@ -321,12 +311,12 @@ const BusinessLoanEMICalculator = () => {
                     type="text"
                     inputMode="numeric"
                     value={yearsStr}
-                    onChange={handleInputChange(setYearsStr, 15)} // Max 15 years
+                    onChange={handleInputChange(setYearsStr, 15)}
                     placeholder="e.g., 5"
                     className="flex-grow"
                   />
                   <span className="text-sm text-slate-500 font-semibold min-w-[60px] text-right">
-                    {years} {years === 1 ? 'Year' : 'Years'}
+                    {years} Yr
                   </span>
                 </div>
                 <Slider
@@ -336,12 +326,7 @@ const BusinessLoanEMICalculator = () => {
                   max={15}
                   step={1}
                   className="[&>span]:bg-teal-500"
-                  aria-label="Loan Tenure Slider"
                 />
-                <div className="flex justify-between text-xs text-slate-500">
-                  <span>1 Yr</span>
-                  <span>15 Yrs</span>
-                </div>
               </div>
 
               {/* Processing Fee */}
@@ -370,130 +355,125 @@ const BusinessLoanEMICalculator = () => {
                   max={5}
                   step={0.1}
                   className="[&>span]:bg-teal-500"
-                  aria-label="Processing Fee Slider"
                 />
-                <div className="flex justify-between text-xs text-slate-500">
-                  <span>0%</span>
-                  <span>5%</span>
-                </div>
               </div>
-            </CardContent>
-            <CardFooter className="bg-teal-50/50 p-6 border-t border-teal-100">
+
               <Button 
                 onClick={calculateLoan} 
-                className="w-full bg-teal-600 hover:bg-teal-700"
+                className="w-full bg-teal-500 hover:bg-teal-600"
               >
-                <Calculator className="h-4 w-4 mr-2" /> Calculate EMI
+                Calculate
               </Button>
-            </CardFooter>
+            </CardContent>
           </Card>
 
-          {/* Results Card */}
-          <Card className="lg:col-span-2 shadow-lg border-teal-100">
-            <CardHeader className="bg-gradient-to-r from-teal-50 to-teal-100 border-b border-teal-100">
-              <CardTitle className="text-xl font-bold text-slate-800">Loan Summary</CardTitle>
-              <CardDescription>Your business loan repayment details</CardDescription>
-            </CardHeader>
-            <CardContent className="p-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* Main Results */}
-                <div className="space-y-4">
-                  <div className="bg-teal-50 rounded-xl p-6 text-center">
-                    <h3 className="text-sm font-medium text-slate-500 mb-1">Monthly EMI</h3>
-                    <p className="text-3xl md:text-4xl font-bold text-teal-600">
-                      {formatCurrency(result?.emi || 0)}
-                    </p>
-                    <p className="text-sm text-slate-500 mt-2">
-                      for {months} months
-                    </p>
-                  </div>
-                  
-                  <div className="space-y-4">
-                    <div className="bg-amber-50 rounded-lg p-4">
-                      <div className="flex justify-between items-center">
-                        <div>
-                          <h3 className="text-xs font-medium text-slate-500">Processing Fee</h3>
-                          <p className="text-lg font-semibold text-amber-600">{formatCurrency(result?.processingFee || 0)}</p>
+          {/* Results Section */}
+          <div className="lg:col-span-2 space-y-8">
+            {result && (
+              <>
+                {/* Donut Chart */}
+                <Card className="shadow-lg border-teal-100">
+                  <CardHeader className="bg-gradient-to-r from-teal-50 to-teal-100 border-b border-teal-100">
+                    <CardTitle className="text-xl font-bold text-slate-800">Payment Breakdown</CardTitle>
+                    <CardDescription>Visual representation of your loan</CardDescription>
+                  </CardHeader>
+                  <CardContent className="p-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                      <div>
+                        <DonutChart 
+                          principal={loanAmount} 
+                          interest={result.totalInterest} 
+                        />
+                        <div className="flex justify-center space-x-8 mt-4">
+                          <div className="flex items-center">
+                            <div className="w-4 h-4 bg-teal-600 rounded-full mr-2"></div>
+                            <span className="text-sm text-slate-700">Principal</span>
+                          </div>
+                          <div className="flex items-center">
+                            <div className="w-4 h-4 bg-amber-500 rounded-full mr-2"></div>
+                            <span className="text-sm text-slate-700">Interest</span>
+                          </div>
                         </div>
-                        <div className="bg-amber-100 p-2 rounded-full">
-                          <Percent className="h-5 w-5 text-amber-600" />
+                      </div>
+                      <div className="flex flex-col justify-center">
+                        <div className="space-y-6">
+                          <div>
+                            <p className="text-sm text-slate-500">Monthly EMI</p>
+                            <p className="text-3xl font-bold text-teal-600">{formatCurrency(result.emi)}</p>
+                          </div>
+                          <div className="grid grid-cols-2 gap-4">
+                            <div>
+                              <p className="text-sm text-slate-500">Processing Fee</p>
+                              <p className="text-lg font-semibold text-slate-700">{formatCurrency(result.processingFee)}</p>
+                            </div>
+                            <div>
+                              <p className="text-sm text-slate-500">Total Interest</p>
+                              <p className="text-lg font-semibold text-amber-600">{formatCurrency(result.totalInterest)}</p>
+                            </div>
+                          </div>
+                          <div>
+                            <p className="text-sm text-slate-500">Total Payment</p>
+                            <p className="text-xl font-semibold text-slate-700">{formatCurrency(result.totalPayment)}</p>
+                            <p className="text-xs text-slate-500 mt-1">(Principal + Interest)</p>
+                          </div>
                         </div>
                       </div>
                     </div>
-                    
-                    <PaymentBreakdown
+                  </CardContent>
+                </Card>
+
+                {/* Detailed Breakdown */}
+                <Card className="shadow-lg border-teal-100">
+                  <CardHeader className="bg-gradient-to-r from-teal-50 to-teal-100 border-b border-teal-100 py-4">
+                    <CardTitle className="text-lg font-bold text-slate-800">Payment Details</CardTitle>
+                  </CardHeader>
+                  <CardContent className="p-6">
+                    <PaymentBreakdown 
                       loanAmount={loanAmount}
-                      emi={result?.emi || 0}
-                      totalInterest={result?.totalInterest || 0}
-                      totalPayment={result?.totalPayment || 0}
+                      emi={result.emi}
+                      totalInterest={result.totalInterest}
+                      totalPayment={result.totalPayment}
                       years={years}
                     />
-                  </div>
-                </div>
-                
-                {/* Chart */}
-                <div className="flex flex-col justify-center items-center">
-                  <h3 className="text-lg font-semibold text-slate-800 mb-4">Payment Distribution</h3>
-                  <DonutChart 
-                    principal={loanAmount} 
-                    interest={result?.totalInterest || 0} 
-                  />
-                  <div className="flex justify-center gap-6 mt-4">
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full bg-teal-600"></div>
-                      <span className="text-xs text-slate-600">Principal ({formatCurrency(loanAmount)})</span>
+                  </CardContent>
+                </Card>
+
+                {/* First Year Payment Schedule */}
+                <Card className="shadow-lg border-teal-100">
+                  <CardHeader className="bg-gradient-to-r from-teal-50 to-teal-100 border-b border-teal-100 py-4">
+                    <CardTitle className="text-lg font-bold text-slate-800">First Year Payment Schedule</CardTitle>
+                  </CardHeader>
+                  <CardContent className="p-6">
+                    <div className="overflow-x-auto">
+                      <table className="min-w-full divide-y divide-teal-200">
+                        <thead className="bg-teal-50">
+                          <tr>
+                            <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-teal-800 uppercase tracking-wider">Month</th>
+                            <th scope="col" className="px-4 py-3 text-right text-xs font-medium text-teal-800 uppercase tracking-wider">EMI</th>
+                            <th scope="col" className="px-4 py-3 text-right text-xs font-medium text-teal-800 uppercase tracking-wider">Principal</th>
+                            <th scope="col" className="px-4 py-3 text-right text-xs font-medium text-teal-800 uppercase tracking-wider">Interest</th>
+                            <th scope="col" className="px-4 py-3 text-right text-xs font-medium text-teal-800 uppercase tracking-wider">Balance</th>
+                          </tr>
+                        </thead>
+                        <tbody className="bg-white divide-y divide-teal-100">
+                          {result.amortization.slice(0, 12).map((month, index) => (
+                            <tr key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-teal-50/30'}>
+                              <td className="px-4 py-2 whitespace-nowrap text-sm font-medium text-slate-700">{index + 1}</td>
+                              <td className="px-4 py-2 whitespace-nowrap text-sm text-right text-slate-700">{formatCurrency(result.emi)}</td>
+                              <td className="px-4 py-2 whitespace-nowrap text-sm text-right text-slate-700">{formatCurrency(month.principal)}</td>
+                              <td className="px-4 py-2 whitespace-nowrap text-sm text-right text-slate-700">{formatCurrency(month.interest)}</td>
+                              <td className="px-4 py-2 whitespace-nowrap text-sm text-right text-slate-700">{formatCurrency(month.balance)}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full bg-amber-500"></div>
-                      <span className="text-xs text-slate-600">Interest ({formatCurrency(result?.totalInterest || 0)})</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-            <CardFooter className="bg-teal-50/50 p-6 border-t border-teal-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <div className="flex items-center gap-2 text-sm text-slate-600">
-                <Info className="h-4 w-4 text-teal-500" />
-                <p>Results are indicative. Actual EMI may vary based on bank terms.</p>
-              </div>
-              <Button variant="outline" className="border-teal-200 text-teal-600 hover:bg-teal-50">
-                <Building className="h-4 w-4 mr-2" /> Compare business loan offers
-              </Button>
-            </CardFooter>
-          </Card>
+                  </CardContent>
+                </Card>
+              </>
+            )}
+          </div>
         </div>
-        
-        {/* Additional Info */}
-        <Card className="mt-8 shadow-lg border-teal-100">
-          <CardHeader className="bg-gradient-to-r from-teal-50 to-teal-100 border-b border-teal-100">
-            <CardTitle className="text-xl font-bold text-slate-800">Business Loan Information</CardTitle>
-          </CardHeader>
-          <CardContent className="p-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="text-lg font-semibold text-slate-800 mb-2">Types of Business Loans</h3>
-                <ul className="list-disc list-inside text-slate-600 space-y-2">
-                  <li>Term Loans - Fixed amount with scheduled repayments</li>
-                  <li>Working Capital Loans - For day-to-day operations</li>
-                  <li>Equipment Financing - Specifically for purchasing equipment</li>
-                  <li>Invoice Financing - Advances against unpaid invoices</li>
-                  <li>Merchant Cash Advances - Based on future credit card sales</li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-slate-800 mb-2">Documents Required</h3>
-                <ul className="list-disc list-inside text-slate-600 space-y-2">
-                  <li>Business registration documents</li>
-                  <li>GST returns for the last 1-2 years</li>
-                  <li>Income tax returns for the last 2-3 years</li>
-                  <li>Bank statements for the last 6 months</li>
-                  <li>KYC documents of directors/partners/proprietor</li>
-                  <li>Business plan (for startups or new ventures)</li>
-                </ul>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
       </div>
     </div>
   );
