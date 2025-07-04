@@ -28,20 +28,19 @@ const LoanFormSlide = ({ title, description, lottiePlaceholder, isActive }: { ti
             >
                 {description}
             </motion.p>
-            <motion.form 
+            <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 20 }}
                 transition={{ duration: 0.6, delay: 0.6, ease: 'easeOut' }}
-                className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-md mx-auto lg:mx-0"
-            >
-                <input type="text" placeholder="Full Name" className="p-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-green focus:outline-none" />
-                <input type="tel" placeholder="Phone Number" className="p-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-green focus:outline-none" />
-                <input type="email" placeholder="Email Address" className="p-3 rounded-lg border border-slate-300 sm:col-span-2 focus:ring-2 focus:ring-brand-green focus:outline-none" />
-                <input type="number" placeholder="Loan Amount (₹)" className="p-3 rounded-lg border border-slate-300 sm:col-span-2 focus:ring-2 focus:ring-brand-green focus:outline-none" />
-                <Button className="bg-brand-green hover:bg-teal-600 text-white font-bold py-3 px-6 rounded-lg sm:col-span-2">
-                    Apply Now
+                className="flex justify-center lg:justify-start items-center gap-4"
+                >
+                <Button className="bg-brand-green hover:bg-teal-600 text-white font-bold py-3 px-6 rounded-lg">
+                    Get Started
                 </Button>
-            </motion.form>
+                <Button variant="outline" className="text-slate-600 border-slate-300 hover:bg-slate-100 py-3 px-6 rounded-lg">
+                    Learn More
+                </Button>
+            </motion.div>
         </div>
         <div className="hidden lg:flex w-1/2 h-full items-center justify-center">
              <div className="w-[450px] h-[450px] bg-slate-100 rounded-full flex items-center justify-center">

@@ -191,16 +191,54 @@ const ContactPage = () => {
           </div>
           <div className="mt-12 rounded-2xl overflow-hidden shadow-xl border-4 border-white">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d941.7219128738456!2d72.90721127507825!3d19.077241282276453!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c7c8c0c7b605%3A0x9edc0c7c94687a89!2sNilkant%20CHS%2C%20Jethabhai%20Ln%2C%20Ghatkopar%20East%2C%20Mumbai%2C%20Maharashtra%20400077!5e0!3m2!1sen!2sin!4v1709799047943!5m2!1sen!2sin"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.4476744283436!2d72.90532627518251!3d19.08384251982052!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c62db66000d5%3A0x3c0245cc58b06100!2sNetwealthIndia%20Office!5e0!3m2!1sen!2sin!4v1709799047943!5m2!1sen!2sin"
               width="100%"
               height="450"
               style={{ border: 0 }}
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="Office Location"
+              title="NetwealthIndia Office Location"
               className="w-full"
             ></iframe>
+          </div>
+          
+          {/* Location Details Card */}
+          <div className="mt-12 bg-gradient-to-r from-teal-50 to-blue-50 rounded-2xl p-8 shadow-lg">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="text-center">
+                <div className="bg-teal-100 rounded-full p-4 w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                  <Building className="h-8 w-8 text-teal-600" />
+                </div>
+                <h3 className="text-xl font-semibold text-[#002855] mb-2">NetwealthIndia Office</h3>
+                <p className="text-slate-600">A-101, Plot No-25/A, Nilkant CHS, 1st Floor, Jethabhai Lane, Near A Ward BMC Office, Ghatkopar (E), Mumbai - 400077</p>
+              </div>
+              
+              <div className="text-center">
+                <div className="bg-blue-100 rounded-full p-4 w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                  <MapPin className="h-8 w-8 text-blue-600" />
+                </div>
+                <h3 className="text-xl font-semibold text-[#002855] mb-2">Coordinates</h3>
+                <p className="text-slate-600">19.0838425, 72.9081277</p>
+                <p className="text-sm text-slate-500 mt-1">Ghatkopar East, Mumbai</p>
+              </div>
+              
+              <div className="text-center">
+                <div className="bg-green-100 rounded-full p-4 w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                  <Phone className="h-8 w-8 text-green-600" />
+                </div>
+                <h3 className="text-xl font-semibold text-[#002855] mb-2">Get Directions</h3>
+                <a 
+                  href="https://www.google.com/maps/place/Ghatkopar+Nilkanth+CHSL/@19.0837268,72.9073226,18.57z/data=!4m6!3m5!1s0x3be7c62db66000d5:0x3c0245cc58b06100!8m2!3d19.0838425!4d72.9081277!16s%2Fg%2F11c0xqr314?hl=en&entry=ttu&g_ep=EgoyMDI1MDYzMC4wIKXMDSoASAFQAw%3D%3D"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-medium"
+                >
+                  Open in Google Maps
+                  <MapPin className="h-4 w-4" />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>

@@ -1,0 +1,93 @@
+<svg width="800" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e40af;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f172a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="sensexGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#047857;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="niftyGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="400" fill="url(#bgGradient)"/>
+  
+  <!-- Market chart grid -->
+  <g stroke="#3b82f6" stroke-width="1" fill="none" opacity="0.3">
+    <path d="M100 50 L700 50"/>
+    <path d="M100 100 L700 100"/>
+    <path d="M100 150 L700 150"/>
+    <path d="M100 200 L700 200"/>
+    <path d="M100 250 L700 250"/>
+    <path d="M100 50 L100 250"/>
+    <path d="M200 50 L200 250"/>
+    <path d="M300 50 L300 250"/>
+    <path d="M400 50 L400 250"/>
+    <path d="M500 50 L500 250"/>
+    <path d="M600 50 L600 250"/>
+    <path d="M700 50 L700 250"/>
+  </g>
+  
+  <!-- Index performance charts -->
+  <g stroke="#10b981" stroke-width="4" fill="none">
+    <path d="M100 200 L150 180 L200 160 L250 140 L300 120 L350 100 L400 130 L450 110 L500 90 L550 80 L600 70 L650 60 L700 50"/>
+  </g>
+  
+  <g stroke="#f59e0b" stroke-width="4" fill="none">
+    <path d="M100 220 L150 200 L200 185 L250 170 L300 150 L350 135 L400 155 L450 140 L500 125 L550 115 L600 105 L650 95 L700 85"/>
+  </g>
+  
+  <!-- Index cards -->
+  <g transform="translate(80, 280)">
+    <rect x="0" y="0" width="140" height="80" rx="10" fill="url(#sensexGradient)" opacity="0.9"/>
+    <text x="70" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white">SENSEX</text>
+    <text x="70" y="45" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#d1fae5">BSE 30</text>
+    <text x="70" y="65" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#fbbf24">74,000+</text>
+  </g>
+  
+  <g transform="translate(250, 280)">
+    <rect x="0" y="0" width="140" height="80" rx="10" fill="url(#niftyGradient)" opacity="0.9"/>
+    <text x="70" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white">NIFTY 50</text>
+    <text x="70" y="45" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#fef3c7">NSE 50</text>
+    <text x="70" y="65" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">22,500+</text>
+  </g>
+  
+  <g transform="translate(420, 280)">
+    <rect x="0" y="0" width="140" height="80" rx="10" fill="#8b5cf6" opacity="0.9"/>
+    <text x="70" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white">MIDCAP</text>
+    <text x="70" y="45" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#e9d5ff">Mid Cap 150</text>
+    <text x="70" y="65" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#fbbf24">45,000+</text>
+  </g>
+  
+  <g transform="translate(590, 280)">
+    <rect x="0" y="0" width="140" height="80" rx="10" fill="#ef4444" opacity="0.9"/>
+    <text x="70" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white">SMALLCAP</text>
+    <text x="70" y="45" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#fecaca">Small Cap 250</text>
+    <text x="70" y="65" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#fbbf24">16,000+</text>
+  </g>
+  
+  <!-- Market indicators -->
+  <g transform="translate(720, 100)">
+    <circle cx="20" cy="20" r="15" fill="#10b981" opacity="0.3"/>
+    <text x="20" y="28" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#10b981">↑</text>
+  </g>
+  
+  <g transform="translate(720, 150)">
+    <circle cx="20" cy="20" r="15" fill="#f59e0b" opacity="0.3"/>
+    <text x="20" y="28" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#f59e0b">↑</text>
+  </g>
+  
+  <!-- Title -->
+  <text x="400" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="white">Market Indices</text>
+  <text x="400" y="380" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#93c5fd">Understanding Stock Market Benchmarks</text>
+  
+  <!-- Decorative elements -->
+  <circle cx="50" cy="100" r="12" fill="#10b981" opacity="0.4"/>
+  <circle cx="750" cy="200" r="10" fill="#f59e0b" opacity="0.5"/>
+</svg> 

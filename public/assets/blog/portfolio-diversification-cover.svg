@@ -1,0 +1,115 @@
+<svg width="800" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f766e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#134e4a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="pieGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="pieGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="pieGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#047857;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="pieGradient4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ef4444;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#dc2626;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="pieGradient5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <rect width="800" height="400" fill="url(#bgGradient)"/>
+  
+  <g transform="translate(150, 120)">
+    <circle cx="80" cy="80" r="70" fill="url(#pieGradient1)" opacity="0.9"/>
+    <path d="M 80 80 L 80 10 A 70 70 0 0 1 142 52 Z" fill="url(#pieGradient2)" opacity="0.9"/>
+    <path d="M 80 80 L 142 52 A 70 70 0 0 1 132 132 Z" fill="url(#pieGradient3)" opacity="0.9"/>
+    <path d="M 80 80 L 132 132 A 70 70 0 0 1 28 132 Z" fill="url(#pieGradient4)" opacity="0.9"/>
+    <path d="M 80 80 L 28 132 A 70 70 0 0 1 80 10 Z" fill="url(#pieGradient5)" opacity="0.9"/>
+    <circle cx="80" cy="80" r="25" fill="white" opacity="0.9"/>
+    <text x="80" y="88" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#0f766e">Portfolio</text>
+  </g>
+  
+  <g transform="translate(350, 100)">
+    <rect x="0" y="0" width="300" height="200" rx="15" fill="white" opacity="0.9"/>
+    <text x="150" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#0f766e">Asset Allocation</text>
+    
+    <g transform="translate(20, 40)">
+      <rect x="0" y="0" width="15" height="15" fill="#3b82f6"/>
+      <text x="25" y="12" font-family="Arial, sans-serif" font-size="12" fill="#475569">Equity (40%)</text>
+      
+      <rect x="0" y="25" width="15" height="15" fill="#f59e0b"/>
+      <text x="25" y="37" font-family="Arial, sans-serif" font-size="12" fill="#475569">Debt (25%)</text>
+      
+      <rect x="0" y="50" width="15" height="15" fill="#10b981"/>
+      <text x="25" y="62" font-family="Arial, sans-serif" font-size="12" fill="#475569">Gold (15%)</text>
+      
+      <rect x="0" y="75" width="15" height="15" fill="#ef4444"/>
+      <text x="25" y="87" font-family="Arial, sans-serif" font-size="12" fill="#475569">Real Estate (10%)</text>
+      
+      <rect x="0" y="100" width="15" height="15" fill="#8b5cf6"/>
+      <text x="25" y="112" font-family="Arial, sans-serif" font-size="12" fill="#475569">International (10%)</text>
+    </g>
+    
+    <g transform="translate(150, 40)">
+      <text x="75" y="15" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#0f766e">Benefits</text>
+      <text x="75" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#475569">✓ Risk Reduction</text>
+      <text x="75" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#475569">✓ Stable Returns</text>
+      <text x="75" y="65" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#475569">✓ Market Protection</text>
+      <text x="75" y="80" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#475569">✓ Long-term Growth</text>
+      <text x="75" y="95" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#475569">✓ Inflation Hedge</text>
+    </g>
+    
+    <g transform="translate(50, 140)">
+      <rect x="0" y="0" width="200" height="30" rx="5" fill="#0f766e" opacity="0.8"/>
+      <text x="100" y="20" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Don't Put All Eggs in One Basket</text>
+    </g>
+  </g>
+  
+  <g transform="translate(50, 320)">
+    <rect x="0" y="0" width="150" height="60" rx="8" fill="#3b82f6" opacity="0.8"/>
+    <text x="75" y="20" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Risk Level</text>
+    <text x="75" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#bfdbfe">High Risk</text>
+    <text x="75" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#fbbf24">📈 High Return</text>
+  </g>
+  
+  <g transform="translate(250, 320)">
+    <rect x="0" y="0" width="150" height="60" rx="8" fill="#10b981" opacity="0.8"/>
+    <text x="75" y="20" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Balanced</text>
+    <text x="75" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#d1fae5">Moderate Risk</text>
+    <text x="75" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#fbbf24">📊 Stable Return</text>
+  </g>
+  
+  <g transform="translate(450, 320)">
+    <rect x="0" y="0" width="150" height="60" rx="8" fill="#f59e0b" opacity="0.8"/>
+    <text x="75" y="20" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Conservative</text>
+    <text x="75" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#fef3c7">Low Risk</text>
+    <text x="75" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">📉 Low Return</text>
+  </g>
+  
+  <g transform="translate(650, 100)">
+    <circle cx="50" cy="50" r="40" fill="#ef4444" opacity="0.3"/>
+    <text x="50" y="45" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#ef4444">Risk</text>
+    <text x="50" y="60" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#ef4444">⚠️</text>
+  </g>
+  
+  <g transform="translate(650, 200)">
+    <circle cx="50" cy="50" r="40" fill="#10b981" opacity="0.3"/>
+    <text x="50" y="45" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#10b981">Return</text>
+    <text x="50" y="60" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#10b981">💰</text>
+  </g>
+  
+  <text x="400" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="white">Portfolio Diversification</text>
+  <text x="400" y="380" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#86efac">Smart Investment Strategies</text>
+  
+  <circle cx="50" cy="50" r="15" fill="#3b82f6" opacity="0.4"/>
+  <circle cx="750" cy="350" r="12" fill="#f59e0b" opacity="0.5"/>
+</svg> 

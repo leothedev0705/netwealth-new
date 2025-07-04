@@ -24,7 +24,7 @@ const SheetTrigger = lazy(() => import("@/components/ui/sheet").then(mod => ({ d
 const SheetTitle = lazy(() => import("@/components/ui/sheet").then(mod => ({ default: mod.SheetTitle })));
 
 // Import Calculator icon and new tool icons
-import { Shield, TrendingUp, Home, LayoutGrid, Calculator, PiggyBank, Goal, Landmark, CreditCard, Wallet, BarChart, FileText, Briefcase, Heart, Umbrella, Percent, Clock, ArrowRight } from 'lucide-react';
+import { Shield, TrendingUp, Home, LayoutGrid, Calculator, PiggyBank, Goal, Landmark, CreditCard, Wallet, BarChart, FileText, Briefcase, Heart, Umbrella, Percent, Clock, ArrowRight, GitCompare } from 'lucide-react';
 
 // Define Service items for dropdown
 const serviceItems: { title: string; href: string; description: string, icon: React.ElementType }[] = [
@@ -56,6 +56,12 @@ const serviceItems: { title: string; href: string; description: string, icon: Re
 
 // Define Credit Card items for dropdown
 const creditCardItems: { title: string; href: string; description?: string, icon?: React.ElementType }[] = [
+  {
+    title: "Compare Cards",
+    href: "/services/credit-cards/compare",
+    description: "Compare credit cards side-by-side to find the best one for you",
+    icon: GitCompare
+  },
   {
     title: "IDFC Bank",
     href: "/services/credit-cards/idfc-bank",
@@ -102,7 +108,7 @@ const loanItems: { title: string; href: string; description?: string, icon?: Rea
   },
   {
     title: "Construction Funding",
-    href: "/services/loans/construction-funding",
+    href: "/services/loans/construction",
     icon: Home
   },
   {
@@ -112,7 +118,7 @@ const loanItems: { title: string; href: string; description?: string, icon?: Rea
   },
   {
     title: "IPO Funding",
-    href: "/services/loans/ipo-funding",
+    href: "/services/loans/ipo",
     icon: TrendingUp
   },
   {
@@ -497,11 +503,9 @@ const Header = () => {
             Why Choose Us?
               </button>
             </Link>
-            <Link href="/contact">
-              <button className="px-5 py-2 rounded-lg border border-slate-300 text-slate-800 font-semibold hover:bg-primary hover:text-emerald-400 transition-colors duration-200 shadow-sm">
-                Sign In
-              </button>
-            </Link>
+            <Button variant="ghost" asChild>
+              <Link href="/contact">Contact us</Link>
+            </Button>
           </div>
         </div>
       </div>

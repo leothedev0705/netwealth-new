@@ -44,7 +44,7 @@ const ServicesPage = () => {
               <p className="text-yellow-600 font-semibold text-sm tracking-wider uppercase mb-3">Our Services</p>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-yellow-900 mb-5">Comprehensive Financial Solutions</h1>
               <p className="text-lg text-yellow-700 mb-6">
-                We offer a wide range of financial services tailored to help you achieve your financial goals and secure your future.
+                NetWealth India offers a wide range of financial services tailored to help you achieve your financial goals and secure your future.
               </p>
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-yellow-200">
@@ -65,7 +65,7 @@ const ServicesPage = () => {
             <div className="relative w-[300px] h-[300px] mx-auto rounded-full bg-yellow-100/90 shadow-lg p-4 flex items-center justify-center border-4 border-yellow-200">
               <Image
                 src="/assets/logo.png"
-                alt="Net Wealth India Logo"
+                alt="NetWealth India Logo"
                 width={250}
                 height={250}
                 className="object-contain"
@@ -161,7 +161,7 @@ const ServicesPage = () => {
             </div>
             <div>
               <h2 className="text-3xl font-bold mb-6 text-white">Ready to Secure Your Financial Future?</h2>
-              <p className="mb-8 max-w-xl mx-auto text-yellow-100">Contact us today for a personalized consultation and discover how our comprehensive financial solutions can help you achieve your goals.</p>
+              <p className="mb-8 max-w-xl mx-auto text-yellow-100">Contact NetWealth India today for a personalized consultation and discover how our comprehensive financial solutions can help you achieve your goals.</p>
               <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 hover:text-white font-semibold" asChild>
                 <a href="/contact">Get Personalized Advice</a>
               </Button>

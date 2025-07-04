@@ -58,12 +58,12 @@ const Footer = () => {
     <footer className="bg-slate-900 text-slate-300 pt-16 pb-8 px-6">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
         {/* Column 1: Logo & Description */}
-        <section className="space-y-4" aria-label="Net Wealth India">
+        <section className="space-y-4" aria-label="NetWealth India">
           <Link href="/" className="flex items-center space-x-2">
             <Suspense fallback={<div className="h-8 w-8 bg-slate-700 rounded-full animate-pulse" />}>
               <Logo />
             </Suspense>
-            <span className="text-2xl font-bold text-white">Net Wealth India</span>
+            <span className="text-2xl font-bold text-white">NetWealth India</span>
           </Link>
           <p className="text-sm text-slate-400">
             Empowering Your Financial Future with Trusted Expertise.
@@ -121,7 +121,7 @@ const Footer = () => {
       </div>
       {/* Bottom Bar */}
       <div className="mt-8 pt-8 border-t border-slate-700/50 text-center text-sm text-slate-500">
-        <p>&copy; {currentYear} Net Wealth India. All Rights Reserved.</p>
+        <p>&copy; {currentYear} NetWealth India. All Rights Reserved.</p>
       </div>
     </footer>
   );

@@ -18,7 +18,7 @@ const teamMembers = [
     title: "Founder & Lead Wealth Advisor",
     imageUrl: "/assets/shrikant-agarwal.png",
     fallback: "SA",
-    bio: "With over 25 years of dedicated experience in financial services and holding relevant financial certifications, Shrikant founded Net Wealth India driven by a passion to provide truly personalized, ethical, and client-centric wealth advisory. He believes in empowering clients through education and building lasting partnerships focused on achieving long-term financial well-being."
+    bio: "With over 25 years of dedicated experience in financial services and holding relevant financial certifications, Shrikant founded NetWealth India driven by a passion to provide truly personalized, ethical, and client-centric wealth advisory. He believes in empowering clients through education and building lasting partnerships focused on achieving long-term financial well-being."
   },
   // Add more team members here if needed
   // {
@@ -36,7 +36,7 @@ const AboutPage = () => {
       {/* Page Hero Section */}
       <section className="bg-gradient-to-r from-slate-50 to-slate-100 py-16 md:py-28 px-4 md:px-6 text-center">
         <div className="container mx-auto">
-          <p className="text-primary font-semibold text-sm tracking-wider uppercase mb-3">About Net Wealth India</p>
+                      <p className="text-primary font-semibold text-sm tracking-wider uppercase mb-3">About NetWealth India</p>
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-slate-800 mb-4 md:mb-5">Your Trusted Partner in Financial Growth</h1>
           <p className="text-base md:text-lg text-slate-600 max-w-3xl mx-auto">
             We are dedicated to building lasting relationships by providing financial solutions tailored to empower your future with trust, guidance, and personal care.
@@ -77,7 +77,7 @@ const AboutPage = () => {
           </div>
           <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-4 md:mb-5">Our Story: Founded on Trust</h2>
           <p className="text-sm md:text-base text-slate-600 leading-relaxed">
-            Net Wealth India was born from a simple observation: too many individuals navigate their financial lives without a truly dedicated partner focused solely on their best interests. We saw a need for objective, personalized guidance grounded in trust and transparency, free from conflicts of interest. Our foundation is built on the principle of forging long-term relationships, understanding your unique journey, and celebrating your financial milestones alongside you.
+            NetWealth India was born from a simple observation: too many individuals navigate their financial lives without a truly dedicated partner focused solely on their best interests. We saw a need for objective, personalized guidance grounded in trust and transparency, free from conflicts of interest. Our foundation is built on the principle of forging long-term relationships, understanding your unique journey, and celebrating your financial milestones alongside you.
           </p>
         </div>
       </section>
@@ -252,7 +252,7 @@ const AboutPage = () => {
        <section className="py-12 md:py-20 px-4 md:px-6 bg-gradient-to-r from-slate-800 to-slate-900 text-white">
          <div className="container mx-auto text-center">
            <h2 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-slate-100">Ready to Start Your Financial Journey?</h2>
-           <p className="text-sm md:text-base mb-6 md:mb-8 max-w-xl mx-auto text-slate-300">Let&apos;s discuss how Net Wealth India can help you achieve your financial goals. Reach out today for a personalized consultation.</p>
+           <p className="text-sm md:text-base mb-6 md:mb-8 max-w-xl mx-auto text-slate-300">Let&apos;s discuss how NetWealth India can help you achieve your financial goals. Reach out today for a personalized consultation.</p>
            <Button 
              size="lg" 
              asChild 
