@@ -17,8 +17,6 @@ const nextConfig = {
   compress: true,
   // Enable production source maps
   productionBrowserSourceMaps: true,
-  // Enable SWC minification
-  swcMinify: true,
 }
 
 module.exports = nextConfig 
