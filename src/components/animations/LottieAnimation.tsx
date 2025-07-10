@@ -42,7 +42,7 @@ const LottieAnimation: React.FC<LottieAnimationProps> = ({ animationData, classN
           width: isMobile ? '90%' : '100%', 
           height: isMobile ? '90%' : '100%',
           maxWidth: isMobile ? '280px' : '100%',
-          maxHeight: isMobile ? '240px' : '400px',
+          maxHeight: isMobile ? '240px' : '100%',
           objectFit: 'contain'
         }} 
       />

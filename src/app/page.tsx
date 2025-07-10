@@ -57,10 +57,10 @@ const LoanFormSlide = ({ title, description, lottieAnimation, slideIndex }: { ti
             </motion.div>
         </div>
         <div className="w-full lg:w-1/2 flex items-center justify-center order-1 lg:order-2 mb-6 lg:mb-0">
-             <div className={`w-full flex items-center justify-center lg:h-full ${
+             <div className={`flex items-center justify-center ${
                  shouldBeSmaller 
-                     ? 'h-36 sm:h-40 md:h-44 max-w-xs sm:max-w-xs lg:max-w-none' 
-                     : 'h-48 sm:h-56 md:h-64 max-w-xs sm:max-w-sm lg:max-w-none'
+                     ? 'h-36 sm:h-40 md:h-44 w-full max-w-xs sm:max-w-xs lg:w-72 lg:h-72 xl:w-80 xl:h-80' 
+                     : 'h-48 sm:h-56 md:h-64 w-full max-w-xs sm:max-w-sm lg:w-80 lg:h-80 xl:w-96 xl:h-96'
              }`}>
                 {lottieAnimation ? (
                     <motion.div 
@@ -72,10 +72,10 @@ const LoanFormSlide = ({ title, description, lottieAnimation, slideIndex }: { ti
                         <LottieAnimation animationData={lottieAnimation} />
                     </motion.div>
                 ) : (
-                    <div className={`bg-slate-100 rounded-full flex items-center justify-center lg:w-[450px] lg:h-[450px] ${
+                    <div className={`bg-slate-100 rounded-full flex items-center justify-center ${
                         shouldBeSmaller 
-                            ? 'w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40' 
-                            : 'w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56'
+                            ? 'w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 lg:w-72 lg:h-72 xl:w-80 xl:h-80' 
+                            : 'w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-80 lg:h-80 xl:w-96 xl:h-96'
                     }`}>
                         <p className="text-slate-500">Lottie Animation Here</p>
                     </div>
@@ -241,7 +241,7 @@ export default function Home() {
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
-                        className="w-full h-full max-w-sm sm:max-w-md lg:max-w-none"
+                        className="w-80 h-80 xl:w-96 xl:h-96 flex items-center justify-center"
                     >
                         <LottieAnimation animationData={MoneyLottie} />
                     </motion.div>
