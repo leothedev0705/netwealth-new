@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
 interface FadeInUpProps {
@@ -18,14 +18,30 @@ const FadeInUp: React.FC<FadeInUpProps> = ({
   yOffset = 20,
   className = ''
 }) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Reduce motion for mobile devices and respect user preferences
+  const shouldReduceMotion = isMobile || (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: yOffset }}
+      initial={{ opacity: 0, y: shouldReduceMotion ? 10 : yOffset }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }} // Trigger animation when 20% of the element is in view, run once
+      viewport={{ 
+        once: true, 
+        amount: isMobile ? 0.1 : 0.2, // Lower threshold for mobile
+        margin: isMobile ? "-50px" : "0px" // Start animation earlier on mobile
+      }}
       transition={{
-        delay,
-        duration,
+        delay: shouldReduceMotion ? delay * 0.5 : delay, // Faster on mobile
+        duration: shouldReduceMotion ? duration * 0.7 : duration, // Shorter duration on mobile
         ease: "easeOut"
       }}
       className={className}

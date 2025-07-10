@@ -155,12 +155,16 @@ const HomeLoanEMICalculator = () => {
       const principalPaid = yearData.reduce((sum, month) => sum + month.principal, 0);
       const interestPaid = yearData.reduce((sum, month) => sum + month.interest, 0);
       
+      // Get the last month's balance, or 0 if no data for this year
+      const lastMonth = yearData[yearData.length - 1];
+      const remainingBalance = lastMonth?.balance ?? 0;
+      
       summary.push({
         year: year + 1,
         principalPaid,
         interestPaid,
         totalPaid: principalPaid + interestPaid,
-        remainingBalance: yearData[yearData.length - 1].balance
+        remainingBalance
       });
     }
     

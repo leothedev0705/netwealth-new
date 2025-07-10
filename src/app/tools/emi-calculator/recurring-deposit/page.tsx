@@ -491,12 +491,15 @@ const RecurringDepositCalculator = () => {
                               }
                             }
                             
+                            // Get balance safely, default to 0 if quarterData is undefined
+                            const balance = quarterData?.balance ?? 0;
+                            
                             return (
                               <tr key={index} className={index % 2 === 0 ? "bg-white" : "bg-green-50/30"}>
                                 <td className="px-4 py-3 whitespace-nowrap text-sm font-medium text-slate-700 font-serif">Q{quarterNumber}</td>
                                 <td className="px-4 py-3 whitespace-nowrap text-sm text-right text-slate-700">{formatCurrency(quarterlyDeposit)}</td>
                                 <td className="px-4 py-3 whitespace-nowrap text-sm text-right text-green-600">{formatCurrency(quarterlyInterest)}</td>
-                                <td className="px-4 py-3 whitespace-nowrap text-sm text-right text-slate-700 font-medium">{formatCurrency(quarterData.balance)}</td>
+                                <td className="px-4 py-3 whitespace-nowrap text-sm text-right text-slate-700 font-medium">{formatCurrency(balance)}</td>
                               </tr>
                             );
                           })}

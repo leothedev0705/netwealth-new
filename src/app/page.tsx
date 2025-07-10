@@ -19,43 +19,72 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 
-const LoanFormSlide = ({ title, description, lottieAnimation }: { title: string, description: string, lottieAnimation?: any }) => (
-    <div className="keen-slider__slide w-full flex items-center px-8 lg:px-16">
-        <div className="w-full lg:w-1/2 text-center lg:text-left">
-            <h1 
-                className="text-4xl lg:text-5xl font-bold text-[#002855] mb-4"
+const LoanFormSlide = ({ title, description, lottieAnimation, slideIndex }: { title: string, description: string, lottieAnimation?: any, slideIndex?: number }) => {
+    // Determine if this slide should have smaller mobile animation (slides 1, 3, 4 = indices 0, 2, 3)
+    const shouldBeSmaller = slideIndex === 0 || slideIndex === 2 || slideIndex === 3;
+    
+    return (
+    <div className="keen-slider__slide w-full flex flex-col lg:flex-row items-center justify-center px-4 sm:px-8 lg:px-16 py-8 lg:py-0">
+        <div className="w-full lg:w-1/2 text-center lg:text-left mb-8 lg:mb-0 order-2 lg:order-1">
+            <motion.h1 
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#002855] mb-4 leading-tight"
             >
                 {title}
-            </h1>
-            <p
-                className="text-slate-600 mb-8 max-w-lg mx-auto lg:mx-0"
+            </motion.h1>
+            <motion.p
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                className="text-sm sm:text-base text-slate-600 mb-6 lg:mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed"
             >
                 {description}
-            </p>
-            <div
-                className="flex justify-center lg:justify-start items-center gap-4"
+            </motion.p>
+            <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+                className="flex flex-col sm:flex-row justify-center lg:justify-start items-center gap-3 sm:gap-4"
                 >
-                <Button className="bg-[#00b894] hover:bg-teal-600 text-white font-bold py-3 px-6 rounded-lg">
+                <Button className="w-full sm:w-auto bg-[#00b894] hover:bg-teal-600 text-white font-bold py-3 px-6 rounded-lg">
                     Get Started
                 </Button>
-                <Button variant="outline" className="text-slate-600 border-slate-300 hover:bg-slate-100 py-3 px-6 rounded-lg">
+                <Button variant="outline" className="w-full sm:w-auto text-slate-600 border-slate-300 hover:bg-slate-100 py-3 px-6 rounded-lg">
                     Learn More
                 </Button>
-            </div>
+            </motion.div>
         </div>
-        <div className="hidden lg:flex w-1/2 h-full items-center justify-center">
-             <div className="w-full h-full flex items-center justify-center">
+        <div className="w-full lg:w-1/2 flex items-center justify-center order-1 lg:order-2 mb-6 lg:mb-0">
+             <div className={`w-full flex items-center justify-center lg:h-full ${
+                 shouldBeSmaller 
+                     ? 'h-36 sm:h-40 md:h-44 max-w-xs sm:max-w-xs lg:max-w-none' 
+                     : 'h-48 sm:h-56 md:h-64 max-w-xs sm:max-w-sm lg:max-w-none'
+             }`}>
                 {lottieAnimation ? (
-                    <LottieAnimation animationData={lottieAnimation} />
+                    <motion.div 
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
+                        className="w-full h-full"
+                    >
+                        <LottieAnimation animationData={lottieAnimation} />
+                    </motion.div>
                 ) : (
-                    <div className="w-[450px] h-[450px] bg-slate-100 rounded-full flex items-center justify-center">
+                    <div className={`bg-slate-100 rounded-full flex items-center justify-center lg:w-[450px] lg:h-[450px] ${
+                        shouldBeSmaller 
+                            ? 'w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40' 
+                            : 'w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56'
+                    }`}>
                         <p className="text-slate-500">Lottie Animation Here</p>
                     </div>
                 )}
             </div>
         </div>
     </div>
-);
+    );
+};
 
 
 export default function Home() {
@@ -136,53 +165,86 @@ export default function Home() {
 
   return (
     <>
-      <section className="relative bg-gradient-to-b from-teal-50 to-white pt-12 pb-16">
-        <div ref={sliderRef} className="keen-slider h-[600px]">
+      <section className="relative bg-gradient-to-b from-teal-50 to-white pt-8 sm:pt-12 pb-12 sm:pb-16">
+        <div ref={sliderRef} className="keen-slider h-auto min-h-[500px] sm:h-[600px] lg:h-[650px]">
             {/* Slide 1: Original Hero */}
-            <div className="keen-slider__slide w-full flex flex-col lg:flex-row items-center justify-between px-8 lg:px-16">
-                <div className="w-full lg:w-1/2 text-center lg:text-left mb-12 lg:mb-0">
-                    <div
-                        className="flex flex-wrap items-center gap-2 mb-4 justify-center lg:justify-start"
+            <div className="keen-slider__slide w-full flex flex-col lg:flex-row items-center justify-between px-4 sm:px-8 lg:px-16 py-8 lg:py-0">
+                <div className="w-full lg:w-1/2 text-center lg:text-left mb-8 lg:mb-0 order-2 lg:order-1">
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, ease: "easeOut" }}
+                        className="flex flex-wrap items-center gap-2 mb-6 justify-center lg:justify-start"
                     >
-                        <div className="inline-flex items-center gap-2 rounded-full bg-teal-100 px-3 py-1 text-xs sm:text-sm font-semibold text-[#00b894]">
-                            <Zap className="h-4 w-4" />
-                            <span>Welcome to NetWealth India</span>
+                        <div className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full bg-teal-100 px-2 sm:px-3 py-1 text-xs sm:text-sm font-semibold text-[#00b894]">
+                            <Zap className="h-3 w-3 sm:h-4 sm:w-4" />
+                            <span className="hidden sm:inline">Welcome to NetWealth India</span>
+                            <span className="sm:hidden">NetWealth India</span>
                         </div>
-                         <div className="inline-flex items-center gap-2 rounded-full bg-blue-100 px-3 py-1 text-xs sm:text-sm font-semibold text-[#002855]">
-                            <ShieldCheck className="h-4 w-4" />
-                            <span>25+ years of experience</span>
+                         <div className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full bg-blue-100 px-2 sm:px-3 py-1 text-xs sm:text-sm font-semibold text-[#002855]">
+                            <ShieldCheck className="h-3 w-3 sm:h-4 sm:w-4" />
+                            <span>25+ years</span>
                         </div>
-                         <div className="inline-flex items-center gap-2 rounded-full bg-amber-100 px-3 py-1 text-xs sm:text-sm font-semibold text-amber-800">
-                            <TrendingUp className="h-4 w-4" />
-                            <span>1000+ Happy Clients</span>
+                         <div className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full bg-amber-100 px-2 sm:px-3 py-1 text-xs sm:text-sm font-semibold text-amber-800">
+                            <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4" />
+                            <span>1000+ Clients</span>
                         </div>
+                    </motion.div>
+                    
+                    {/* Mobile Animation - Between badges and heading */}
+                    <div className="lg:hidden w-full flex items-center justify-center mb-6">
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
+                            className="w-48 h-36 flex items-center justify-center"
+                        >
+                            <LottieAnimation animationData={MoneyLottie} />
+                        </motion.div>
                     </div>
-                    <h1
-                        className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#002855] mb-6 leading-tight"
+                    
+                    <motion.h1
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                        className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-[#002855] mb-4 sm:mb-6 leading-tight"
                     >
                         Navigate Your Financial Future with Confidence
-                    </h1>
-                    <p
-                        className="text-lg text-slate-600 md:text-xl  mb-8 max-w-lg mx-auto lg:mx-0"
+                    </motion.h1>
+                    <motion.p
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+                        className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-600 mb-6 sm:mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed"
                     >
                         Your trusted partner for comprehensive financial planning, from
                         strategic investments and insurance to achieving your life goals.
-                    </p>
-                    <div
-                        className="flex flex-col gap-4 sm:flex-row sm:justify-center md:justify-start"
+                    </motion.p>
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+                        className="flex flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start sm:gap-4"
                     >
-                        <Link href="/contact">
-                            <Button size="lg" className="bg-[#00b894] text-white hover:bg-[#00a383]">
-                                Get Started <ArrowRight className="ml-2 h-5 w-5" />
+                        <Link href="/contact" className="w-full sm:w-auto">
+                            <Button size="lg" className="w-full sm:w-auto bg-[#00b894] text-white hover:bg-[#00a383] font-semibold py-3 px-6">
+                                Get Started <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
                             </Button>
                         </Link>
-                        <Button size="lg" variant="outline" className="border-[#00b894] text-[#00b894] hover:bg-teal-50 hover:text-[#00a383]">
+                        <Button size="lg" variant="outline" className="w-full sm:w-auto border-[#00b894] text-[#00b894] hover:bg-teal-50 hover:text-[#00a383] font-semibold py-3 px-6">
                             Explore Services
                         </Button>
-                    </div>
+                    </motion.div>
                 </div>
-                <div className="w-full lg:w-1/2 flex items-center justify-center">
-                    <LottieAnimation animationData={MoneyLottie} />
+                <div className="hidden lg:flex w-full lg:w-1/2 items-center justify-center order-1 lg:order-2 mb-6 lg:mb-0">
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
+                        className="w-full h-full max-w-sm sm:max-w-md lg:max-w-none"
+                    >
+                        <LottieAnimation animationData={MoneyLottie} />
+                    </motion.div>
                 </div>
             </div>
 
@@ -193,6 +255,7 @@ export default function Home() {
                     title={slide.title}
                     description={slide.description}
                     lottieAnimation={slide.lottie}
+                    slideIndex={index}
                     />
             ))}
         </div>
@@ -201,23 +264,27 @@ export default function Home() {
             <>
                 <ArrowLeft
                     onClick={(e: any) => e.stopPropagation() || instanceRef.current?.prev()}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 p-2 text-[#00b894] bg-teal-50/50 rounded-full cursor-pointer hover:bg-teal-100/70 transition z-10"
+                    className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 p-1.5 sm:p-2 text-[#00b894] bg-white/80 backdrop-blur-sm rounded-full cursor-pointer hover:bg-white shadow-lg transition-all duration-200 z-10"
                 />
 
                 <ArrowRight
                     onClick={(e: any) => e.stopPropagation() || instanceRef.current?.next()}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 p-2 text-[#00b894] bg-teal-50/50 rounded-full cursor-pointer hover:bg-teal-100/70 transition z-10"
+                    className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 p-1.5 sm:p-2 text-[#00b894] bg-white/80 backdrop-blur-sm rounded-full cursor-pointer hover:bg-white shadow-lg transition-all duration-200 z-10"
                 />
             </>
         )}
         {loaded && instanceRef.current && (
-            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+            <div className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 flex gap-2 sm:gap-3 z-10">
                 {[...Array(instanceRef.current.track.details.slides.length).keys()].map((idx) => {
                     return (
                         <button
                             key={idx}
                             onClick={() => instanceRef.current?.moveToIdx(idx)}
-                            className={'w-3 h-3 rounded-full ' + (currentSlide === idx ? 'bg-brand-green' : 'bg-slate-300')}
+                            className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all duration-200 ${
+                                currentSlide === idx 
+                                    ? 'bg-[#00b894] scale-125' 
+                                    : 'bg-white/70 hover:bg-white/90'
+                            }`}
                         ></button>
                     )
                 })}

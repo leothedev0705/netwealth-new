@@ -2,6 +2,365 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Blog Content Enhancements */
+.prose .table-wrapper {
+  @apply overflow-x-auto rounded-lg border border-slate-200 shadow-sm my-6 sm:my-8;
+}
+
+/* Mobile-first responsive adjustments */
+@media (max-width: 768px) {
+  .prose {
+    @apply text-sm leading-relaxed;
+  }
+  
+  .prose h1 {
+    @apply text-2xl mb-4;
+  }
+  
+  .prose h2 {
+    @apply text-xl mb-3;
+  }
+  
+  .prose h3 {
+    @apply text-lg mb-2;
+  }
+  
+  .prose p {
+    @apply mb-4;
+  }
+  
+  .prose ul, .prose ol {
+    @apply mb-4;
+  }
+  
+  .prose blockquote {
+    @apply my-4 pl-4;
+  }
+  
+  .prose table {
+    @apply text-xs;
+  }
+  
+  .prose table th,
+  .prose table td {
+    @apply p-2;
+  }
+}
+
+.prose table {
+  @apply w-full border-collapse bg-white rounded-xl overflow-hidden shadow-lg my-8;
+  border-spacing: 0 !important;
+  display: table !important;
+  table-layout: auto;
+}
+
+.prose table thead {
+  @apply bg-gradient-to-r from-[#002855] via-[#003366] to-[#00b894];
+  position: relative;
+}
+
+.prose table thead::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #00b894, #002855);
+}
+
+.prose table th {
+  @apply text-white font-bold p-4 sm:p-6 text-left text-sm sm:text-base uppercase tracking-wider;
+  position: relative;
+  display: table-cell !important;
+  vertical-align: middle;
+}
+
+.prose table th:first-child {
+  @apply pl-6 sm:pl-8;
+}
+
+.prose table th:last-child {
+  @apply pr-6 sm:pr-8;
+}
+
+.prose table td {
+  @apply p-4 sm:p-6 text-slate-700 border-b border-slate-100 text-sm sm:text-base;
+  position: relative;
+  display: table-cell !important;
+  vertical-align: middle;
+}
+
+.prose table td:first-child {
+  @apply pl-6 sm:pl-8 font-semibold text-[#002855];
+}
+
+.prose table td:last-child {
+  @apply pr-6 sm:pr-8;
+}
+
+.prose table tbody tr {
+  @apply transition-all duration-200;
+}
+
+.prose table tbody tr:hover {
+  @apply bg-slate-50 shadow-sm transform scale-[1.01];
+}
+
+.prose table tbody tr:nth-child(even) {
+  @apply bg-slate-50/20;
+}
+
+.prose table tbody tr:last-child td {
+  @apply border-b-0;
+}
+
+/* Enhanced comparison styling */
+.prose table td strong,
+.prose table td **strong** {
+  @apply text-[#00b894] font-bold bg-teal-50 px-2 py-1 rounded;
+}
+
+/* Special styling for comparison tables */
+.prose table[data-comparison] {
+  @apply shadow-2xl border border-slate-200;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+}
+
+.prose table[data-comparison] th {
+  @apply relative;
+}
+
+.prose table[data-comparison] th::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+  pointer-events: none;
+}
+
+.prose table[data-comparison] tbody tr:hover {
+  @apply bg-gradient-to-r from-slate-50 to-teal-50/30;
+}
+
+/* Add visual indicators for numerical data */
+.prose table td[data-type="number"] {
+  @apply font-mono text-right bg-slate-50 font-semibold;
+}
+
+.prose table td[data-type="feature"] {
+  @apply bg-gradient-to-r from-transparent to-slate-50/20;
+}
+
+/* Enhanced section dividers */
+.prose hr {
+  @apply border-0 h-px bg-gradient-to-r from-transparent via-slate-300 to-transparent my-12 relative;
+}
+
+.prose hr::after {
+  content: '◦';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  color: #00b894;
+  font-size: 1.5rem;
+  padding: 0 1rem;
+}
+
+/* Comparison Section Styling */
+.prose .comparison-section {
+  @apply bg-gradient-to-br from-slate-50 to-teal-50/30 rounded-2xl p-6 sm:p-8 my-8 border border-slate-200 shadow-lg;
+  position: relative;
+  overflow: hidden;
+}
+
+.prose .comparison-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #00b894, #002855, #00b894);
+}
+
+.prose .comparison-section h3 {
+  @apply text-2xl sm:text-3xl font-bold text-[#002855] mb-6 text-center;
+  background: linear-gradient(135deg, #002855, #00b894);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.prose .comparison-section table {
+  @apply shadow-xl border-2 border-slate-200 table-auto w-full;
+  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+  border-collapse: collapse !important;
+  display: table !important;
+}
+
+.prose .comparison-section table th {
+  @apply bg-gradient-to-r from-[#002855] via-[#003366] to-[#00b894] text-white font-bold text-center p-3 sm:p-4;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.prose .comparison-section table td {
+  @apply text-center p-3 sm:p-4 border border-slate-200;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.prose .comparison-section table tbody tr:hover {
+  @apply bg-gradient-to-r from-blue-50 to-teal-50;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Mobile table responsiveness */
+@media (max-width: 768px) {
+  .prose .comparison-section table {
+    @apply text-xs;
+    font-size: 0.75rem;
+  }
+  
+  .prose .comparison-section table th,
+  .prose .comparison-section table td {
+    @apply p-2;
+    white-space: normal;
+    word-break: break-word;
+  }
+  
+  .prose .comparison-section table th {
+    @apply text-xs;
+  }
+}
+
+/* Enhanced List Styling */
+.prose ul > li::marker {
+  @apply text-[#00b894];
+}
+
+.prose ol > li::marker {
+  @apply text-[#002855] font-semibold;
+}
+
+/* Enhanced Blockquote */
+.prose blockquote {
+  @apply border-l-4 border-[#00b894] bg-gradient-to-r from-slate-50 to-transparent pl-6 py-4 my-8 rounded-r-lg;
+}
+
+.prose blockquote p {
+  @apply text-slate-600 italic text-lg leading-relaxed mb-2;
+}
+
+/* Code Blocks */
+.prose pre {
+  @apply bg-gradient-to-r from-slate-900 to-slate-800 text-slate-100 p-6 rounded-xl overflow-x-auto shadow-lg;
+}
+
+.prose code {
+  @apply bg-slate-100 text-[#002855] px-2 py-1 rounded font-medium text-sm border border-slate-200;
+}
+
+.prose pre code {
+  @apply bg-transparent text-slate-100 px-0 py-0 border-0;
+}
+
+/* Enhanced Horizontal Rules */
+.prose hr {
+  @apply border-slate-300 my-12 border-t-2 border-dashed;
+}
+
+/* Table of Contents Styling */
+.prose .toc {
+  @apply bg-slate-50 border border-slate-200 rounded-xl p-6 my-8;
+}
+
+.prose .toc h3 {
+  @apply text-[#002855] font-bold mb-4 text-lg;
+}
+
+.prose .toc ul {
+  @apply space-y-2;
+}
+
+.prose .toc a {
+  @apply text-slate-600 hover:text-[#00b894] transition-colors duration-200;
+}
+
+/* Warning/Info Boxes */
+.prose .info-box {
+  @apply bg-blue-50 border-l-4 border-blue-400 p-4 my-6 rounded-r-lg;
+}
+
+.prose .warning-box {
+  @apply bg-amber-50 border-l-4 border-amber-400 p-4 my-6 rounded-r-lg;
+}
+
+.prose .success-box {
+  @apply bg-green-50 border-l-4 border-green-400 p-4 my-6 rounded-r-lg;
+}
+
+.prose .danger-box {
+  @apply bg-red-50 border-l-4 border-red-400 p-4 my-6 rounded-r-lg;
+}
+
+/* Mobile Performance Optimizations */
+@media (max-width: 768px) {
+  /* Reduce motion for better mobile performance */
+  .motion-reduce {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  /* Optimize carousel performance on mobile */
+  .keen-slider {
+    will-change: transform;
+    transform: translateZ(0);
+  }
+  
+  /* Improve mobile scroll performance */
+  .keen-slider__slide {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+}
+
+/* Responsive animations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Touch-friendly interaction areas */
+@media (max-width: 768px) {
+  button, 
+  .button,
+  [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Improve tap targets */
+  .keen-slider__slide button {
+    padding: 12px 16px;
+  }
+}
+
 @import "tailwindcss";
 @import "tw-animate-css";
 
