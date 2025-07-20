@@ -23,7 +23,7 @@ Current capabilities:
 
 export async function getChatResponse(userMessage: string, chatHistory: { content: string; isUser: boolean }[]) {
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro-latest" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
 
     // Combine system prompt with user message
     const prompt = `${SYSTEM_PROMPT}\n\nPrevious conversation:\n${
